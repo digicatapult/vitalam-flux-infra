@@ -1,0 +1,20 @@
+image: 
+  repository: ghcr.io/digicatapult/vitalam-node
+  tag: latest
+  pullPolicy: IfNotPresent
+
+node:
+  chain: "local"
+  command: "vitalam-node"
+  dataVolumeSize: 1Gi
+  flags:
+    - "--alice"
+    - "--ws-port 9944"
+    - "--port 30333"
+  keys: 
+    - type: "gran"
+      scheme: "ed25519"
+      seed: "//Alice"
+    - type: "aura"
+      scheme: "sr25519"
+      seed: "//Alice"
