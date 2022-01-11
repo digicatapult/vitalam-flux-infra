@@ -14,7 +14,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: parity
-      version: node-0.20.0
+      version: 0.20.0
   valuesFrom:
   - kind: ConfigMap
     name: vitalam-node-values
