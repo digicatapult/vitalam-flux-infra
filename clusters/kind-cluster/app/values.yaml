@@ -3,7 +3,7 @@ image:
   tag: latest
   pullPolicy: IfNotPresent
 
-node:
+cheese:
   chain: "local"
   command: "vitalam-node"
   dataVolumeSize: 1Gi
