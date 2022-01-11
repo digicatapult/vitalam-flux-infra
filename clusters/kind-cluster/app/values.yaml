@@ -3,9 +3,9 @@ image:
   tag: latest
   pullPolicy: IfNotPresent
 
-cheese:
+node:
   chain: "local"
-  command: "vitalam-node"
+  #command: "vitalam-node"
   dataVolumeSize: 1Gi
   flags:
     - "--alice"
