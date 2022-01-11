@@ -15,9 +15,7 @@ node:
     - type: "gran"
       scheme: "ed25519"
       seed: "//Alice"
-      Values:
-        node:
-          command: "vitalam-node"
-    # - type: "aura"
-    #   scheme: "sr25519"
-    #   seed: "//Alice"
+    - type: "aura"
+      scheme: "sr25519"
+      seed: "//Alice"
+storageClass: "standard"
