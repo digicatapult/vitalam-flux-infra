@@ -5,7 +5,7 @@ image:
 
 node:
   chain: "local"
-  command: "vitalam-node"
+  command: "./vitalam-node"
   dataVolumeSize: 1Gi
   flags:
     - "--alice"
