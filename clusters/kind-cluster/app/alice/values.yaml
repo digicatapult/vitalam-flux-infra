@@ -1,0 +1,24 @@
+image: 
+  repository: ghcr.io/digicatapult/vitalam-node
+  tag: latest
+  pullPolicy: IfNotPresent
+
+node:
+  chain: "local"
+  command: "./vitalam-node"
+  dataVolumeSize: 1Gi
+  flags:
+    - "--alice"
+    - "--rpc-external"
+    - "--ws-external"
+    - "--rpc-methods=safe"
+    - "--rpc-cors=all"
+    - "--prometheus-external"
+  keys: 
+    - type: "gran"
+      scheme: "ed25519"
+      seed: "//Alice"
+    - type: "aura"
+      scheme: "sr25519"
+      seed: "//Alice"
+storageClass: "standard"

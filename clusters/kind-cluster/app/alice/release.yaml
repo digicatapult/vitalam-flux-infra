@@ -1,0 +1,22 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: vitalam-node-alice
+  namespace: vitalam
+spec:
+  install:
+    remediation:
+      retries: -1
+  chart:
+    spec:
+      chart: node
+      sourceRef:
+        kind: HelmRepository
+        name: parity
+      version: 0.22.0
+  valuesFrom:
+  - kind: ConfigMap
+    name: vitalam-node-values
+    valuesKey: valuesAlice.yaml
+  interval: 10m0s
