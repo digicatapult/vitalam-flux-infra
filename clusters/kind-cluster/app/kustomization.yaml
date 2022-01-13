@@ -8,8 +8,8 @@ resources:
 configMapGenerator:
   - name: vitalam-node-values
     files:
-      - bob/values.yaml=valuesBob.yaml
-      - alice/values.yaml=valuesAlice.yaml
+      - valuesBob.yaml=bob/values.yaml
+      - valuesAlice.yaml=alice/values.yaml
 configurations:
   - kustomize-config.yaml
 generatorOptions:
