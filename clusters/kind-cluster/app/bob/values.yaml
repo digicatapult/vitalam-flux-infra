@@ -14,6 +14,7 @@ node:
     - "--rpc-methods=safe"
     - "--rpc-cors=all"
     - "--prometheus-external"
+    - "--bootnodes /dns4/vitalam-node-alice-0-relay-chain-p2p/tcp/30333/12D3KooWN3pqoGjwuvxvfkKEvnYt6fVSgMTVdFUdd5sX6TwLkKGK"
   keys: 
     - type: "gran"
       scheme: "ed25519"
