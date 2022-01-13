@@ -21,4 +21,6 @@ node:
     - type: "aura"
       scheme: "sr25519"
       seed: "//Alice"
+  perNodeServices:
+    createP2pNodePortService: true
 storageClass: "standard"
