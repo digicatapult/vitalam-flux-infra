@@ -1,6 +1,6 @@
 image: 
   repository: ghcr.io/digicatapult/vitalam-node
-  tag: latest
+  tag: "v2.5.1"
   pullPolicy: IfNotPresent
 
 node:
