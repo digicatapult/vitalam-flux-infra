@@ -23,4 +23,5 @@ node:
       seed: "//Alice"
   perNodeServices:
     createP2pNodePortService: true
+  persistGeneratedNodeKey: true
 storageClass: "standard"

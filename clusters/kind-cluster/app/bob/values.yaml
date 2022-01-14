@@ -24,4 +24,5 @@ node:
       seed: "//Bob"
   perNodeServices:
     createP2pNodePortService: true
+  persistGeneratedNodeKey: true
 storageClass: "standard"
