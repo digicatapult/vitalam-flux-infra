@@ -163,7 +163,7 @@ generate_sudo() {
   local output=
 
   printf "Generating sudo key with scheme Sr25519..." >&2
-  if output=$(docker run -t $container key generate --scheme Sr25519 --output-type Json 2>&1); then
+  if output=$(docker run --rm -t $container key generate --scheme Sr25519 --output-type Json 2>&1); then
     printf "OK\n" >&2
     SUDO_SEED=$(echo $output | jq -r .secretPhrase)
     SUDO_ADDR=$(echo $output | jq -r .ss58Address)
@@ -197,7 +197,7 @@ generate_validator() {
     GENESIS=$(echo $GENESIS | jq --arg aura_id $aura_id '.genesis.runtime.palletAura.authorities += [$aura_id]')
     GENESIS=$(echo $GENESIS | jq --arg grandpa_id $grandpa_id '.genesis.runtime.palletGrandpa.authorities += [[$grandpa_id, 1]]')
     # convert node_id to hex
-    node_id=$(docker run -a stdout python:alpine /bin/sh -c "\
+    node_id=$(docker run --rm -a stdout python:alpine /bin/sh -c "\
       pip install base58 1>/dev/null; \
       printf \"$node_id\" | base58 -d | xxd -p | tr -d '[:space:]'")
     node_id=($(echo $node_id | fold -w2))
@@ -236,7 +236,7 @@ done
 pull_container $CONTAINER
 
 # swap out names and set chain type
-GENESIS=$(docker run -a stdout $CONTAINER build-spec --disable-default-bootnode --chain $BASE_CHAIN)
+GENESIS=$(docker run --rm -a stdout $CONTAINER build-spec --disable-default-bootnode --chain $BASE_CHAIN)
 GENESIS=$(echo $GENESIS | jq --arg cluster $CLUSTER '.name |= $cluster')
 GENESIS=$(echo $GENESIS | jq --arg cluster ${CLUSTER//[-]/_} '.id |= $cluster')
 GENESIS=$(echo $GENESIS | jq '.chainType |= "Live"')
@@ -259,3 +259,4 @@ do
 done
 
 echo $GENESIS
+echo "IMPORTANT SUDO SEED: $SUDO_SEED" >&2

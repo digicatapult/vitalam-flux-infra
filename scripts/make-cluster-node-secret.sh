@@ -121,7 +121,7 @@ generate_node_key() {
   local container=$1
 
   printf "Generating node-key..." >&2
-  if output=$(docker run -t $container key generate-node-key 2>&1); then
+  if output=$(docker run --rm -t $container key generate-node-key 2>&1); then
     printf "OK\n" >&2
     output=(${output[@]})
     NODE_ID=(${output[0]})
@@ -140,7 +140,7 @@ generate_node_key() {
   local output=
 
   printf "Generating node-key..." >&2
-  if output=$(docker run -t $container key generate-node-key 2>&1); then
+  if output=$(docker run --rm -t $container key generate-node-key 2>&1); then
     printf "OK\n" >&2
     output=(${output[@]})
     NODE_ID=$(printf "${output[0]}" | tr -d '\r')
@@ -160,7 +160,7 @@ generate_authority_key() {
   local output=
 
   printf "Generating authority key with scheme $scheme..." >&2
-  if output=$(docker run -t $container key generate --scheme $scheme --output-type Json 2>&1); then
+  if output=$(docker run --rm -t $container key generate --scheme $scheme --output-type Json 2>&1); then
     printf "OK\n" >&2
     AUTH_KEY=$(echo $output | jq -r .secretPhrase)
     AUTH_ADDR=$(echo $output | jq -r .ss58Address)
