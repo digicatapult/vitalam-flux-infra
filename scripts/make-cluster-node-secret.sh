@@ -133,25 +133,6 @@ generate_node_key() {
   fi
 }
 
-NODE_KEY=
-NODE_ID=
-generate_node_key() {
-  local container=$1
-  local output=
-
-  printf "Generating node-key..." >&2
-  if output=$(docker run --rm -t $container key generate-node-key 2>&1); then
-    printf "OK\n" >&2
-    output=(${output[@]})
-    NODE_ID=$(printf "${output[0]}" | tr -d '\r')
-    NODE_KEY=$(printf "${output[1]}" | tr -d '\r')
-  else
-    printf "FAIL\n" >&2
-    echo "$output" >&2
-    exit 1
-  fi
-}
-
 AUTH_KEY=
 AUTH_ADDR=
 generate_authority_key() {
