@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 print_usage() {
   echo "TODO"
   echo ""
@@ -61,18 +60,6 @@ while getopts ":n:b:c:v:a:h" opt; do
 done
 shift $((OPTIND -1))
 CLUSTER=$1
-
-# echo $CLUSTER
-# echo "$NAMESPACE"
-# echo "$CONTAINER"
-# for value in "${VALIDATOR_NAMES[@]}"
-# do
-#   echo "VALIDATOR: $value"
-# done
-# for value in "${ADDITIONAL_NAMES[@]}"
-# do
-#   echo "ADDITIONAL $value"
-# done
 
 assert_cluster() {
   local cluster=$1
@@ -199,13 +186,13 @@ generate_validator() {
     # convert node_id to hex
     node_id=$(docker run --rm -a stdout python:alpine /bin/sh -c "\
       pip install base58 1>/dev/null; \
-      printf \"$node_id\" | base58 -d | xxd -p | tr -d '[:space:]'")
+      printf \"$node_id\" | base58 -d | xxd -p | tr -d '[:space:]' | tr '[:lower:]' '[:upper:]'")
     node_id=($(echo $node_id | fold -w2))
 
     GENESIS=$(echo $GENESIS | jq --arg sudo_id $owner '.genesis.runtime.palletNodeAuthorization.nodes += [[[], $sudo_id]]')
     for byte in "${node_id[@]}"
     do
-      GENESIS=$(echo $GENESIS | jq --arg sudo_id $owner --arg byte 0x$byte '.genesis.runtime.palletNodeAuthorization.nodes[-1][0] += [$byte]')
+      GENESIS=$(echo $GENESIS | jq --arg sudo_id $owner --arg byte $(echo "obase=10; ibase=16; $byte" | bc) '.genesis.runtime.palletNodeAuthorization.nodes[-1][0] += [($byte | tonumber)]')
     done
   else
     printf "FAIL\n" >&2
@@ -258,5 +245,12 @@ do
   generate_validator $CLUSTER $NAMESPACE $CONTAINER $validator_name $SUDO_ADDR
 done
 
+GENESIS_DIR=$(mktemp -d -t inteli-genesis.XXXXXX)
+echo $GENESIS > $GENESIS_DIR/genesis.json
+
+GENESIS=$(docker run --rm -a stdout --mount type=bind,source="$GENESIS_DIR",target=/config $CONTAINER \
+  build-spec --disable-default-bootnode --raw --chain /config/genesis.json)
+
 echo $GENESIS
-echo "IMPORTANT SUDO SEED: $SUDO_SEED" >&2
+printf "\n************************ IMPORTANT SUDO SEED ************************\n\n" >&2
+echo "$SUDO_SEED" >&2
