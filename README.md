@@ -9,3 +9,7 @@ For an overview of the structure of this repository please see [here](./docs/rep
 ## Managing Secrets
 
 For managing secret values within a cluster see the documentation [here](./docs/managing-secrets.md).
+
+## Creating a new cluster
+
+For creating a new cluster see the documentation [here](./docs/creating-a-new-cluster.md).
