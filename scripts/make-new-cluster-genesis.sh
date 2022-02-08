@@ -14,7 +14,7 @@ print_usage() {
   echo "  -h                         Print this message"
   echo "  -n <namespace>             Namespace in which to create the secret. Defaults to `dscp`"
   echo "  -b <base_chain>            Base chain-spec to generate spec from. Defaults to `local`."
-  echo "  -c <container>             Container image to use for key generation"
+  echo "  -c <container>             Container image to use for key generation. Defaults to ghcr.io/digicatapult/vitalam-node:latest"
   echo "  -v <validator_node_name>   Adds a validator node with name <validator_node_name>. To add multiple validators add multiple -v flags"
   echo "  -a <additional_node_name>  Adds an additional (non-validator) node with name <additional_node_name>. To add multiple additional nodes add multiple -a flags"
 }
