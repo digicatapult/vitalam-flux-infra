@@ -152,7 +152,7 @@ assert_node_valid() {
   assert_not_node "$CLUSTER" "$namespace" "$node"
 
   assert_label "owner" $node_owner
-  printf "Checking that owner for node $node is valid..." >&2
+  printf "Checking that owner for node $node:$namespace is valid..." >&2
   for owner in "${OWNER_NAMES[@]}"
   do
     owner_name=$(echo $owner | cut -f1 -d:)
@@ -163,7 +163,7 @@ assert_node_valid() {
     fi
   done
 
-  printf "Owner is not [resent in account list\n" >&2
+  printf "Owner is not present in account list\n" >&2
   exit 1
 }
 
