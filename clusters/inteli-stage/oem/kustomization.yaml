@@ -9,3 +9,5 @@ configMapGenerator:
       - values-bootnode.yaml=bootnode/values.yaml
 configurations:
   - kustomize-config.yaml
+generatorOptions:
+  disableNameSuffixHash: true
