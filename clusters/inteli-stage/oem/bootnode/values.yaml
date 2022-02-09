@@ -1,0 +1,6 @@
+node:
+  perNodeServices:
+    setPublicAddressToExternalIp:
+      enabled: true
+      ipRetrievalServiceUrl: https://ifconfig.io/ip
+storageClass: ebs-sc-substrate

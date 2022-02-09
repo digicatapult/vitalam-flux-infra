@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: oem
+resources:
+  - bootnode
+configMapGenerator:
+  - name: oem-values
+    files:
+      - values-bootnode.yaml=bootnode/values.yaml
+configurations:
+  - kustomize-config.yaml
