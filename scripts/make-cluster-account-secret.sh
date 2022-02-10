@@ -143,7 +143,7 @@ create_k8s_secret() {
   kubectl create secret generic ${account_name}-keys \
     --type=Opaque \
     --namespace=$namespace \
-    --from-literal=acount_seed="$account_seed" \
+    --from-literal=account_seed="$account_seed" \
     --dry-run=client \
     --output=yaml > ./clusters/${cluster}/secrets/${account_name}_${namespace}_account-keys.unc.yaml
 
