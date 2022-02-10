@@ -64,29 +64,11 @@ assert_command() {
   printf "OK\n"
 }
 
-assert_gpg() {
-  printf "Checking for presense of gpg..."
-  local path_to_executable=$(command -v gpg)
-
-  if [ -z "$path_to_executable" ] ; then
-    echo -e "Cannot find gpg executable. Is it on your \$PATH?"
-    exit 1
-  fi
-
-  if $path_to_executable --version | head -n 1 | grep -E "2.2.27|2.2.19" &> /dev/null ; then
-  printf "OK\n"
-  else
-    echo -e "Incorrect version of gpg detected, make sure you are using 2.2.27 or 2.2.19"
-    $path_to_executable --version |head -n 1
-    exit 1
-  fi
-}
-
 # sanity check
 
 
 assert_cluster $CLUSTER
-assert_gpg
+assert_command gpg
 assert_command sops
 
 # check we can decrypt secrets if we need to

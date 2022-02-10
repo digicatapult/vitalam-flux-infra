@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 
 print_usage() {
-  echo "Makes a kubernetes secret containing keys for a dscp-node. The final line of this script will output a JSON object containing the new node's PeerId, AuraId and GrandpaId."
+  echo "Makes a kubernetes secret containing keys for a dscp account. The final line of this script will output a JSON object containing the new account's accountId."
   echo ""
   echo "Usage:"
-  echo "  ./scripts/make-cluster-node-secret.sh [ -h ] [ -f ] [ -n <namespace> ] [ -c <container> ] <cluster_name> <node_name>"
+  echo "  ./scripts/make-cluster-account-secret.sh [ -h ] [ -f ] [ -n <namespace> ] [ -c <container> ] <cluster_name> <account_name>"
   echo ""
   echo "Example Usage:"
-  echo "  ./scripts/make-cluster-node-secret.sh inteli-stage red"
+  echo "  ./scripts/make-cluster-account-secret.sh inteli-stage api"
   echo ""
   echo "Flags: "
   echo "  -h              Print this message"
-  echo "  -f              Force re-creation of new secret for an existing node. Note this is destructive"
+  echo "  -f              Force re-creation of new secret for an existing account. Note this is destructive"
   echo "  -c <container>  Container image to use for key generation"
   echo "  -n <namespace>  Namespace in which to create the secret. Defaults to dscp"
 }
@@ -48,7 +48,7 @@ while getopts ":n:c:fh" opt; do
 done
 shift $((OPTIND -1))
 CLUSTER=$1
-NODE_NAME=$2
+ACCOUNT_NAME=$2
 
 assert_cluster() {
   local cluster=$1
@@ -61,18 +61,18 @@ assert_cluster() {
   printf "OK\n" >&2
 }
 
-assert_not_node() {
+assert_not_account() {
   local cluster=$1
   local namespace=$2
-  local node_name=$3
+  local account_name=$3
 
-  printf "Checking node $node_name:$namespace does not already exist in cluster $cluster..." >&2
+  printf "Checking account $account_name:$namespace does not already exist in cluster $cluster..." >&2
   if [ ! -z "$FORCE_RECREATE" ]; then
     printf "SKIP\n" >&2
   else
-    if [ -f "./clusters/$cluster/secrets/${node_name}_${namespace}_node-keys.yaml" ] ||
-       [ -f "./clusters/$cluster/secrets/${node_name}_${namespace}_node-keys.unc.yaml" ]; then
-      echo -e "Node $node_name:${namespace} already exists in cluster $cluster. Use -f to overrite anyway." >&2
+    if [ -f "./clusters/$cluster/secrets/${account_name}_${namespace}_account-keys.yaml" ] ||
+       [ -f "./clusters/$cluster/secrets/${account_name}_${namespace}_account-keys.unc.yaml" ]; then
+      echo -e "Account $account_name:${namespace} already exists in cluster $cluster. Use -f to overrite anyway." >&2
       exit 1
     fi
     printf "OK\n" >&2
@@ -116,36 +116,16 @@ pull_container() {
   fi
 }
 
-NODE_KEY=
-NODE_ID=
-generate_node_key() {
+ACCOUNT_SEED=
+ACCOUNT_ADDR=
+generate_account_key() {
   local container=$1
 
-  printf "Generating node-key..." >&2
-  if output=$(docker run --rm -t $container key generate-node-key 2>&1); then
+  printf "Generating account-key..." >&2
+  if output=$(docker run --rm -t $container key generate --scheme Sr25519 --output-type Json 2>&1); then
     printf "OK\n" >&2
-    output=(${output[@]})
-    NODE_ID=(${output[0]})
-    NODE_KEY=(${output[1]})
-  else
-    printf "FAIL\n" >&2
-    echo "$output" >&2
-    exit 1
-  fi
-}
-
-AUTH_KEY=
-AUTH_ADDR=
-generate_authority_key() {
-  local container=$1
-  local scheme=$2
-  local output=
-
-  printf "Generating authority key with scheme $scheme..." >&2
-  if output=$(docker run --rm -t $container key generate --scheme $scheme --output-type Json 2>&1); then
-    printf "OK\n" >&2
-    AUTH_KEY=$(echo $output | jq -r .secretPhrase)
-    AUTH_ADDR=$(echo $output | jq -r .ss58Address)
+    ACCOUNT_SEED=$(echo $output | jq -r .secretPhrase)
+    ACCOUNT_ADDR=$(echo $output | jq -r .ss58Address)
   else
     printf "FAIL\n" >&2
     echo "$output" >&2
@@ -156,20 +136,16 @@ generate_authority_key() {
 create_k8s_secret() {
   local cluster=$1
   local namespace=$2
-  local node_name=$3
-  local node_key=$4
-  local aura_seed=$5
-  local grandpa_seed=$6
+  local account_name=$3
+  local account_seed=$4
 
-  printf "Generating k8s secret for $node_name..." >&2
-  kubectl create secret generic ${node_name}-keys \
+  printf "Generating k8s secret for $account_name..." >&2
+  kubectl create secret generic ${account_name}-keys \
     --type=Opaque \
     --namespace=$namespace \
-    --from-literal=node_id=$node_key \
-    --from-literal=aura_seed="$aura_seed" \
-    --from-literal=grandpa_seed="$grandpa_seed" \
+    --from-literal=account_seed="$account_seed" \
     --dry-run=client \
-    --output=yaml > ./clusters/${cluster}/secrets/${node_name}_${namespace}_node-keys.unc.yaml
+    --output=yaml > ./clusters/${cluster}/secrets/${account_name}_${namespace}_account-keys.unc.yaml
 
   if [ "$?" -ne "0" ]; then
     printf "FAIL\n" >&2
@@ -184,25 +160,15 @@ assert_command docker
 assert_command jq
 assert_cluster $CLUSTER
 assert_namespace $NAMESPACE
-assert_not_node $CLUSTER $NAMESPACE $NODE_NAME
+assert_not_account $CLUSTER $NAMESPACE $ACCOUNT_NAME
 # make sure we can pull the container
 pull_container $CONTAINER
 
 # Generate keys
-generate_node_key $CONTAINER
-generate_authority_key $CONTAINER Sr25519
-AURA_ADDR=$AUTH_ADDR
-AURA_SEED=$AUTH_KEY
-generate_authority_key $CONTAINER Ed25519
-GRANDPA_ADDR=$AUTH_ADDR
-GRANDPA_SEED=$AUTH_KEY
+generate_account_key $CONTAINER
 
 # generate kubernetes secret
-create_k8s_secret "$CLUSTER" "$NAMESPACE" "$NODE_NAME" "$NODE_KEY" "$AURA_SEED" "$GRANDPA_SEED"
+create_k8s_secret "$CLUSTER" "$NAMESPACE" "$ACCOUNT_NAME" "$ACCOUNT_SEED"
 
 # Generate output as JSON
-echo $(jq --null-input \
-  --arg node_id $NODE_ID \
-  --arg aura_id $AURA_ADDR \
-  --arg grandpa_id $GRANDPA_ADDR \
-  '{ "nodeId": $node_id, "auraId": $aura_id, "grandpaId": $grandpa_id }')
+echo $(jq --null-input --arg account_addr $ACCOUNT_ADDR '{ "accountId": $account_addr }')

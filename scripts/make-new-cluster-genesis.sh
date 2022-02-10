@@ -4,41 +4,50 @@ print_usage() {
   echo "TODO"
   echo ""
   echo "Usage:"
-  echo "  ./scripts/make-new-cluster-genesis.sh [ -h ] [ -n <namespace> ] [ -b <base_chain> ] [ -c <container> ] [ -v <validator_node_name> ] [ -a <additional_node_name> ] <cluster_name>"
+  echo "  ./scripts/make-new-cluster-genesis.sh [ -h ] [ -b <base_chain> ] [ -c <container> ] [ -v <validator_node_name> ] [ -a <additional_node_name> ] <cluster_name>"
   echo ""
   echo "Example Usage:"
   echo "  # Create keys and a genesis for cluster inteli-stage with three validator nodes (red, green, blue) and two additional nodes (bootnode, api-light)"
   echo "  ./scripts/make-new-cluster-genesis.sh -v red -v green -v blue -a bootnode -a api-light inteli-stage"
   echo ""
   echo "Flags: "
-  echo "  -h                         Print this message"
-  echo "  -n <namespace>             Namespace in which to create the secret. Defaults to `dscp`"
-  echo "  -b <base_chain>            Base chain-spec to generate spec from. Defaults to `local`."
-  echo "  -c <container>             Container image to use for key generation. Defaults to ghcr.io/digicatapult/vitalam-node:latest"
-  echo "  -v <validator_node_name>   Adds a validator node with name <validator_node_name>. To add multiple validators add multiple -v flags"
-  echo "  -a <additional_node_name>  Adds an additional (non-validator) node with name <additional_node_name>. To add multiple additional nodes add multiple -a flags"
+  echo "  -h                                            Print this message"
+  echo "  -n <namespace>                                Namespace in which to create the secret. Defaults to dscp"
+  echo "  -b <base_chain>                               Base chain-spec to generate spec from. Defaults to local"
+  echo "  -c <container>                                Container image to use for key generation."
+  echo "                                                Defaults to ghcr.io/digicatapult/vitalam-node:latest"
+  echo "  -o <owner>:<namespace>:<balance>              Adds a node owner account giving the specified balance."
+  echo "                                                The secret for the owner will be placed in the Kubernetes <namespace>"
+  echo "  -v <validator_node_name>:<namespace>:<owner>  Adds a validator node with name <validator_node_name> which will be owned by <owner>."
+  echo "                                                The secrets will be added to the specified Kubernetes <namespace>."
+  echo "                                                The <owner> must be in the same namesapce as the node."
+  echo "                                                To add multiple validators add multiple -v flags"
+  echo "  -a <additional_node_name:<namespace>:<owner>  Adds an additional (non-validator) node with name <additional_node_name>"
+  echo "                                                which will be owned by <owner>. The secrets will be added to the specified"
+  echo "                                                Kubernetes <namespace>. The <owner> must be in the same namesapce as the node."
+  echo "                                                To add multiple additional nodes add multiple -a flags"
 }
 
-NAMESPACE="dscp"
 BASE_CHAIN="local"
 CONTAINER="ghcr.io/digicatapult/vitalam-node:latest"
+OWNER_NAMES=()
 VALIDATOR_NAMES=()
 ADDITIONAL_NAMES=()
 GENESIS=
-while getopts ":n:b:c:v:a:h" opt; do
+while getopts ":b:c:o:v:a:h" opt; do
   case ${opt} in
     h )
       print_usage
       exit 0
-      ;;
-    n )
-      NAMESPACE=${OPTARG}
       ;;
     b )
       BASE_CHAIN=${OPTARG}
       ;;
     c )
       CONTAINER=${OPTARG}
+      ;;
+    o )
+      OWNER_NAMES+=("${OPTARG}")
       ;;
     v )
       VALIDATOR_NAMES+=("${OPTARG}")
@@ -74,15 +83,34 @@ assert_cluster() {
 
 assert_not_node() {
   local cluster=$1
-  local node_name=$2
+  local namespace=$2
+  local node_name=$3
 
-  printf "Checking node $node_name does not already exist in cluster $cluster..." >&2
+  printf "Checking node $node_name:$namespace does not already exist in cluster $cluster..." >&2
   if [ ! -z "$FORCE_RECREATE" ]; then
     printf "SKIP\n" >&2
   else
-    if [ -f "./clusters/$cluster/secrets/${node_name}_keys.yaml" ] ||
-       [ -f "./clusters/$cluster/secrets/${node_name}_keys.unc.yaml" ]; then
-      echo -e "Node $node_name already exists in cluster $cluster. Use -f to overrite anyway." >&2
+    if [ -f "./clusters/$cluster/secrets/${node_name}_${namespace}_node-keys.yaml" ] ||
+       [ -f "./clusters/$cluster/secrets/${node_name}_${namespace}_node-keys.unc.yaml" ]; then
+      echo -e "Node $node_name already exists in cluster $cluster" >&2
+      exit 1
+    fi
+    printf "OK\n" >&2
+  fi
+}
+
+assert_not_account() {
+  local cluster=$1
+  local namespace=$2
+  local account_name=$3
+
+  printf "Checking account $account_name:$namespace does not already exist in cluster $cluster..." >&2
+  if [ ! -z "$FORCE_RECREATE" ]; then
+    printf "SKIP\n" >&2
+  else
+    if [ -f "./clusters/$cluster/secrets/${account_name}_${namespace}_account-keys.yaml" ] ||
+       [ -f "./clusters/$cluster/secrets/${account_name}_${namespace}_account-keys.unc.yaml" ]; then
+      echo -e "Account $account_name:$namespace already exists in cluster $cluster" >&2
       exit 1
     fi
     printf "OK\n" >&2
@@ -98,7 +126,57 @@ assert_label() {
     echo -e "$name is not a valid Kubernetes name" >&2
     exit 1
   fi
-  printf "OK'\n" >&2
+  printf "OK\n" >&2
+}
+
+assert_balance() {
+  local balance=$1
+  printf "Checking that balance $balance is valid..." >&2
+  if [[ ! $balance =~ ^[1-9][0-9]*$ ]]; then
+    echo -e "$balance is not a valid integer" >&2
+    exit 1
+  fi
+  printf "OK\n" >&2
+}
+
+assert_node_valid() {
+  local node_input=$1
+  local node=$(echo $node_input | cut -f1 -d:)
+  local namespace=$(echo $node_input | cut -f2 -d:)
+  local node_owner=$(echo $node_input | cut -f3 -d:)
+  local owner_name=
+  local owner_namespace=
+
+  assert_label "namespace" $namespace
+  assert_label "name" $node
+  assert_not_node "$CLUSTER" "$namespace" "$node"
+
+  assert_label "owner" $node_owner
+  printf "Checking that owner for node $node:$namespace is valid..." >&2
+  for owner in "${OWNER_NAMES[@]}"
+  do
+    owner_name=$(echo $owner | cut -f1 -d:)
+    owner_namespace=$(echo $owner | cut -f2 -d:)
+    if [[ "$namespace" == "$owner_namespace" ]] && [[ "$node_owner" == "$owner_name" ]]; then
+      printf "OK\n" >&2
+      return 0
+    fi
+  done
+
+  printf "Owner is not present in account list\n" >&2
+  exit 1
+}
+
+assert_owner_valid() {
+  local owner_input=$1
+  local owner=$(echo $owner_input | cut -f1 -d:)
+  local namespace=$(echo $owner_input | cut -f2 -d:)
+  local balance=$(echo $owner_input | cut -f3 -d:)
+
+  assert_label "namespace" $namespace
+  assert_label "owner" $owner
+  assert_balance $balance
+  assert_not_account "$CLUSTER" "$namespace" "$owner"
 }
 
 assert_command() {
@@ -162,18 +240,60 @@ generate_sudo() {
   fi
 }
 
-generate_validator() {
+OWNER_ACCOUNTS=()
+generate_owner() {
   local cluster=$1
-  local namespace=$2
+  local container=$2
+  local owner_name_namespace_balance=$3
+
+  local owner_name=$(echo "$owner_name_namespace_balance" | cut -f1 -d:)
+  local owner_namespace=$(echo "$owner_name_namespace_balance" | cut -f2 -d:)
+  local owner_balance=$(echo "$owner_name_namespace_balance" | cut -f3 -d:)
+
+  printf "Generating owner account ${owner_name}:${owner_namespace}..." >&2
+  if output=$(./scripts/make-cluster-account-secret.sh -n $owner_namespace -c $container $cluster $owner_name 2>/dev/null); then
+    printf "OK\n" >&2
+    account_id=$(echo $output | jq -r '.accountId')
+    OWNER_ACCOUNTS+=("${owner_name}:${owner_namespace}:${account_id}")
+    GENESIS=$(echo $GENESIS | jq --arg account_id $account_id --arg balance $owner_balance '.genesis.runtime.palletBalances.balances += [[$account_id, ($balance | tonumber)]]')
+    GENESIS=$(echo $GENESIS | jq --arg account_id $account_id '.genesis.runtime.palletMembership.members += [$account_id]')
+  else
+    printf "FAIL\n" >&2
+    echo "$output" >&2
+    exit 1
+  fi
+}
+
+generate_node() {
+  local type=$1
+  local cluster=$2
   local container=$3
-  local node_name=$4
-  local owner=$5
+  local node_name_namespace_owner=$4
+
+  local node_name=$(echo "$node_name_namespace_owner" | cut -f1 -d:)
+  local namespace=$(echo "$node_name_namespace_owner" | cut -f2 -d:)
+  local node_owner=$(echo "$node_name_namespace_owner" | cut -f3 -d:)
+  local node_owner_account=
+
   local output=
   local node_id=
   local aura_id=
   local grandpa_id=
+  local owner_name=
+  local owner_namespace=
+  local owner_account=
 
-  printf "Generating keys for validator $node_name..." >&2
+  for owner in "${OWNER_ACCOUNTS[@]}"
+  do
+    owner_name=$(echo $owner | cut -f1 -d:)
+    owner_namespace=$(echo $owner | cut -f2 -d:)
+    owner_account=$(echo $owner | cut -f3 -d:)
+    if [[ "$namespace" == "$owner_namespace" ]] && [[ "$node_owner" == "$owner_name" ]]; then
+      node_owner_account=$owner_account
+    fi
+  done
+
+  printf "Generating keys for $type node $node_name:$namespace..." >&2
   if output=$(./scripts/make-cluster-node-secret.sh -n $namespace -c $container $cluster $node_name 2>/dev/null); then
     printf "OK\n" >&2
     # extract ids
@@ -181,18 +301,20 @@ generate_validator() {
     aura_id=$(echo $output | jq -r '.auraId')
     grandpa_id=$(echo $output | jq -r '.grandpaId')
     # update genesis
-    GENESIS=$(echo $GENESIS | jq --arg aura_id $aura_id '.genesis.runtime.palletAura.authorities += [$aura_id]')
-    GENESIS=$(echo $GENESIS | jq --arg grandpa_id $grandpa_id '.genesis.runtime.palletGrandpa.authorities += [[$grandpa_id, 1]]')
+    if [ "$type" == "validator" ]; then
+      GENESIS=$(echo $GENESIS | jq --arg aura_id $aura_id '.genesis.runtime.palletAura.authorities += [$aura_id]')
+      GENESIS=$(echo $GENESIS | jq --arg grandpa_id $grandpa_id '.genesis.runtime.palletGrandpa.authorities += [[$grandpa_id, 1]]')
+    fi
     # convert node_id to hex
     node_id=$(docker run --rm -a stdout python:alpine /bin/sh -c "\
       pip install base58 1>/dev/null; \
-      printf \"$node_id\" | base58 -d | xxd -p | tr -d '[:space:]' | tr '[:lower:]' '[:upper:]'")
+      printf \"$node_id\" | base58 -d | xxd -p | tr -d '[:space:]' | tr '[:lower:]' '[:upper:]'" 2>/dev/null)
     node_id=($(echo $node_id | fold -w2))
 
-    GENESIS=$(echo $GENESIS | jq --arg sudo_id $owner '.genesis.runtime.palletNodeAuthorization.nodes += [[[], $sudo_id]]')
+    GENESIS=$(echo $GENESIS | jq --arg owner $node_owner_account '.genesis.runtime.palletNodeAuthorization.nodes += [[[], $owner]]')
     for byte in "${node_id[@]}"
     do
-      GENESIS=$(echo $GENESIS | jq --arg sudo_id $owner --arg byte $(echo "obase=10; ibase=16; $byte" | bc) '.genesis.runtime.palletNodeAuthorization.nodes[-1][0] += [($byte | tonumber)]')
+      GENESIS=$(echo $GENESIS | jq --arg byte $(echo "obase=10; ibase=16; $byte" | bc) '.genesis.runtime.palletNodeAuthorization.nodes[-1][0] += [($byte | tonumber)]')
     done
   else
     printf "FAIL\n" >&2
@@ -205,18 +327,20 @@ assert_command kubectl
 assert_command docker
 assert_command jq
 assert_cluster $CLUSTER
-assert_label "namespace" $NAMESPACE
+
+for owner in "${OWNER_NAMES[@]}"
+do
+  assert_owner_valid $owner
+done
 
 for validator_name in "${VALIDATOR_NAMES[@]}"
 do
-  assert_label "name" "$validator_name"
-  assert_not_node "$CLUSTER" "$validator_name"
+  assert_node_valid $validator_name
 done
 
 for additional_name in "${ADDITIONAL_NAMES[@]}"
 do
-  assert_label "name" "$additional_name"
-  assert_not_node "$CLUSTER" "$additional_name"
+  assert_node_valid $additional_name
 done
 
 # make sure we can pull the container
@@ -238,11 +362,22 @@ GENESIS=$(echo $GENESIS | jq '.genesis.runtime.palletMembership.members |= []')
 # Generate sudo
 generate_sudo $CONTAINER
 
+# loop through nodes and add them in
+for owner in "${OWNER_NAMES[@]}"
+do
+  generate_owner $CLUSTER $CONTAINER $owner
+done
+
 # loop through validators and add them in
-NODE_CREATE_OUTPUT=
 for validator_name in "${VALIDATOR_NAMES[@]}"
 do
-  generate_validator $CLUSTER $NAMESPACE $CONTAINER $validator_name $SUDO_ADDR
+  generate_node "validator" $CLUSTER $CONTAINER $validator_name
+done
+
+# loop through additional nodes and add them in
+for additional_name in "${ADDITIONAL_NAMES[@]}"
+do
+  generate_node "additional" $CLUSTER $CONTAINER $additional_name
 done
 
 GENESIS_DIR=$(mktemp -d -t inteli-genesis.XXXXXX)
