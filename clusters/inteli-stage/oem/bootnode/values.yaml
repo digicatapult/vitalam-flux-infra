@@ -1,5 +1,11 @@
 node:
+  chain: inteli-stage
   perNodeServices:
     setPublicAddressToExternalIp:
       enabled: true
+  keys:
+    - type: aura
+      scheme: sr25519
+    - type: gran
+      scheme: ed25519
 storageClass: ebs-sc-substrate

@@ -19,4 +19,16 @@ spec:
   - kind: ConfigMap
     name: oem-values
     valuesKey: values-bootnode.yaml
+  - kind: Secret
+    name: bn-keys
+    valuesKey: node_id
+    targetPath: node.customNodeKey
+  - kind: Secret
+    name: bn-keys
+    valuesKey: aura_seed
+    targetPath: node.keys[0].seed
+  - kind: Secret
+    name: bn-keys
+    valuesKey: grandpa_seed
+    targetPath: node.keys[1].seed
   interval: 10m0s
