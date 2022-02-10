@@ -293,7 +293,7 @@ generate_node() {
     fi
   done
 
-  printf "Generating keys for $type node $node_name..." >&2
+  printf "Generating keys for $type node $node_name:$namespace..." >&2
   if output=$(./scripts/make-cluster-node-secret.sh -n $namespace -c $container $cluster $node_name 2>/dev/null); then
     printf "OK\n" >&2
     # extract ids
@@ -308,7 +308,7 @@ generate_node() {
     # convert node_id to hex
     node_id=$(docker run --rm -a stdout python:alpine /bin/sh -c "\
       pip install base58 1>/dev/null; \
-      printf \"$node_id\" | base58 -d | xxd -p | tr -d '[:space:]' | tr '[:lower:]' '[:upper:]'")
+      printf \"$node_id\" | base58 -d | xxd -p | tr -d '[:space:]' | tr '[:lower:]' '[:upper:]'" 2>/dev/null)
     node_id=($(echo $node_id | fold -w2))
 
     GENESIS=$(echo $GENESIS | jq --arg owner $node_owner_account '.genesis.runtime.palletNodeAuthorization.nodes += [[[], $owner]]')
