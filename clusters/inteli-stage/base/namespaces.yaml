@@ -1,0 +1,32 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.kubernetes.io/instance: oem
+    app.kubernetes.io/version: latest
+  name: oem
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.kubernetes.io/instance: t1
+    app.kubernetes.io/version: latest
+  name: t1
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.kubernetes.io/instance: t2
+    app.kubernetes.io/version: latest
+  name: t2
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.kubernetes.io/instance: aws-ebs-csi-driver
+    app.kubernetes.io/version: latest
+  name: aws-ebs-csi-driver
