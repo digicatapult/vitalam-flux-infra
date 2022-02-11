@@ -1,6 +1,6 @@
 node:
   chain: inteli-stage
-  role: light
+  role: full
   perNodeServices:
     setPublicAddressToExternal:
       enabled: false
