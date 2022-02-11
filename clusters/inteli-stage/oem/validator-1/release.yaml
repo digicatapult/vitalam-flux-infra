@@ -18,7 +18,7 @@ spec:
   valuesFrom:
   - kind: ConfigMap
     name: oem-values
-    valuesKey: values-validator-1.yaml
+    valuesKey: values-validator.yaml
   - kind: Secret
     name: oem-1-keys
     valuesKey: node_id

@@ -8,8 +8,7 @@ resources:
 configMapGenerator:
   - name: t1-values
     files:
-      - values-validator-1.yaml=validator-1/values.yaml
-      - values-validator-0.yaml=validator-0/values.yaml
+      - values-validator.yaml=values-validator.yaml
 configurations:
   - kustomize-config.yaml
 generatorOptions:
