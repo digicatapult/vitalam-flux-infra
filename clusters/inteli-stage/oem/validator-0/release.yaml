@@ -11,14 +11,14 @@ spec:
   chart:
     spec:
       chart: vitalam-node
-      version: "0.24.0"
+      version: "0.24.1"
       sourceRef:
         kind: HelmRepository
         name: vitalam-node
   valuesFrom:
   - kind: ConfigMap
     name: oem-values
-    valuesKey: values-validator-1.yaml
+    valuesKey: values-validator-0.yaml
   - kind: Secret
     name: oem-0-keys
     valuesKey: node_id
