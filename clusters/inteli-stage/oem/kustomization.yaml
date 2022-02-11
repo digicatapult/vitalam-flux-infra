@@ -4,10 +4,14 @@ namespace: oem
 resources:
   - source.yaml
   - bootnode
+  - validator-0
+  - validator-1
 configMapGenerator:
   - name: oem-values
     files:
       - values-bootnode.yaml=bootnode/values.yaml
+      - values-validator-1.yaml=validator-1/values.yaml
+      - values-validator-0.yaml=validator-0/values.yaml
 configurations:
   - kustomize-config.yaml
 generatorOptions:
