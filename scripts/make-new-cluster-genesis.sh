@@ -232,6 +232,7 @@ generate_sudo() {
     printf "OK\n" >&2
     SUDO_SEED=$(echo $output | jq -r .secretPhrase)
     SUDO_ADDR=$(echo $output | jq -r .ss58Address)
+    GENESIS=$(echo $GENESIS | jq --arg sudo $SUDO_ADDR --arg balance 1152921504606846976 '.genesis.runtime.palletBalances.balances += [[$sudo, ($balance | tonumber)]]')
     GENESIS=$(echo $GENESIS | jq --arg sudo $SUDO_ADDR '.genesis.runtime.palletSudo.key |= $sudo')
   else
     printf "FAIL\n" >&2
