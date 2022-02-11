@@ -1,8 +1,9 @@
 node:
   chain: inteli-stage
+  role: light
   perNodeServices:
-    setPublicAddressToExternalIp:
-      enabled: true
+    setPublicAddressToExternal:
+      enabled: false
   keys:
     - type: aura
       scheme: sr25519
