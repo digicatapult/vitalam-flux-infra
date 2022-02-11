@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: oem-bn
+  name: oem-v1
   namespace: oem
 spec:
   install:
@@ -18,17 +18,17 @@ spec:
   valuesFrom:
   - kind: ConfigMap
     name: oem-values
-    valuesKey: values-bootnode.yaml
+    valuesKey: values-validator.yaml
   - kind: Secret
-    name: bn-keys
+    name: oem-1-keys
     valuesKey: node_id
     targetPath: node.customNodeKey
   - kind: Secret
-    name: bn-keys
+    name: oem-1-keys
     valuesKey: aura_seed
     targetPath: node.keys[0].seed
   - kind: Secret
-    name: bn-keys
+    name: oem-1-keys
     valuesKey: grandpa_seed
     targetPath: node.keys[1].seed
   interval: 10m0s
