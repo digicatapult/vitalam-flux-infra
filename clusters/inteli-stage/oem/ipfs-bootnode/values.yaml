@@ -1,6 +1,6 @@
 config:
-  logLevel: info
-  ipfsLogLevel: info
+  logLevel: debug
+  ipfsLogLevel: debug
 storage:
   storageClass: ebs-sc-ipfs
   dataVolumeSize: 20
