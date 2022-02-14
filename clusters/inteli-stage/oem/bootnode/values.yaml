@@ -1,6 +1,7 @@
 node:
   chain: inteli-stage
   role: full
+  dataVolumeSize: 30Gi
   perNodeServices:
     setPublicAddressToExternal:
       enabled: false
@@ -9,4 +10,6 @@ node:
       scheme: sr25519
     - type: gran
       scheme: ed25519
+image:
+  tag: v2.9.3
 storageClass: ebs-sc-substrate
