@@ -1,0 +1,34 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: oem-ipfs-bn
+  namespace: oem
+spec:
+  install:
+    remediation:
+      retries: -1
+  chart:
+    spec:
+      chart: vitalam-ipfs
+      version: "1.2.4"
+      sourceRef:
+        kind: HelmRepository
+        name: vitalam-ipfs
+  valuesFrom:
+  - kind: ConfigMap
+    name: oem-values
+    valuesKey: values-ipfs-bootnode.yaml
+  - kind: Secret
+    name: ipfs-bn-light-keys
+    valuesKey: node_id
+    targetPath: vitalamNode.node.customNodeKey
+  - kind: Secret
+    name: ipfs-bn-light-keys
+    valuesKey: aura_seed
+    targetPath: vitalamNode.node.keys[0].seed
+  - kind: Secret
+    name: ipfs-bn-light-keys
+    valuesKey: grandpa_seed
+    targetPath: vitalamNode.node.keys[1].seed
+  interval: 10m0s

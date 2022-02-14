@@ -7,3 +7,12 @@ metadata:
 spec:
   interval: 10m0s
   url: https://digicatapult.github.io/vitalam-node
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: vitalam-ipfs
+  namespace: oem
+spec:
+  interval: 10m0s
+  url: https://digicatapult.github.io/vitalam-ipfs
