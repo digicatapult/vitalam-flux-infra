@@ -4,8 +4,8 @@ namespace: oem
 resources:
   - source.yaml
   - bootnode
-#  - validator-0
-#  - validator-1
+  - validator-0
+  - validator-1
 configMapGenerator:
   - name: oem-values
     files:
