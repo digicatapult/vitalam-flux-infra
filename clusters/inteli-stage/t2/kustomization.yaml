@@ -3,11 +3,13 @@ kind: Kustomization
 namespace: t2
 resources:
   - source.yaml
+  - api
   - nginx
 configMapGenerator:
   - name: t2-values
     files:
       - values-nginx.yaml=nginx/values.yaml
+      - values-api.yaml=api/values.yaml
 configurations:
   - kustomize-config.yaml
 generatorOptions:
