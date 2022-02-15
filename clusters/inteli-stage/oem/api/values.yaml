@@ -1,4 +1,5 @@
 config:
+  logLevel: info
 ingress:
   className: nginx-oem
 vitalamIpfs:
