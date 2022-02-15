@@ -6,11 +6,13 @@ resources:
   - bootnode
   - validator-0
   - validator-1
+  - ipfs-bootnode
 configMapGenerator:
   - name: oem-values
     files:
       - values-bootnode.yaml=bootnode/values.yaml
       - values-validator.yaml=values-validator.yaml
+      - values-ipfs-bootnode.yaml=ipfs-bootnode/values.yaml
 configurations:
   - kustomize-config.yaml
 generatorOptions:
