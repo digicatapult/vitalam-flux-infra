@@ -11,6 +11,15 @@ spec:
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
+  name: vitalam-api
+  namespace: t1
+spec:
+  interval: 10m0s
+  url: https://digicatapult.github.io/vitalam-api
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
   name: bitnami
   namespace: t1
 spec:
