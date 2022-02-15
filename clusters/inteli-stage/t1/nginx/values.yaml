@@ -1,0 +1,10 @@
+service:
+  type: ClusterIP
+  targetPorts:
+    http: 80
+    https: 443
+ingressClass: nginx-t1
+containerPorts:
+  http: 80
+  https: 443
+  metrics: 10254
