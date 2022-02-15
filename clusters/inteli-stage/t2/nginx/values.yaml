@@ -3,7 +3,7 @@ service:
   targetPorts:
     http: 80
     https: 443
-ingressClass: nginx-t1
+ingressClass: nginx-t2
 containerPorts:
   http: 80
   https: 443
