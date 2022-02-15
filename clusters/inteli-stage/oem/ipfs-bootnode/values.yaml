@@ -1,6 +1,6 @@
 config:
   logLevel: info
-  ipfsLogLevel: info
+  ipfsLogLevel: trace
 storage:
   storageClass: ebs-sc-ipfs
   dataVolumeSize: 20
