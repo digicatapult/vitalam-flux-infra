@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: oem
 resources:
   - source.yaml
+  - api
   - bootnode
   - validator-0
   - validator-1
@@ -12,6 +13,7 @@ configMapGenerator:
   - name: oem-values
     files:
       - values-bootnode.yaml=bootnode/values.yaml
+      - values-api.yaml=api/values.yaml
       - values-validator.yaml=values-validator.yaml
       - values-ipfs-bootnode.yaml=ipfs-bootnode/values.yaml
       - values-nginx.yaml=nginx/values.yaml
