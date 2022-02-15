@@ -3,7 +3,10 @@ service:
   targetPorts:
     http: 80
     https: 443
-ingressClass: nginx-t2
+ingressClassResource:
+  name: nginx-t2
+scope:
+  enabled: true  
 containerPorts:
   http: 80
   https: 443
