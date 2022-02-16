@@ -5,7 +5,7 @@ ingress:
 vitalamIpfs:
   enabled: true
   logLevel: info
-  ipfsLogLevel: trace
+  ipfsLogLevel: debug
   storage:
     storageClass: ebs-sc-ipfs
     dataVolumeSize: 20
