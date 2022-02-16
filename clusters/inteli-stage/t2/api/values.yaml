@@ -9,7 +9,8 @@ vitalamIpfs:
   storage:
     storageClass: ebs-sc-ipfs
     dataVolumeSize: 20
-  ipfsBootNodeAddress: /dns4/oem-ipfs-bn-vitalam-ipfs-swarm.oem.svc.cluster.local/tcp/4001/p2p/12D3KooWJ1ZBoSYADNep8S23MPRKYG4M4epih6Xug4pkY4dL22hb
+  config:
+    ipfsBootNodeAddress: /dns4/oem-ipfs-bn-vitalam-ipfs-swarm.oem.svc.cluster.local/tcp/4001/p2p/12D3KooWJ1ZBoSYADNep8S23MPRKYG4M4epih6Xug4pkY4dL22hb
   vitalamNode:
     enabled: true
     node:
