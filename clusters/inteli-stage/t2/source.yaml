@@ -2,17 +2,8 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
-  name: vitalam-node
-  namespace: t1
-spec:
-  interval: 10m0s
-  url: https://digicatapult.github.io/vitalam-node
----
-apiVersion: source.toolkit.fluxcd.io/v1beta1
-kind: HelmRepository
-metadata:
   name: vitalam-api
-  namespace: t1
+  namespace: t2
 spec:
   interval: 10m0s
   url: https://digicatapult.github.io/vitalam-api
@@ -21,7 +12,7 @@ apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
   name: bitnami
-  namespace: t1
+  namespace: t2
 spec:
   interval: 10m0s
   url: https://charts.bitnami.com/bitnami
