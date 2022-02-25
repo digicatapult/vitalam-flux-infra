@@ -9,7 +9,7 @@ vitalamIpfs:
     dataVolumeSize: 20
   config:
     logLevel: info
-    ipfsLogLevel: debug
+    ipfsLogLevel: fatal
     ipfsBootNodeAddress: /dns4/oem-ipfs-bn-vitalam-ipfs-swarm.oem.svc.cluster.local/tcp/4001/p2p/12D3KooWJ1ZBoSYADNep8S23MPRKYG4M4epih6Xug4pkY4dL22hb
     ipfsSwarmAddrFilters:
       - /ip4/100.64.0.0/ipcidr/10

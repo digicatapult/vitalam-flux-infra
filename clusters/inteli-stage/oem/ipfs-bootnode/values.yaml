@@ -1,6 +1,6 @@
 config:
   logLevel: info
-  ipfsLogLevel: debug
+  ipfsLogLevel: fatal
   ipfsSwarmAddrFilters:
     - /ip4/100.64.0.0/ipcidr/10
     - /ip4/169.254.0.0/ipcidr/16
