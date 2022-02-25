@@ -24,7 +24,7 @@ vitalamNode:
   enabled: true
   node:
     chain: inteli-stage
-    role: light
+    role: full
     perNodeServices:
       setPublicAddressToExternal:
         enabled: false
@@ -40,6 +40,7 @@ vitalamNode:
       - "--rpc-cors=all"
       - "--unsafe-ws-external"
       - "--unsafe-rpc-external"
+      - "--pruning 100"
       - "--bootnodes '/dns4/oem-bn-vitalam-node-0-rc-p2p.oem.svc.cluster.local/tcp/30333/p2p/12D3KooWQSy2rqKyrkyqnniFkLg3A8UFn6ChLBoRxj4LRoyGgUnf'"
   image:
     tag: v2.9.3
