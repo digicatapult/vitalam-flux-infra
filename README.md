@@ -1,6 +1,6 @@
-# VitalAM Flux Infra
+# DSCP Flux Infra
 
-Work in progress flux repo to bring up a VitalAM kubernetes chain.
+Work in progress flux repo to bring up a DSCP kubernetes chain.
 
 ## Repository structure
 

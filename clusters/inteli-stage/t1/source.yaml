@@ -2,20 +2,20 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
-  name: vitalam-node
+  name: dscp-node
   namespace: t1
 spec:
   interval: 10m0s
-  url: https://digicatapult.github.io/vitalam-node
+  url: https://digicatapult.github.io/dscp-node
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
-  name: vitalam-api
+  name: dscp-api
   namespace: t1
 spec:
   interval: 10m0s
-  url: https://digicatapult.github.io/vitalam-api
+  url: https://digicatapult.github.io/dscp-api
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository

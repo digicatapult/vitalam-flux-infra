@@ -2,12 +2,12 @@ config:
   logLevel: info
 ingress:
   className: nginx-oem
-vitalamIpfs:
+dscpIpfs:
   enabled: true
   config:
     logLevel: info
     ipfsLogLevel: fatal
-    ipfsBootNodeAddress: /dns4/oem-ipfs-bn-vitalam-ipfs-swarm.oem.svc.cluster.local/tcp/4001/p2p/12D3KooWJ1ZBoSYADNep8S23MPRKYG4M4epih6Xug4pkY4dL22hb
+    ipfsBootNodeAddress: /dns4/oem-ipfs-bn-dscp-ipfs-swarm.oem.svc.cluster.local/tcp/4001/p2p/12D3KooWJ1ZBoSYADNep8S23MPRKYG4M4epih6Xug4pkY4dL22hb
     ipfsSwarmAddrFilters:
       - /ip4/100.64.0.0/ipcidr/10
       - /ip4/169.254.0.0/ipcidr/16
@@ -26,7 +26,7 @@ vitalamIpfs:
   storage:
     storageClass: ebs-sc-ipfs
     dataVolumeSize: 20
-  vitalamNode:
+  dscpNode:
     enabled: true
     node:
       chain: inteli-stage
@@ -47,7 +47,7 @@ vitalamIpfs:
         - "--unsafe-ws-external"
         - "--unsafe-rpc-external"
         - "--pruning 100"
-        - "--bootnodes '/dns4/oem-bn-vitalam-node-0-rc-p2p.oem.svc.cluster.local/tcp/30333/p2p/12D3KooWQSy2rqKyrkyqnniFkLg3A8UFn6ChLBoRxj4LRoyGgUnf'"
+        - "--bootnodes '/dns4/oem-bn-dscp-node-0-rc-p2p.oem.svc.cluster.local/tcp/30333/p2p/12D3KooWQSy2rqKyrkyqnniFkLg3A8UFn6ChLBoRxj4LRoyGgUnf'"
     image:
       tag: v2.9.3
     storageClass: ebs-sc-substrate

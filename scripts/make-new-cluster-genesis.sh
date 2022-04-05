@@ -15,7 +15,7 @@ print_usage() {
   echo "  -n <namespace>                                Namespace in which to create the secret. Defaults to dscp"
   echo "  -b <base_chain>                               Base chain-spec to generate spec from. Defaults to local"
   echo "  -c <container>                                Container image to use for key generation."
-  echo "                                                Defaults to ghcr.io/digicatapult/vitalam-node:latest"
+  echo "                                                Defaults to ghcr.io/digicatapult/dscp-node:latest"
   echo "  -o <owner>:<namespace>:<balance>              Adds a node owner account giving the specified balance."
   echo "                                                The secret for the owner will be placed in the Kubernetes <namespace>"
   echo "  -v <validator_node_name>:<namespace>:<owner>  Adds a validator node with name <validator_node_name> which will be owned by <owner>."
@@ -29,7 +29,7 @@ print_usage() {
 }
 
 BASE_CHAIN="local"
-CONTAINER="ghcr.io/digicatapult/vitalam-node:latest"
+CONTAINER="ghcr.io/digicatapult/dscp-node:latest"
 OWNER_NAMES=()
 VALIDATOR_NAMES=()
 ADDITIONAL_NAMES=()
