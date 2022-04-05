@@ -11,5 +11,5 @@ node:
     - type: gran
       scheme: ed25519
 image:
-  tag: v2.9.3
+  tag: v3.0.0
 storageClass: ebs-sc-substrate
