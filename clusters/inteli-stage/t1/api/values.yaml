@@ -4,6 +4,7 @@ ingress:
   className: nginx-t1
 dscpIpfs:
   enabled: true
+  nameOverride: vitalamipfs
   storage:
     storageClass: ebs-sc-ipfs
     dataVolumeSize: 20
@@ -28,6 +29,7 @@ dscpIpfs:
       - /ip6/fe80::/ipcidr/10
   dscpNode:
     enabled: true
+    nameOverride: vitalamnode
     node:
       chain: inteli-stage
       role: full

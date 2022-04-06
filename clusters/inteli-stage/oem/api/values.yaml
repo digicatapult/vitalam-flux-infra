@@ -4,6 +4,7 @@ ingress:
   className: nginx-oem
 dscpIpfs:
   enabled: true
+  nameOverride: vitalamipfs
   config:
     logLevel: info
     ipfsLogLevel: fatal
@@ -28,6 +29,7 @@ dscpIpfs:
     dataVolumeSize: 20
   dscpNode:
     enabled: true
+    nameOverride: vitalamnode
     node:
       chain: inteli-stage
       role: full

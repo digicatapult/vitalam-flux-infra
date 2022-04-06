@@ -22,6 +22,7 @@ storage:
 
 dscpNode:
   enabled: true
+  nameOverride: vitalamnode
   node:
     chain: inteli-stage
     role: full
