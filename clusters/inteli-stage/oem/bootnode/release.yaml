@@ -10,11 +10,11 @@ spec:
       retries: -1
   chart:
     spec:
-      chart: vitalam-node
-      version: "0.24.1"
+      chart: dscp-node
+      version: "3.0.0"
       sourceRef:
         kind: HelmRepository
-        name: vitalam-node
+        name: dscp-node
   valuesFrom:
   - kind: ConfigMap
     name: oem-values

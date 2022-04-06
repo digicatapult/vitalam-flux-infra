@@ -1,3 +1,4 @@
+nameOverride: vitalam-node
 node:
   chain: inteli-stage
   role: validator
@@ -19,5 +20,5 @@ node:
     - "--unsafe-rpc-external"
     - "--bootnodes '/dns4/oem-bn-vitalam-node-0-rc-p2p.oem.svc.cluster.local/tcp/30333/p2p/12D3KooWQSy2rqKyrkyqnniFkLg3A8UFn6ChLBoRxj4LRoyGgUnf'"
 image:
-  tag: v2.9.3
+  tag: v3.0.0
 storageClass: ebs-sc-substrate

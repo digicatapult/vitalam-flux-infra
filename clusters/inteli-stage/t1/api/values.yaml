@@ -2,8 +2,9 @@ config:
   logLevel: info
 ingress:
   className: nginx-t1
-vitalamIpfs:
+dscpIpfs:
   enabled: true
+  nameOverride: vitalamipfs
   storage:
     storageClass: ebs-sc-ipfs
     dataVolumeSize: 20
@@ -26,8 +27,9 @@ vitalamIpfs:
       - /ip6/2001:db8::/ipcidr/32
       - /ip6/fc00::/ipcidr/7
       - /ip6/fe80::/ipcidr/10
-  vitalamNode:
+  dscpNode:
     enabled: true
+    nameOverride: vitalamnode
     node:
       chain: inteli-stage
       role: full
@@ -49,5 +51,5 @@ vitalamIpfs:
         - "--pruning 100"
         - "--bootnodes '/dns4/oem-bn-vitalam-node-0-rc-p2p.oem.svc.cluster.local/tcp/30333/p2p/12D3KooWQSy2rqKyrkyqnniFkLg3A8UFn6ChLBoRxj4LRoyGgUnf'"
     image:
-      tag: v2.9.3
+      tag: v3.0.0
     storageClass: ebs-sc-substrate
