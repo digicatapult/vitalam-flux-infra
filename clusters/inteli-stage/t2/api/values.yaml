@@ -10,7 +10,7 @@ dscpIpfs:
   config:
     logLevel: info
     ipfsLogLevel: fatal
-    ipfsBootNodeAddress: /dns4/oem-ipfs-bn-dscp-ipfs-swarm.oem.svc.cluster.local/tcp/4001/p2p/12D3KooWJ1ZBoSYADNep8S23MPRKYG4M4epih6Xug4pkY4dL22hb
+    ipfsBootNodeAddress: /dns4/oem-ipfs-bn-dscp-ipfs-swarm.oem.svc.cluster.local/tcp/4001/p2p/12D3KooWFDxTkVkRx3CRRVqg9s94NkFDgqkVEN7Fk92wj7TyZxbQ
     ipfsSwarmAddrFilters:
       - /ip4/100.64.0.0/ipcidr/10
       - /ip4/169.254.0.0/ipcidr/16
