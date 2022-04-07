@@ -1,4 +1,3 @@
-nameOverride: vitalam-node
 node:
   chain: inteli-stage
   role: full
