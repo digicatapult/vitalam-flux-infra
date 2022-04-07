@@ -41,7 +41,7 @@ dscpNode:
       - "--unsafe-ws-external"
       - "--unsafe-rpc-external"
       - "--pruning 100"
-      - "--bootnodes '/dns4/oem-bn-dscp-node-0-rc-p2p.oem.svc.cluster.local/tcp/30333/p2p/12D3KooWQSy2rqKyrkyqnniFkLg3A8UFn6ChLBoRxj4LRoyGgUnf'"
+      - "--bootnodes '/dns4/oem-bn-dscp-node-0-rc-p2p.oem.svc.cluster.local/tcp/30333/p2p/12D3KooWCs3iTJXb1HtLfvXybNSP4tXhEjeKpoaKDmnvk3JDP9Hr'"
   image:
     tag: v3.0.1
   storageClass: ebs-sc-substrate
