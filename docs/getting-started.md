@@ -9,10 +9,10 @@ This quickstart will help you to setup the application into a local Kind cluster
 Before getting started make sure you have the following installed:
 
 - docker
-- kind
-- kubectl
+- kind >= 0.11.1
+- kubectl >= 1.21.1
 - git
-- flux
+- flux >= 0.29.5
 
 ## Setting up Kind and Flux
 
