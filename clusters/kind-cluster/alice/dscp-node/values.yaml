@@ -2,6 +2,7 @@ node:
   chain: local
   role: validator
   dataVolumeSize: 5Gi
+  customNodeKey: "0000000000000000000000000000000000000000000000000000000000000001"
   perNodeServices:
     setPublicAddressToExternal:
       enabled: false
