@@ -1,0 +1,22 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: bob-node
+  namespace: bob
+spec:
+  install:
+    remediation:
+      retries: -1
+  chart:
+    spec:
+      chart: dscp-node
+      version: "3.5.0"
+      sourceRef:
+        kind: HelmRepository
+        name: dscp-node
+  valuesFrom:
+  - kind: ConfigMap
+    name: bob-values
+    valuesKey: values-dscp-node.yaml
+  interval: 10m0s

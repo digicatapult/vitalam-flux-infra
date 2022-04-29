@@ -1,0 +1,36 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: dscp-node
+  namespace: bob
+spec:
+  interval: 10m0s
+  url: https://digicatapult.github.io/dscp-node
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: dscp-ipfs
+  namespace: bob
+spec:
+  interval: 10m0s
+  url: https://digicatapult.github.io/dscp-ipfs
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: dscp-api
+  namespace: bob
+spec:
+  interval: 10m0s
+  url: https://digicatapult.github.io/dscp-api
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: bitnami
+  namespace: bob
+spec:
+  interval: 10m0s
+  url: https://charts.bitnami.com/bitnami
