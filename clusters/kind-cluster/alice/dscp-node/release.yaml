@@ -18,5 +18,5 @@ spec:
   valuesFrom:
   - kind: ConfigMap
     name: alice-values
-    valuesKey: values-alice.yaml
+    valuesKey: values-dscp-node.yaml
   interval: 10m0s
