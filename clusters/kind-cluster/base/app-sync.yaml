@@ -3,7 +3,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
   name: alice-sync
-  namespace: dscp
+  namespace: alice
 spec:
   interval: 1m0s
   path: ./clusters/kind-cluster/alice
@@ -18,7 +18,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
   name: bob-sync
-  namespace: dscp
+  namespace: bob
 spec:
   interval: 1m0s
   path: ./clusters/kind-cluster/bob
@@ -33,7 +33,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
   name: charlie-sync
-  namespace: dscp
+  namespace: charlie
 spec:
   interval: 1m0s
   path: ./clusters/kind-cluster/charlie
