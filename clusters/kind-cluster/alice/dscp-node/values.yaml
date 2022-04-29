@@ -1,17 +1,10 @@
 node:
-  chain: dev
+  chain: local
   role: validator
   dataVolumeSize: 5Gi
   perNodeServices:
     setPublicAddressToExternal:
       enabled: false
-  keys:
-    - type: aura
-      scheme: sr25519
-      seed: "//Alice"
-    - type: gran
-      scheme: ed25519
-      seed: "//Alice"
   flags:
     - "--rpc-external"
     - "--ws-external"
@@ -19,7 +12,7 @@ node:
     - "--rpc-cors=all"
     - "--unsafe-ws-external"
     - "--unsafe-rpc-external"
-    - "--dev"
+    - "--alice"
 image:
   tag: v3.5.0
 storageClass: standard
