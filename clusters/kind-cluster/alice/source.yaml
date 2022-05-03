@@ -5,7 +5,7 @@ metadata:
   name: dscp-node
   namespace: alice
 spec:
-  interval: 10m0s
+  interval: 10m
   url: https://digicatapult.github.io/dscp-node
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
@@ -14,7 +14,7 @@ metadata:
   name: dscp-ipfs
   namespace: alice
 spec:
-  interval: 10m0s
+  interval: 10m
   url: https://digicatapult.github.io/dscp-ipfs
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
@@ -23,7 +23,7 @@ metadata:
   name: dscp-api
   namespace: alice
 spec:
-  interval: 10m0s
+  interval: 10m
   url: https://digicatapult.github.io/dscp-api
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
@@ -32,5 +32,5 @@ metadata:
   name: bitnami
   namespace: alice
 spec:
-  interval: 10m0s
+  interval: 10m
   url: https://charts.bitnami.com/bitnami

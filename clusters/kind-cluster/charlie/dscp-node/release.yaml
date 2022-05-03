@@ -19,4 +19,4 @@ spec:
   - kind: ConfigMap
     name: charlie-values
     valuesKey: values-dscp-node.yaml
-  interval: 10m0s
+  interval: 10m
