@@ -4,4 +4,21 @@ metadata:
   labels:
     app.kubernetes.io/instance: dscp
     app.kubernetes.io/version: latest
-  name: dscp
+  name: alice
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.kubernetes.io/instance: dscp
+    app.kubernetes.io/version: latest
+  name: bob
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.kubernetes.io/instance: dscp
+    app.kubernetes.io/version: latest
+  name: charlie
+---

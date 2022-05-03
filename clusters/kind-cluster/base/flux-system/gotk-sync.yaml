@@ -5,20 +5,20 @@ metadata:
   name: flux-system
   namespace: flux-system
 spec:
-  interval: 1m0s
+  interval: 1m
   ref:
-    branch: main
+    branch: feature/kind-cluster-init
   secretRef:
     name: flux-system
   url: https://github.com/digicatapult/dscp-flux-infra.git
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
   name: flux-system
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 10m
   path: ./clusters/kind-cluster/base
   prune: true
   sourceRef:

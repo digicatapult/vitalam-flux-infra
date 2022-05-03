@@ -1,0 +1,8 @@
+---
+nameReference:
+- kind: ConfigMap
+  namespace: alice
+  version: v1
+  fieldSpecs:
+  - path: spec/valuesFrom/name
+    kind: HelmRelease
