@@ -1,4 +1,5 @@
 config:
+  logLevel: debug
   nodeHost: bob-node-dscp-node
   nodePort: 9944
   privateKey: CAESQM0Tr9ABULiEY/eYlokv8Jmm51+bcdDgdtaQ+qfW5zWj2nnmxPqpR77onoXS5mmrYtD7o/AOaoidj5/mf6ZaQjE=
