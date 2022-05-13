@@ -3,6 +3,7 @@ config:
   nodePort: 9944
   privateKey: CAESQM0Tr9ABULiEY/eYlokv8Jmm51+bcdDgdtaQ+qfW5zWj2nnmxPqpR77onoXS5mmrYtD7o/AOaoidj5/mf6ZaQjE=
   publicKey: 12D3KooWQXCrfo6dW24HCQWzED5wzjNAwEBZGFVe1TsHMGdn5q4L
+  ipfsBootNodeAddress: /dnsaddr/alice-ipfs-dscp-ipfs-swarm.alice.svc.cluster.local/tcp/4001/p2p/12D3KooWGnnDccXt956NhFkUki48216AwogbfWTcN33mjinFkNNT
 storage:
   storageClass: standard
   dataVolumeSize: 10

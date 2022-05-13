@@ -6,6 +6,5 @@ config:
 storage:
   storageClass: standard
   dataVolumeSize: 10
-
 dscpNode:
   enabled: false
