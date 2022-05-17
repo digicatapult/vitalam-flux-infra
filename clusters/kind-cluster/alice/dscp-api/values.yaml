@@ -1,0 +1,12 @@
+config:
+  logLevel: info
+  externalNodeHost: alice-node-dscp-node-0
+  externalIpfsHost: alice-ipfs-dscp-ipfs-api
+  externalIpfsPort: 5001
+  accountKey: //Alice
+ingress:
+  className: nginx-alice
+dscpIpfs:
+  enabled: false
+dscpNode:
+  enabled: false
