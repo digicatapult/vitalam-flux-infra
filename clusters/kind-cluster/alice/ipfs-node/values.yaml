@@ -1,5 +1,5 @@
 config:
-  nodeHost: alice-node-dscp-node
+  nodeHost: alice-node-dscp-node-0
   nodePort: 9944
   privateKey: CAESQLfNGaEqtlj1juOeV1/yqS2RxYIXFCnSffHqmRDQtMyGZ5nW90T0ULaquqNLe6waWAu6154bKsIqanNezT+m+sg=
   publicKey: 12D3KooWGnnDccXt956NhFkUki48216AwogbfWTcN33mjinFkNNT
