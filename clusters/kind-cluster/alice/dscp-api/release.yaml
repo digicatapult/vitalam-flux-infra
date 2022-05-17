@@ -18,8 +18,4 @@ spec:
   - kind: ConfigMap
     name: alice-values
     valuesKey: values-dscp-api.yaml
-  - kind: Secret
-    name: oem-keys
-    valuesKey: account_seed
-    targetPath: config.accountKey
   interval: 10m0s
