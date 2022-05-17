@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: alice
 resources:
   - source.yaml
+  - dscp-api
   - dscp-node
   - ipfs-node
 configMapGenerator:
@@ -10,6 +11,7 @@ configMapGenerator:
     files:
       - values-dscp-node.yaml=dscp-node/values.yaml
       - values-dscp-ipfs.yaml=ipfs-node/values.yaml
+      - values-dscp-api.yaml=dscp-api/values.yaml
 configurations:
   - kustomize-config.yaml
 generatorOptions:
