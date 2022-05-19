@@ -4,6 +4,7 @@ namespace: bob
 resources:
   - source.yaml
   - dscp-api
+  - dscp-identity-service
   - dscp-node
   - ipfs-node
 configMapGenerator:
@@ -12,6 +13,7 @@ configMapGenerator:
       - values-dscp-node.yaml=dscp-node/values.yaml
       - values-dscp-ipfs.yaml=ipfs-node/values.yaml
       - values-dscp-api.yaml=dscp-api/values.yaml
+      - values-dscp-identity-service.yaml=dscp-identity-service/values.yaml
 configurations:
   - kustomize-config.yaml
 generatorOptions:

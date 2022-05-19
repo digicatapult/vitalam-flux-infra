@@ -29,6 +29,15 @@ spec:
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
+  name: dscp-identity-service
+  namespace: bob
+spec:
+  interval: 10m
+  url: https://digicatapult.github.io/dscp-identity-service
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
   name: bitnami
   namespace: bob
 spec:

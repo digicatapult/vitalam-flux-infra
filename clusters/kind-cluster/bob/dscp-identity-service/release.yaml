@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: dscp-identity-service
+  namespace: bob
+spec:
+  install:
+    remediation:
+      retries: -1
+  chart:
+    spec:
+      chart: dscp-identity-service
+      sourceRef:
+        kind: HelmRepository
+        name: dscp-identity-service
+  valuesFrom:
+  - kind: ConfigMap
+    name: bob-values
+    valuesKey: values-dscp-identity-service.yaml
+  interval: 10m0s
