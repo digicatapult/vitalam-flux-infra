@@ -38,6 +38,15 @@ spec:
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
+  name: inteli-api
+  namespace: bob
+spec:
+  interval: 10m
+  url: https://digicatapult.github.io/inteli-api
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
   name: bitnami
   namespace: bob
 spec:
