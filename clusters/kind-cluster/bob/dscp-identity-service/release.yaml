@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: dscp-identity-service
+  name: bob-identity-service
   namespace: bob
 spec:
   install:
