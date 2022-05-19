@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: bob-inteli-api
+  namespace: bob
+spec:
+  install:
+    remediation:
+      retries: -1
+  chart:
+    spec:
+      chart: inteli-api
+      sourceRef:
+        kind: HelmRepository
+        name: inteli-api
+  valuesFrom:
+  - kind: ConfigMap
+    name: bob-values
+    valuesKey: values-inteli-api.yaml
+  interval: 10m0s
