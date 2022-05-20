@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: bob-dscp-api
+  name: bob-inteli-api
   namespace: bob
 spec:
   install:
@@ -10,12 +10,12 @@ spec:
       retries: -1
   chart:
     spec:
-      chart: dscp-api
+      chart: inteli-api
       sourceRef:
         kind: HelmRepository
-        name: dscp-api
+        name: inteli-api
   valuesFrom:
   - kind: ConfigMap
     name: bob-values
-    valuesKey: values-dscp-api.yaml
+    valuesKey: values-inteli-api.yaml
   interval: 10m0s

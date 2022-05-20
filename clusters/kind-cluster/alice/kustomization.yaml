@@ -4,7 +4,9 @@ namespace: alice
 resources:
   - source.yaml
   - dscp-api
+  - dscp-identity-service
   - dscp-node
+  - inteli-api
   - ipfs-node
 configMapGenerator:
   - name: alice-values
@@ -12,6 +14,8 @@ configMapGenerator:
       - values-dscp-node.yaml=dscp-node/values.yaml
       - values-dscp-ipfs.yaml=ipfs-node/values.yaml
       - values-dscp-api.yaml=dscp-api/values.yaml
+      - values-dscp-identity-service.yaml=dscp-identity-service/values.yaml
+      - values-inteli-api.yaml=inteli-api/values.yaml
 configurations:
   - kustomize-config.yaml
 generatorOptions:
