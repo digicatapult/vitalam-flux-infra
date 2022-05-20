@@ -1,0 +1,13 @@
+config:
+  logLevel: info
+  selfAddress: 12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp
+  externalNodeHost: alice-node-dscp-node-0
+  auth:
+    jwksUri: https://inteli.eu.auth0.com/.well-known/jwks.json
+    audience: inteli-dev
+    issuer: https://inteli.eu.auth0.com/
+    tokenUrl: https://inteli.eu.auth0.com/oauth/token
+ingress:
+  className: nginx-alice
+dscpNode:
+  enabled: false

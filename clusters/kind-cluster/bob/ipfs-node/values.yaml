@@ -1,5 +1,5 @@
 config:
-  nodeHost: bob-node-dscp-node
+  nodeHost: bob-node-dscp-node-0
   nodePort: 9944
   privateKey: CAESQM0Tr9ABULiEY/eYlokv8Jmm51+bcdDgdtaQ+qfW5zWj2nnmxPqpR77onoXS5mmrYtD7o/AOaoidj5/mf6ZaQjE=
   publicKey: 12D3KooWQXCrfo6dW24HCQWzED5wzjNAwEBZGFVe1TsHMGdn5q4L

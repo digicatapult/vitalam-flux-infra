@@ -1,0 +1,13 @@
+config:
+  logLevel: info
+  selfAddress: 12D3KooWHdiAxVd8uMQR1hGWXccidmfCwLqcMpGwR6QcTP6QRMuD
+  externalNodeHost: bob-node-dscp-node-0
+  auth:
+    jwksUri: https://inteli.eu.auth0.com/.well-known/jwks.json
+    audience: inteli-dev
+    issuer: https://inteli.eu.auth0.com/
+    tokenUrl: https://inteli.eu.auth0.com/oauth/token
+ingress:
+  className: nginx-bob
+dscpNode:
+  enabled: false
