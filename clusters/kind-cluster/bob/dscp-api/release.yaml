@@ -8,6 +8,8 @@ spec:
   install:
     remediation:
       retries: -1
+  dependsOn:
+    - bob-ipfs
   chart:
     spec:
       chart: dscp-api

@@ -8,6 +8,8 @@ spec:
   install:
     remediation:
       retries: -1
+  dependsOn:
+    - bob-node
   chart:
     spec:
       chart: dscp-identity-service

@@ -1,6 +1,6 @@
 hostNetwork: true
 service:
-  type: NodePort
+  type: clusterIP
 ingressClassResource:
   name: nginx-alice
 nodeSelector:
@@ -12,6 +12,17 @@ tolerations:
     operator: Equal
 scope:
   enabled: true
+rbac:
+  rules:
+    - apiGroups:
+        - ""
+      resources:
+        - nodes
+      verbs:
+        - get
+        - list
+        - watch
+
 containerPorts:
   http: 80
   https: 443

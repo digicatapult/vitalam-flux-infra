@@ -10,6 +10,9 @@ spec:
       retries: -1
   chart:
     spec:
+      dependsOn:
+        - bob-dscp-api
+        - bob-identity-service
       chart: inteli-api
       sourceRef:
         kind: HelmRepository
