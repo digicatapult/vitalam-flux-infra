@@ -1,4 +1,3 @@
-hostNetwork: true
 service:
   type: ClusterIP
 ingressClassResource:
@@ -10,19 +9,6 @@ tolerations:
   - effect: NoSchedule
     key: node-role.kubernetes.io/master
     operator: Equal
-scope:
-  enabled: true
-rbac:
-  rules:
-    - apiGroups:
-        - ""
-      resources:
-        - nodes
-      verbs:
-        - get
-        - list
-        - watch
-
 containerPorts:
   http: 80
   https: 443
