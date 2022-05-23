@@ -1,6 +1,6 @@
 hostNetwork: true
 service:
-  type: clusterIP
+  type: ClusterIP
 ingressClassResource:
   name: nginx-bob
 nodeSelector:
