@@ -5,6 +5,7 @@ ingressClassResource:
 nodeSelector:
   ingress-ready: "true"
   kubernetes.io/os: linux
+serviceAccountName: alice-nginx-ingress-controller
 tolerations:
   - effect: NoSchedule
     key: node-role.kubernetes.io/master
