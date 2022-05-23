@@ -3,8 +3,8 @@ service:
   targetPorts:
     http: 80
     https: 443
-ingressClassResource:
-  name: nginx-bob
+# ingressClassResource:
+#   name: nginx-bob
 scope:
   enabled: true
 containerPorts:

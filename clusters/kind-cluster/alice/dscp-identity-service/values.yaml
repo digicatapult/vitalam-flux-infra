@@ -7,7 +7,7 @@ config:
     audience: inteli-dev
     issuer: https://inteli.eu.auth0.com/
     tokenUrl: https://inteli.eu.auth0.com/oauth/token
-ingress:
-  className: nginx-alice
+# ingress:
+#   className: nginx-alice
 dscpNode:
   enabled: false

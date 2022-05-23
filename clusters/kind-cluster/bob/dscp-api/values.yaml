@@ -4,8 +4,8 @@ config:
   externalIpfsHost: bob-ipfs-dscp-ipfs-api
   externalIpfsPort: 5001
   accountKey: //Bob
-ingress:
-  className: nginx-bob
+# ingress:
+#   className: nginx-bob
 dscpIpfs:
   enabled: false
 dscpNode:
