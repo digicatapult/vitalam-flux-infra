@@ -9,7 +9,7 @@ spec:
     remediation:
       retries: -1
   dependsOn:
-    - bob-ipfs
+    - name: bob-ipfs
   chart:
     spec:
       chart: dscp-api

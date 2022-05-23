@@ -9,7 +9,7 @@ spec:
     remediation:
       retries: -1
   dependsOn:
-    - alice-node
+    - name: alice-node
   chart:
     spec:
       chart: dscp-ipfs

@@ -8,8 +8,8 @@ spec:
   install:
     remediation:
       retries: -1
-  dependsOn:
-    - alice-ipfs
+  dependsOn: 
+    - name: alice-ipfs
   chart:
     spec:
       chart: dscp-api

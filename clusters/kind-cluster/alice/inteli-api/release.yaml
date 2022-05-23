@@ -9,8 +9,8 @@ spec:
     remediation:
       retries: -1
   dependsOn:
-    - alice-dscp-api
-    - alice-identity-service
+    - name: alice-dscp-api
+    - name: alice-identity-service
   chart:
     spec:
       chart: inteli-api

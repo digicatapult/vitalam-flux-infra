@@ -8,11 +8,11 @@ spec:
   install:
     remediation:
       retries: -1
+  dependsOn:
+    - name: bob-dscp-api
+    - name: bob-identity-service
   chart:
     spec:
-      dependsOn:
-        - bob-dscp-api
-        - bob-identity-service
       chart: inteli-api
       sourceRef:
         kind: HelmRepository

@@ -9,7 +9,7 @@ spec:
     remediation:
       retries: -1
   dependsOn:
-    - bob-node
+    - name: bob-node
   chart:
     spec:
       chart: dscp-ipfs
