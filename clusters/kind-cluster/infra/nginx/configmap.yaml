@@ -10,8 +10,6 @@ data:
       targetPorts:
         http: 80
         https: 443
-    scope:
-      enabled: true
     containerPorts:
       http: 80
       https: 443

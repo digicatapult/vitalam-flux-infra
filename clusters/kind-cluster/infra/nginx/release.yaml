@@ -15,7 +15,6 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: bitnami
-      version: "9.1.5"
   interval: 10m0s
   # Default values
   # https://github.com/bitnami/charts/blob/master/bitnami/nginx-ingress-controller/values.yaml
