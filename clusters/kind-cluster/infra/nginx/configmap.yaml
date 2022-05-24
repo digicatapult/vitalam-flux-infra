@@ -5,6 +5,9 @@ metadata:
   namespace: dscp
 data:
   values.yaml: |
+    watchIngressWithoutClass: true
+    ingressClassResource:
+      default: true
     service:
       type: ClusterIP
       targetPorts:
