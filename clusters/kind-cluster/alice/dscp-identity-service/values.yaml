@@ -7,7 +7,11 @@ config:
     audience: inteli-dev
     issuer: https://inteli.eu.auth0.com/
     tokenUrl: https://inteli.eu.auth0.com/oauth/token
-# ingress:
-#   className: nginx-alice
+ingress:
+  paths:
+    - "/alice/dscp-identity-service/(v1/members(?:/|$).*)"
+    - "/alice/dscp-identity-service/(v1/self)$"
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
 dscpNode:
   enabled: false
