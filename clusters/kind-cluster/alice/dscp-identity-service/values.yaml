@@ -9,8 +9,7 @@ config:
     tokenUrl: https://inteli.eu.auth0.com/oauth/token
 ingress:
   paths:
-    - "/alice/dscp-identity-service/(v1/members(?:/|$).*)"
-    - "/alice/dscp-identity-service/(v1/self)$"
+    - "/alice/dscp-identity-service/(.*)"
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
 dscpNode:

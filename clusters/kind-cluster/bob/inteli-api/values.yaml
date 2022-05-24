@@ -9,10 +9,6 @@ config:
     tokenUrl: https://inteli.eu.auth0.com/oauth/token
 ingress:
   paths:
-    - "/bob/inteli-api/(v1/attachment(?:/|$).*)"
-    - "/bob/inteli-api/(v1/build(?:/|$).*)"
-    - "/bob/inteli-api/(v1/order(?:/|$).*)"
-    - "/bob/inteli-api/(v1/part(?:/|$).*)"
-    - "/bob/inteli-api/(v1/recipe(?:/|$).*)"
+    - "/bob/inteli-api/(.*)"
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
