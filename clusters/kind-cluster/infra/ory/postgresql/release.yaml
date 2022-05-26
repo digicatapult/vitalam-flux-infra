@@ -8,7 +8,7 @@ spec:
   install:
     remediation:
       retries: -1
-  releaseName: hydra
+  releaseName: pg-hydra
   chart:
     spec:
       chart: postgresql

@@ -5,4 +5,6 @@ metadata:
   namespace: dscp
 data:
   values.yaml: |
-
+    hydra:
+      config:
+        dsn: postgres://hydra:hydra@hydra-postgresql:5432/hydra?sslmode=disable&max_conns=20&max_idle_conns=4
