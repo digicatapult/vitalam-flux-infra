@@ -51,6 +51,7 @@ nodes:
   - containerPort: 443
     hostPort: 3443
     protocol: tcp
+- role: worker
 EOF
 
 # connect the registry to the cluster network

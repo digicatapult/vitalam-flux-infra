@@ -8,6 +8,9 @@ spec:
   install:
     remediation:
       retries: -1
+  dependsOn:
+    - name: bob-dscp-api
+    - name: bob-identity-service
   chart:
     spec:
       chart: inteli-api

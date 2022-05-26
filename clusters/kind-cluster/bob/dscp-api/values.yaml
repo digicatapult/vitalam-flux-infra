@@ -5,7 +5,10 @@ config:
   externalIpfsPort: 5001
   accountKey: //Bob
 ingress:
-  className: nginx-bob
+  paths:
+    - "/bob/dscp-api/(.*)"
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
 dscpIpfs:
   enabled: false
 dscpNode:

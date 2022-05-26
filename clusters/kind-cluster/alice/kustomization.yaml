@@ -8,7 +8,6 @@ resources:
   - dscp-node
   - inteli-api
   - ipfs-node
-  - nginx
 configMapGenerator:
   - name: alice-values
     files:
@@ -17,7 +16,6 @@ configMapGenerator:
       - values-dscp-api.yaml=dscp-api/values.yaml
       - values-dscp-identity-service.yaml=dscp-identity-service/values.yaml
       - values-inteli-api.yaml=inteli-api/values.yaml
-      - values-nginx.yaml=nginx/values.yaml
 configurations:
   - kustomize-config.yaml
 generatorOptions:

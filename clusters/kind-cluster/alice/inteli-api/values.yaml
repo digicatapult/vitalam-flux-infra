@@ -8,4 +8,7 @@ config:
     issuer: https://inteli.eu.auth0.com/
     tokenUrl: https://inteli.eu.auth0.com/oauth/token
 ingress:
-  className: nginx-alice
+  paths:
+    - "/alice/inteli-api/(.*)"
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1

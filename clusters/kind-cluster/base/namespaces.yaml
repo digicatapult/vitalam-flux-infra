@@ -29,3 +29,11 @@ metadata:
     app.kubernetes.io/instance: ambassador
     app.kubernetes.io/version: latest
   name: ambassador
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.kubernetes.io/instance: dscp
+    app.kubernetes.io/version: latest
+  name: dscp

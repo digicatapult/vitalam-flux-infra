@@ -8,6 +8,9 @@ spec:
   install:
     remediation:
       retries: -1
+  dependsOn:
+    - name: alice-dscp-api
+    - name: alice-identity-service
   chart:
     spec:
       chart: inteli-api
