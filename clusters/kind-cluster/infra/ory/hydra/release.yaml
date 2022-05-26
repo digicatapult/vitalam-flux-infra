@@ -20,4 +20,4 @@ spec:
   # https://github.com/ory/k8s/blob/master/helm/charts/hydra/values.yaml
   valuesFrom:
     - kind: ConfigMap
-      name: hydra
+      name: hydra-values
