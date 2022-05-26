@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: hydra-postgres
+  namespace: dscp
+spec:
+  install:
+    remediation:
+      retries: -1
+  releaseName: hydra-postgres
+  chart:
+    spec:
+      chart: postgresql
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+  interval: 10m0s
+  valuesFrom:
+    - kind: ConfigMap
+      name: hydra-postgresql
