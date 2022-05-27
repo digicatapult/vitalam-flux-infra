@@ -5,6 +5,18 @@ metadata:
   namespace: dscp
 data:
   values.yaml: |
+    configmap:
+      hashSumEnabled: true
+    maester:
+      enabled: false
     hydra:
+      autoMigrate: true
+      dangerousForceHttp: true
       config:
-        dsn: postgres://hydra:hydra@hydra-postgresql:5432/hydra?sslmode=disable&max_conns=20&max_idle_conns=4
+        dsn: postgres://hydra:hydra@pg-hydra-postgresql:5432/hydra?sslmode=disable&max_conns=20&max_idle_conns=4
+        urls:
+          self:
+            issuer: http://hydra/
+            consent: http://my-idp/consent/
+        secrets:
+          system: 00000000000000000000000000000000
