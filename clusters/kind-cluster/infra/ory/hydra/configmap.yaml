@@ -17,6 +17,6 @@ data:
         urls:
           self:
             issuer: http://hydra/
-            consent: http://my-idp/consent/
+          consent: http://my-idp/consent/
         secrets:
           system: 00000000000000000000000000000000
