@@ -34,4 +34,4 @@ data:
             issuer: http://localhost:3080/api/
           consent: http://localhost:3080/consent/
         secrets:
-          system: "00000000000000000000000000000000"
+          system: ["00000000000000000000000000000000"]
