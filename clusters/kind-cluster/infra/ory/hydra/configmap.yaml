@@ -10,8 +10,18 @@ data:
     ingress:
       public:
         enabled: true
+        hosts:
+          - host: localhost
+            paths:
+              - path: /hydra-public/
+                pathType: ImplementationSpecific
       admin:
         enabled: true
+        hosts:
+          - host: localhost
+            paths:
+              - path: /hydra-admin/
+                pathType: ImplementationSpecific
     maester:
       enabled: false
     hydra:
@@ -21,7 +31,7 @@ data:
         dsn: postgres://hydra:hydra@pg-hydra-postgresql:5432/hydra?sslmode=disable&max_conns=20&max_idle_conns=4
         urls:
           self:
-            issuer: http://hydra/
-          consent: http://my-idp/consent/
+            issuer: http://localhost:3080/api/
+          consent: http://localhost:3080/consent/
         secrets:
           system: 00000000000000000000000000000000
