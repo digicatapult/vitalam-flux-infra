@@ -1,0 +1,23 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: hydra
+  namespace: dscp
+spec:
+  install:
+    remediation:
+      retries: -1
+  releaseName: hydra
+  chart:
+    spec:
+      chart: hydra
+      sourceRef:
+        kind: HelmRepository
+        name: ory
+  interval: 10m0s
+  # Default values
+  # https://github.com/ory/k8s/blob/master/helm/charts/hydra/values.yaml
+  valuesFrom:
+    - kind: ConfigMap
+      name: hydra-values
