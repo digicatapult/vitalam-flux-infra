@@ -10,17 +10,24 @@ data:
     ingress:
       public:
         enabled: true
+        annotations:
+          nginx.ingress.kubernetes.io/use-regex: "true"
+          nginx.ingress.kubernetes.io/rewrite-target: /$1
+          
         hosts:
           - host: localhost
             paths:
-              - path: /hydra-public/
+              - path: /hydra-public/(.*)
                 pathType: ImplementationSpecific
       admin:
         enabled: true
+        annotations:
+          nginx.ingress.kubernetes.io/use-regex: "true"
+          nginx.ingress.kubernetes.io/rewrite-target: /$1
         hosts:
           - host: localhost
             paths:
-              - path: /hydra-admin/
+              - path: /hydra-admin/(.*)
                 pathType: ImplementationSpecific
     maester:
       enabled: false
