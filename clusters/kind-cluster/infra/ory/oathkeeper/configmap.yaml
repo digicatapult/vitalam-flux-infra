@@ -39,19 +39,19 @@ data:
               introspection_url: http://hydra-admin/oauth2/introspection
               scope_strategy: wildcard
       accessRules:
-        - id: some-id
-          match:
-            url: <.*>
-            methods:
-            - GET
-            - POST
-          authenticators:
-          - handler: oauth2_introspection
-            config: {}
-          authorizer:
-            handler: allow
-          mutators:
-          - handler: noop
+      - id: some-id
+        match:
+          url: <.*>
+          methods:
+          - GET
+          - POST
+        authenticators:
+        - handler: oauth2_introspection
+          config: {}
+        authorizer:
+          handler: allow
+        mutators:
+        - handler: noop
           
     ingress:
       proxy:
