@@ -54,7 +54,7 @@ data:
                 pathType: ImplementationSpecific
     maester:
       enabled: false
-  rules.json: |-
+  rules.json: >-
     [
       {
         "id": "some-id",
