@@ -41,7 +41,7 @@ data:
       access_rules:
         - id: some-id
           match:
-            url: http://localhost/api/
+            url: <.*>
             methods:
             - GET
             - POST
