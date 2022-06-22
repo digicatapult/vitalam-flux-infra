@@ -38,7 +38,7 @@ data:
             config:
               introspection_url: http://hydra-admin/oauth2/introspection
               scope_strategy: wildcard
-        access_rules:
+        accessRules:
           - id: some-id
             match:
               url: <.*>
