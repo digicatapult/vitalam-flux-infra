@@ -5,7 +5,7 @@ metadata:
   namespace: dscp
 spec:
   match:
-    url: blah.com
+    url: http://localhost:3080/api/<.*>
     methods:
       - GET
       - POST
