@@ -9,8 +9,7 @@ spec:
     methods:
       - GET
       - POST
-    - handler: allow
   authenticators:
-    handler: oauth2_introspection
+    - handler: oauth2_introspection
   authorizer:
     handler: allow
