@@ -1,12 +1,15 @@
-apiVersion: rules.oathkeeper.ory.sh/v1alpha1
+apiVersion: oathkeeper.ory.sh/v1alpha1
+kind: Rule
 metadata:
   name: oathkeeper-example
   namespace: dscp
-match:
-  url: blah.com
-  methods:
-  - "GET"
-  - "POST"
+spec:
+  match:
+    url: blah.com
+    methods:
+      - GET
+      - POST
+    - handler: allow
   authenticators:
     handler: oauth2_introspection
   authorizer:
