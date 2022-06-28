@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
   - release.yaml
   - configmap.yaml
-  - rules.yaml
+  - rules-sync.yaml

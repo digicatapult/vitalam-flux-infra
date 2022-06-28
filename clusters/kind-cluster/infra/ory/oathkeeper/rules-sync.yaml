@@ -1,0 +1,17 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: rules-sync
+  namespace: dscp
+spec:
+  interval: 10m0s
+  path: ./clusters/kind-cluster/infra/ory/oathkeeper/rules
+  dependsOn:
+    - name: ory
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  validation: client
