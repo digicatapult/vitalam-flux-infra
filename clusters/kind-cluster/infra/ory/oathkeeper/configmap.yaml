@@ -6,12 +6,12 @@ metadata:
 data:
   values.yaml: |
     configmap:
-      hashSumEnabled: false
-
+      hashSumEnabled: true
     service:
       proxy:
         enabled: false
     oathkeeper:
+      managedAccessRules: false
       config:
         log:
           level: debug
@@ -53,5 +53,5 @@ data:
               - path: /oathkeeper/(.*)
                 pathType: ImplementationSpecific
     maester:
-      enabled: false
+      enabled: true
   rules.json: "[{\"id\":\"some-id\",\"match\":{\"url\":\"blah.com\",\"methods\":[\"GET\",\"POST\"]},\"authenticators\":[{\"handler\":\"oauth2_introspection\",\"config\":{}}],\"authorizer\":{\"handler\":\"allow\"},\"mutators\":[{\"handler\":\"noop\"}]}]"

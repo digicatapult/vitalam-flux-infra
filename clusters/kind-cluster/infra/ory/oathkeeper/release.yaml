@@ -21,7 +21,3 @@ spec:
   valuesFrom:
     - kind: ConfigMap
       name: oathkeeper-values
-    - kind: ConfigMap
-      name: oathkeeper-values
-      valuesKey: rules.json 
-      targetPath: oathkeeper.accessRules
