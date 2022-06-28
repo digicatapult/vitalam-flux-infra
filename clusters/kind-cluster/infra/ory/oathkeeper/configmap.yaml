@@ -29,6 +29,9 @@ data:
               enabled: true
               config:
                 verbose: true
+        authorizers:
+          allow:
+            enabled: true
         authenticators:
           oauth2_introspection:
             enabled: true
