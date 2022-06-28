@@ -1,5 +1,4 @@
 apiVersion: rules.oathkeeper.ory.sh/v1alpha1
-kind: rule
 metadata:
   name: oathkeeper-example
   namespace: dscp
