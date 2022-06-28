@@ -5,7 +5,7 @@ metadata:
   namespace: dscp
 spec:
   match:
-    url: http://localhost:3080/api/<.*>
+    url: <.*>/alice/inteli-api/<.*>
     methods:
       - GET
       - POST
