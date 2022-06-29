@@ -36,7 +36,7 @@ data:
           oauth2_introspection:
             enabled: true
             config:
-              introspection_url: http://hydra-admin:4445/oauth2/introspection
+              introspection_url: http://hydra-admin:4445/oauth2/introspect
               scope_strategy: wildcard
           
     ingress:
