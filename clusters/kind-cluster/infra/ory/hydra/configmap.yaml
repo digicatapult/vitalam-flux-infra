@@ -18,7 +18,6 @@ data:
           - host: localhost
             paths:
               - path: /hydra-public/(.*)
-                pathType: ImplementationSpecific
       admin:
         enabled: true
         annotations:
@@ -28,7 +27,6 @@ data:
           - host: localhost
             paths:
               - path: /hydra-admin/(.*)
-                pathType: ImplementationSpecific
     maester:
       enabled: false
     hydra:
