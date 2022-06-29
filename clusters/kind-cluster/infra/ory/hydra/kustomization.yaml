@@ -4,3 +4,5 @@ resources:
   - release.yaml
   - source.yaml
   - configmap.yaml
+  - ingress-hydra-admin.yaml
+  - ingress-hydra-public.yaml
