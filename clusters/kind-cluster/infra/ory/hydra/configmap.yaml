@@ -9,32 +9,14 @@ data:
       hashSumEnabled: true
     ingress:
       public:
-        enabled: true
-        annotations:
-          nginx.ingress.kubernetes.io/use-regex: "true"
-          nginx.ingress.kubernetes.io/rewrite-target: /$1
-          
-        hosts:
-          - host: localhost
-            paths:
-              - path: /hydra-public/(.*)
-                pathType: ImplementationSpecific
+        enabled: false
       admin:
-        enabled: true
-        annotations:
-          nginx.ingress.kubernetes.io/use-regex: "true"
-          nginx.ingress.kubernetes.io/rewrite-target: /$1
-        hosts:
-          - host: localhost
-            paths:
-              - path: /hydra-admin/(.*)
-                pathType: ImplementationSpecific
+        enabled: false
     maester:
       enabled: false
     hydra:
       autoMigrate: true
       dangerousForceHttp: true
-      dangerousAllowInsecureRedirectUrls: true
       config:
         dsn: postgres://hydra:hydra@pg-hydra-postgresql:5432/hydra?sslmode=disable&max_conns=20&max_idle_conns=4
         urls:
