@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/use-regex: "true"
+  labels:
+    app.kubernetes.io/instance: hydra
+    app.kubernetes.io/name: hydra
+  name: hydra-admin
+  namespace: dscp
+spec:
+  ingressClassName: nginx
+  rules:
+    http:
+      paths:
+      - path: /hydra-admin/(.*)
+        backend:
+          service:
+            name: hydra-admin
+            port:
+              name: http
+        pathType: ImplementationSpecific
