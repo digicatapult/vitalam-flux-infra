@@ -9,26 +9,9 @@ data:
       hashSumEnabled: true
     ingress:
       public:
-        enabled: true
-        annotations:
-          nginx.ingress.kubernetes.io/use-regex: "true"
-          nginx.ingress.kubernetes.io/rewrite-target: /$1
-          
-        hosts:
-          - host: localhost
-            paths:
-              - path: /hydra-public/(.*)
-                pathType: ImplementationSpecific
+        enabled: false
       admin:
-        enabled: true
-        annotations:
-          nginx.ingress.kubernetes.io/use-regex: "true"
-          nginx.ingress.kubernetes.io/rewrite-target: /$1
-        hosts:
-          - host: localhost
-            paths:
-              - path: /hydra-admin/(.*)
-                pathType: ImplementationSpecific
+        enabled: false
     maester:
       enabled: false
     hydra:
