@@ -29,6 +29,9 @@ data:
               enabled: true
               config:
                 verbose: true
+        mutators:
+          noop:
+            enabled: true
         authorizers:
           allow:
             enabled: true
