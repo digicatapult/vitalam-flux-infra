@@ -43,15 +43,7 @@ data:
       proxy:
         enabled: false
       api:
-        enabled: true
-        annotations:
-          nginx.ingress.kubernetes.io/use-regex: "true"
-          nginx.ingress.kubernetes.io/rewrite-target: /$1
-        hosts:
-          - host: localhost
-            paths:
-              - path: /oathkeeper/(.*)
-                pathType: ImplementationSpecific
+        enabled: false
     maester:
       enabled: true
   rules.json: "[{\"id\":\"some-id\",\"match\":{\"url\":\"blah.com\",\"methods\":[\"GET\",\"POST\"]},\"authenticators\":[{\"handler\":\"oauth2_introspection\",\"config\":{}}],\"authorizer\":{\"handler\":\"allow\"},\"mutators\":[{\"handler\":\"noop\"}]}]"

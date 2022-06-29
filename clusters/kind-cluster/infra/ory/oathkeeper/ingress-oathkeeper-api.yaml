@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/use-regex: "true"
+  labels:
+    app.kubernetes.io/instance: oathkeeper
+    app.kubernetes.io/name: oathkeeper
+  name: oathkeeper-api
+  namespace: dscp
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /oathkeeper/(.*)
+        backend:
+          service:
+            name: oathkeeper-api
+            port:
+              name: http
+        pathType: ImplementationSpecific
