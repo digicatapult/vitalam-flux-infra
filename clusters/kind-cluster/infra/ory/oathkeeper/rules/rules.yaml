@@ -1,0 +1,15 @@
+apiVersion: oathkeeper.ory.sh/v1alpha1
+kind: Rule
+metadata:
+  name: oathkeeper-example
+  namespace: dscp
+spec:
+  match:
+    url: <.*>/<{alice,bob}>/<{inteli-api,dscp-api,dscp-identity-service}>/<.*>
+    methods:
+      - GET
+      - POST
+  authenticators:
+    - handler: oauth2_introspection
+  authorizer:
+    handler: allow
