@@ -37,6 +37,8 @@ data:
         authorizers:
           allow:
             enabled: true
+          deny:
+            enabled: true
         authenticators:
           oauth2_introspection:
             enabled: true
