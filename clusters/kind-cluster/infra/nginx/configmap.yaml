@@ -9,6 +9,7 @@ data:
     ingressClassResource:
       default: true
     hostNetwork: true
+    dnsPolicy: ClusterFirstWithHostNet
     service:
       type: NodePort
     nodeSelector:
