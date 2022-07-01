@@ -27,3 +27,5 @@ spec:
       - POST
   authenticators:
     - handler: noop
+  authorizer:
+    handler: allow
