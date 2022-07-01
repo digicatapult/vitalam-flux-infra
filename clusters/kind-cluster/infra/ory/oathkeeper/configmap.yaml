@@ -10,6 +10,8 @@ data:
     service:
       proxy:
         enabled: false
+      api:
+        port: 80
     oathkeeper:
       managedAccessRules: false
       config:
