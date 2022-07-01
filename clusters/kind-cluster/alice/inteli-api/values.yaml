@@ -12,4 +12,4 @@ ingress:
     - "/alice/inteli-api/(.*)"
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
-    nginx.ingress.kubernetes.io/auth-url: "http://oathkeeper-api.dscp.svc.cluster.local/decisions/$request_uri"
+    nginx.ingress.kubernetes.io/auth-url: "http://oathkeeper-api/decisions/$request_uri"
