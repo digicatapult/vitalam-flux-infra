@@ -10,6 +10,8 @@ data:
       default: true
     hostNetwork: true
     dnsPolicy: ClusterFirstWithHostNet
+    config:
+      global-auth-url: "http://oathkeeper-api.dscp.svc.cluster.local/decisions$request_uri"
     service:
       type: NodePort
     nodeSelector:

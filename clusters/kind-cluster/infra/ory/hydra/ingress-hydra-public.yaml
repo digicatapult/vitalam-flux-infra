@@ -4,6 +4,7 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
     nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/enable-global-auth: "false"
   labels:
     app.kubernetes.io/instance: hydra
     app.kubernetes.io/name: hydra
