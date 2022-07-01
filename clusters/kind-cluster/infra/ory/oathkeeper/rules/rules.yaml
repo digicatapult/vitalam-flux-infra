@@ -5,7 +5,7 @@ metadata:
   namespace: dscp
 spec:
   match:
-    url: <.*>/<{alice,bob}>/inteli-api/<.*>
+    url: <.*>/<alice|bob>/<inteli-api|dscp-api|dscp-identity-service>/<.*>
     methods:
       - GET
       - POST
