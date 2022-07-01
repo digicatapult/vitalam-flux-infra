@@ -21,7 +21,7 @@ metadata:
   namespace: dscp
 spec:
   match:
-    url: <.*>/<alice|bob>/<inteli-api|dscp-api|dscp-identity-service>/<v1|v3>/<swagger|api-docs><.*>
+    url: <.*>/<swagger|api-docs>
     methods:
       - GET
       - POST
