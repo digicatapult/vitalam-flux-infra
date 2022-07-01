@@ -21,7 +21,7 @@ metadata:
   namespace: dscp
 spec:
   match:
-    url: <.*>/<(swagger|api-docs)(|/)>
+    url: <.*>/<(swagger|api-docs).*>
     methods:
       - GET
       - POST
