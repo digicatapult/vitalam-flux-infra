@@ -1,15 +1,31 @@
 apiVersion: oathkeeper.ory.sh/v1alpha1
 kind: Rule
 metadata:
-  name: oathkeeper-example
+  name: oathkeeper-authenticated-paths
   namespace: dscp
 spec:
   match:
-    url: <.*>/<{alice,bob}>/<{inteli-api,dscp-api,dscp-identity-service}>/<.*>
+    url: <.*>/<alice|bob>/<inteli-api|dscp-api|dscp-identity-service>/<v1|v3>/<(?!swagger|api-docs).*>
     methods:
       - GET
       - POST
   authenticators:
     - handler: oauth2_introspection
+  authorizer:
+    handler: allow
+---
+apiVersion: oathkeeper.ory.sh/v1alpha1
+kind: Rule
+metadata:
+  name: oathkeeper-unauthenticated-paths
+  namespace: dscp
+spec:
+  match:
+    url: <.*>/<(swagger|api-docs).*>
+    methods:
+      - GET
+      - POST
+  authenticators:
+    - handler: noop
   authorizer:
     handler: allow

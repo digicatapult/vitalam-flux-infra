@@ -10,6 +10,8 @@ data:
     service:
       proxy:
         enabled: false
+      api:
+        port: 80
     oathkeeper:
       managedAccessRules: false
       config:
@@ -35,12 +37,16 @@ data:
         authorizers:
           allow:
             enabled: true
+          deny:
+            enabled: true
         authenticators:
           oauth2_introspection:
             enabled: true
             config:
               introspection_url: http://hydra-admin:4445/oauth2/introspect
               scope_strategy: wildcard
+          noop:
+            enabled: true
           
     ingress:
       proxy:

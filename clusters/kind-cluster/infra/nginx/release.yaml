@@ -20,5 +20,5 @@ spec:
   # https://github.com/bitnami/charts/blob/master/bitnami/nginx-ingress-controller/values.yaml
   valuesFrom:
     - kind: ConfigMap
-      name: nginx-ingress-controller
+      name: nginx
       valuesKey: values.yaml
