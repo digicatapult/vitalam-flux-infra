@@ -2,11 +2,6 @@ config:
   logLevel: info
   dscpApiHost: bob-dscp-api
   identityServiceHost: bob-identity-service-dscp-identity-service
-  auth:
-    jwksUri: https://inteli.eu.auth0.com/.well-known/jwks.json
-    audience: inteli-dev
-    issuer: https://inteli.eu.auth0.com/
-    tokenUrl: https://inteli.eu.auth0.com/oauth/token
 ingress:
   paths:
     - "/bob/inteli-api/(.*)"
