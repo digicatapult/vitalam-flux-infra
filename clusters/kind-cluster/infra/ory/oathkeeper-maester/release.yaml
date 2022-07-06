@@ -16,3 +16,7 @@ spec:
         kind: HelmRepository
         name: ory
   interval: 1m0s
+  valuesFrom:
+    - kind: ConfigMap
+      name: oathkeeper-maester-values
+
