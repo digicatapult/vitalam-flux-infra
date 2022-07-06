@@ -15,7 +15,9 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: ory
-  interval: 10m0s
+  interval: 1m
+  dependsOn: 
+    - name: postgresql
   # Default values
   # https://github.com/ory/k8s/blob/master/helm/charts/hydra/values.yaml
   valuesFrom:
