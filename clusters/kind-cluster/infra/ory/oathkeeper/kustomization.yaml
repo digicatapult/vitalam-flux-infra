@@ -4,4 +4,4 @@ resources:
   - release.yaml
   - configmap.yaml
   - ingress-oathkeeper-api.yaml
-  - rules-sync.yaml
+  - rules/rules.yaml
