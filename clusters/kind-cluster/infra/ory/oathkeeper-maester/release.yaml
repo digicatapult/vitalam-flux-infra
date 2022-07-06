@@ -15,9 +15,4 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: ory
-  interval: 10m0s
-  # Default values
-  # https://github.com/ory/k8s/blob/master/helm/charts/hydra/values.yaml
-  valuesFrom:
-    - kind: ConfigMap
-      name: oathkeeper-values
+  interval: 1m0s
