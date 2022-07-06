@@ -35,9 +35,13 @@ metadata:
   name: ory
   namespace: dscp
 spec:
-  interval: 10m0s
+  interval: 1m
   path: ./clusters/kind-cluster/infra/ory
   prune: true
+  healthChecks:
+    - apiVersion: apiextensions.k8s.io/v1
+      kind: CustomResourceDefinition
+      name: rules.oathkeeper.ory.sh
   sourceRef:
     kind: GitRepository
     name: flux-system

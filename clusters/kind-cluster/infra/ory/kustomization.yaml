@@ -5,3 +5,4 @@ resources:
   - oathkeeper-maester
   - postgresql
   - source.yaml
+  - oathkeeper-sync.yaml
