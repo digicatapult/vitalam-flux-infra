@@ -3,17 +3,3 @@ kind: Kustomization
 namespace: t1
 resources:
   - source.yaml
-  - validator-0
-  - validator-1
-  - nginx
-  - api
-configMapGenerator:
-  - name: t1-values
-    files:
-      - values-validator.yaml=values-validator.yaml
-      - values-nginx.yaml=nginx/values.yaml
-      - values-api.yaml=api/values.yaml
-configurations:
-  - kustomize-config.yaml
-generatorOptions:
-  disableNameSuffixHash: true
