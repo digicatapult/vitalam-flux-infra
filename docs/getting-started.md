@@ -13,6 +13,7 @@ Before getting started make sure you have the following installed:
 - kubectl >= 1.21.1
 - git
 - flux >= 0.29.5
+- ory hydra CLI
 
 ## Setting up Kind and Flux
 
@@ -30,6 +31,19 @@ Run
 ```
 
 Once this has completed you will have a functioning flux cluster.
+
+## Getting an API Token
+
+We use a combination of Ory [Hydra](https://www.ory.sh/docs/hydra) and Ory [Oathkeeper](https://www.ory.sh/docs/oathkeeper) for creating and storing OAuth2 access tokens which are in turn used to access the various APIs used in the dscp project.
+
+To obtain an API token Run
+```console
+./scripts/get-hydra-token.sh
+```
+Once this has completed you will need to set your token in the form of a header
+```
+Authorization: Bearer <token>
+```
 
 ## Suspending/resuming flux
 
