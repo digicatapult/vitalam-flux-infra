@@ -3,5 +3,3 @@ kind: Kustomization
 resources:
   - release.yaml
   - configmap.yaml
-  - ingress-oathkeeper-api.yaml
-  - rules/rules.yaml
