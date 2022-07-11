@@ -2,25 +2,21 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: hydra
+  name: oathkeeper-maester
   namespace: dscp
 spec:
   install:
     remediation:
       retries: -1
-  releaseName: hydra
+  releaseName: oathkeeper-maester
   chart:
     spec:
-      chart: hydra
+      chart: oathkeeper-maester
       sourceRef:
         kind: HelmRepository
         name: ory
-  interval: 1m
-  dependsOn: 
-    - name: postgresql
-    - name: nginx
-  # Default values
-  # https://github.com/ory/k8s/blob/master/helm/charts/hydra/values.yaml
+  interval: 1m0s
   valuesFrom:
     - kind: ConfigMap
-      name: hydra-values
+      name: oathkeeper-maester-values
+

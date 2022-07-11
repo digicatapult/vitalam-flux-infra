@@ -54,4 +54,4 @@ data:
       api:
         enabled: false
     maester:
-      enabled: true
+      enabled: false
