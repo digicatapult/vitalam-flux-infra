@@ -15,7 +15,7 @@ print_usage() {
   echo "  -n <namespace>                                Namespace in which to create the secret. Defaults to dscp"
   echo "  -b <base_chain>                               Base chain-spec to generate spec from. Defaults to local"
   echo "  -c <container>                                Container image to use for key generation."
-  echo "                                                Defaults to ghcr.io/digicatapult/dscp-node:latest"
+  echo "                                                Defaults to digicatapult/dscp-node:latest"
   echo "  -o <owner>:<namespace>:<balance>              Adds a node owner account giving the specified balance."
   echo "                                                The secret for the owner will be placed in the Kubernetes <namespace>"
   echo "  -v <validator_node_name>:<namespace>:<owner>  Adds a validator node with name <validator_node_name> which will be owned by <owner>."
@@ -29,7 +29,7 @@ print_usage() {
 }
 
 BASE_CHAIN="local"
-CONTAINER="ghcr.io/digicatapult/dscp-node:latest"
+CONTAINER="digicatapult/dscp-node:latest"
 OWNER_NAMES=()
 VALIDATOR_NAMES=()
 ADDITIONAL_NAMES=()
@@ -232,8 +232,8 @@ generate_sudo() {
     printf "OK\n" >&2
     SUDO_SEED=$(echo $output | jq -r .secretPhrase)
     SUDO_ADDR=$(echo $output | jq -r .ss58Address)
-    GENESIS=$(echo $GENESIS | jq --arg sudo $SUDO_ADDR --arg balance 1152921504606846976 '.genesis.runtime.palletBalances.balances += [[$sudo, ($balance | tonumber)]]')
-    GENESIS=$(echo $GENESIS | jq --arg sudo $SUDO_ADDR '.genesis.runtime.palletSudo.key |= $sudo')
+    GENESIS=$(echo $GENESIS | jq --arg sudo $SUDO_ADDR --arg balance 1152921504606846976 '.genesis.runtime.balances.balances += [[$sudo, ($balance | tonumber)]]')
+    GENESIS=$(echo $GENESIS | jq --arg sudo $SUDO_ADDR '.genesis.runtime.sudo.key |= $sudo')
   else
     printf "FAIL\n" >&2
     echo "$output" >&2
@@ -256,8 +256,8 @@ generate_owner() {
     printf "OK\n" >&2
     account_id=$(echo $output | jq -r '.accountId')
     OWNER_ACCOUNTS+=("${owner_name}:${owner_namespace}:${account_id}")
-    GENESIS=$(echo $GENESIS | jq --arg account_id $account_id --arg balance $owner_balance '.genesis.runtime.palletBalances.balances += [[$account_id, ($balance | tonumber)]]')
-    GENESIS=$(echo $GENESIS | jq --arg account_id $account_id '.genesis.runtime.palletMembership.members += [$account_id]')
+    GENESIS=$(echo $GENESIS | jq --arg account_id $account_id --arg balance $owner_balance '.genesis.runtime.balances.balances += [[$account_id, ($balance | tonumber)]]')
+    GENESIS=$(echo $GENESIS | jq --arg account_id $account_id '.genesis.runtime.membership.members += [$account_id]')
   else
     printf "FAIL\n" >&2
     echo "$output" >&2
@@ -303,8 +303,8 @@ generate_node() {
     grandpa_id=$(echo $output | jq -r '.grandpaId')
     # update genesis
     if [ "$type" == "validator" ]; then
-      GENESIS=$(echo $GENESIS | jq --arg aura_id $aura_id '.genesis.runtime.palletAura.authorities += [$aura_id]')
-      GENESIS=$(echo $GENESIS | jq --arg grandpa_id $grandpa_id '.genesis.runtime.palletGrandpa.authorities += [[$grandpa_id, 1]]')
+      GENESIS=$(echo $GENESIS | jq --arg aura_id $aura_id '.genesis.runtime.aura.authorities += [$aura_id]')
+      GENESIS=$(echo $GENESIS | jq --arg grandpa_id $grandpa_id '.genesis.runtime.grandpa.authorities += [[$grandpa_id, 1]]')
     fi
     # convert node_id to hex
     node_id=$(docker run --rm -a stdout python:alpine /bin/sh -c "\
@@ -312,10 +312,10 @@ generate_node() {
       printf \"$node_id\" | base58 -d | xxd -p | tr -d '[:space:]' | tr '[:lower:]' '[:upper:]'" 2>/dev/null)
     node_id=($(echo $node_id | fold -w2))
 
-    GENESIS=$(echo $GENESIS | jq --arg owner $node_owner_account '.genesis.runtime.palletNodeAuthorization.nodes += [[[], $owner]]')
+    GENESIS=$(echo $GENESIS | jq --arg owner $node_owner_account '.genesis.runtime.nodeAuthorization.nodes += [[[], $owner]]')
     for byte in "${node_id[@]}"
     do
-      GENESIS=$(echo $GENESIS | jq --arg byte $(echo "obase=10; ibase=16; $byte" | bc) '.genesis.runtime.palletNodeAuthorization.nodes[-1][0] += [($byte | tonumber)]')
+      GENESIS=$(echo $GENESIS | jq --arg byte $(echo "obase=10; ibase=16; $byte" | bc) '.genesis.runtime.nodeAuthorization.nodes[-1][0] += [($byte | tonumber)]')
     done
   else
     printf "FAIL\n" >&2
@@ -354,11 +354,11 @@ GENESIS=$(echo $GENESIS | jq --arg cluster ${CLUSTER//[-]/_} '.id |= $cluster')
 GENESIS=$(echo $GENESIS | jq '.chainType |= "Live"')
 
 # remove all pallet configuration
-GENESIS=$(echo $GENESIS | jq '.genesis.runtime.palletAura.authorities |= []')
-GENESIS=$(echo $GENESIS | jq '.genesis.runtime.palletGrandpa.authorities |= []')
-GENESIS=$(echo $GENESIS | jq '.genesis.runtime.palletBalances.balances |= []')
-GENESIS=$(echo $GENESIS | jq '.genesis.runtime.palletNodeAuthorization.nodes |= []')
-GENESIS=$(echo $GENESIS | jq '.genesis.runtime.palletMembership.members |= []')
+GENESIS=$(echo $GENESIS | jq '.genesis.runtime.aura.authorities |= []')
+GENESIS=$(echo $GENESIS | jq '.genesis.runtime.grandpa.authorities |= []')
+GENESIS=$(echo $GENESIS | jq '.genesis.runtime.balances.balances |= []')
+GENESIS=$(echo $GENESIS | jq '.genesis.runtime.nodeAuthorization.nodes |= []')
+GENESIS=$(echo $GENESIS | jq '.genesis.runtime.membership.members |= []')
 
 # Generate sudo
 generate_sudo $CONTAINER
