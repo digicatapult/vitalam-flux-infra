@@ -172,7 +172,7 @@ The described script allows for generating a new cluster with any number of desi
 
 would create a genesis for a new cluster called `new-cluster`. Three accounts `alice`, `bob` and `charlie` would be created in the namespaces `ns1`, `ns2` and `ns3` respectively. Three validator nodes called `red`, `green` and `blue` would be created in namespaces `ns1`, `ns2` and `ns3` and with owners `alice`, `bob` and `charlie` respectively. Two additional nodes (`bootnode` and `api-light`) would be created in `ns1` and owned by `alice`. Finally namespaces `ns2` and `ns3` would both contain an additional node called `api-light` owned by `bob` and `charlie` respectively.
 
-Additional options may be specified to configure the docker image used to generate the genesis (defaults to `ghcr.io/digicatapult/dscp-node:latest`) and the kubernetes namespace secrets should be created in (defaults to `dscp`). The script writes the final raw genesis file to stdout so can be safely redirected. This should then either be hosted publicly or built into the node to be deployed so that the chain can be referenced.
+Additional options may be specified to configure the docker image used to generate the genesis (defaults to `digicatapult/dscp-node:latest`) and the kubernetes namespace secrets should be created in (defaults to `dscp`). The script writes the final raw genesis file to stdout so can be safely redirected. This should then either be hosted publicly or built into the node to be deployed so that the chain can be referenced.
 
 #### Creating additional secrets
 
