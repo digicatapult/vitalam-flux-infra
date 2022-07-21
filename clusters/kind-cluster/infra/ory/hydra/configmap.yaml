@@ -15,7 +15,8 @@ data:
     maester:
       enabled: false
     hydra:
-      autoMigrate: true
+      automigration:
+        enabled: true
       dangerousForceHttp: true
       config:
         dsn: postgres://hydra:hydra@pg-hydra-postgresql:5432/hydra?sslmode=disable&max_conns=20&max_idle_conns=4

@@ -4,11 +4,11 @@ config:
   externalIpfsHost: bob-ipfs-dscp-ipfs-api
   externalIpfsPort: 5001
   accountKey: //Bob
+  externalOrigin: "http://localhost:3080"
+  externalPathPrefix: "bob/dscp-api"
 ingress:
   paths:
     - "/bob/dscp-api/(.*)"
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
 dscpIpfs:
   enabled: false
 dscpNode:

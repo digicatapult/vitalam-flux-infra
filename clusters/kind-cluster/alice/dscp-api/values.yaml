@@ -4,12 +4,13 @@ config:
   externalIpfsHost: alice-ipfs-dscp-ipfs-api
   externalIpfsPort: 5001
   accountKey: //Alice
+  externalOrigin: "http://localhost:3080"
+  externalPathPrefix: "alice/dscp-api"
 ingress:
   paths:
     - "/alice/dscp-api/(.*)"
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
 #   className: nginx-alice
 dscpIpfs:
   enabled: false

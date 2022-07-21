@@ -2,8 +2,8 @@ config:
   logLevel: info
   dscpApiHost: alice-dscp-api
   identityServiceHost: alice-identity-service-dscp-identity-service
+  externalOrigin: "http://localhost:3080"
+  externalPathPrefix: "alice/inteli-api"
 ingress:
   paths:
     - "/alice/inteli-api/(.*)"
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$1

@@ -14,6 +14,4 @@ node:
     - "--unsafe-ws-external"
     - "--unsafe-rpc-external"
     - "--alice"
-image:
-  tag: v3.5.0
 storageClass: standard
