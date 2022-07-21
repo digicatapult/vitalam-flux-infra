@@ -3,12 +3,7 @@ config:
   nodePort: 9944
   privateKey: CAESQLfNGaEqtlj1juOeV1/yqS2RxYIXFCnSffHqmRDQtMyGZ5nW90T0ULaquqNLe6waWAu6154bKsIqanNezT+m+sg=
   publicKey: 12D3KooWGnnDccXt956NhFkUki48216AwogbfWTcN33mjinFkNNT
-  logLevel: trace
-  ipfsLogLevel: debug
   ipfsBootNodeAddress: /dns4/alice-ipfs-dscp-ipfs-swarm.alice.svc.cluster.local/tcp/4001/p2p/12D3KooWGnnDccXt956NhFkUki48216AwogbfWTcN33mjinFkNNT
-statefulSet:
-  livenessProbe:
-    enabled: false
 storage:
   storageClass: standard
   dataVolumeSize: 10
