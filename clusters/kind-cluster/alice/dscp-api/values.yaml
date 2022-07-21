@@ -13,6 +13,6 @@ ingress:
     nginx.ingress.kubernetes.io/use-regex: "true"
 #   className: nginx-alice
 dscpIpfs:
-  enabled: falseåå
+  enabled: false
 dscpNode:
   enabled: false
