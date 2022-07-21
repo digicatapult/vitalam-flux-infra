@@ -4,7 +4,8 @@ config:
   externalIpfsHost: bob-ipfs-dscp-ipfs-api
   externalIpfsPort: 5001
   accountKey: //Bob
-  externalUrl: "http://localhost:3080/bob/dscp-api/v3"
+  externalOrigin: "http://localhost:3080"
+  externalPathPrefix: "bob/dscp-api"
 ingress:
   paths:
     - "/bob/dscp-api/(.*)"

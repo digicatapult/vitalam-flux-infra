@@ -4,7 +4,8 @@ config:
   externalIpfsHost: alice-ipfs-dscp-ipfs-api
   externalIpfsPort: 5001
   accountKey: //Alice
-  externalUrl: "http://localhost:3080/alice/dscp-api/v3"
+  externalOrigin: "http://localhost:3080"
+  externalPathPrefix: "alice/dscp-api"
 ingress:
   paths:
     - "/alice/dscp-api/(.*)"
