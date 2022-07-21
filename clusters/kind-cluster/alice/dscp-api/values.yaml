@@ -10,7 +10,6 @@ ingress:
     - "/alice/dscp-api/(.*)"
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
 #   className: nginx-alice
 dscpIpfs:
   enabled: false
