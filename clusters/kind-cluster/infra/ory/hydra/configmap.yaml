@@ -17,7 +17,6 @@ data:
     hydra:
       automigration:
         enabled: true
-        type: initContainer
       dangerousForceHttp: true
       config:
         dsn: postgres://hydra:hydra@pg-hydra-postgresql:5432/hydra?sslmode=disable&max_conns=20&max_idle_conns=4
