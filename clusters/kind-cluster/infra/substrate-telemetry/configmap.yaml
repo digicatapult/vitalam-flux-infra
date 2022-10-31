@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: telemetry
+  namespace: dscp
+data:
+  values.yaml:
+    envVars:
+      frontend:
+        SUBSTRATE_TELEMETRY_URL: "wss://test"

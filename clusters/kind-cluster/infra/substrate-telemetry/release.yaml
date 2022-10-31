@@ -1,0 +1,24 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: telemetry
+  namespace: dscp
+spec:
+  install:
+    remediation:
+      retries: -1
+  releaseName: substrate-telemetry
+  chart:
+    spec:
+      chart: substrate-telemetry
+      sourceRef:
+        kind: HelmRepository
+        name: parity
+  interval: 10m0s
+  # Default values
+  # https://github.com/paritytech/helm-charts/blob/main/charts/substrate-telemetry/values.yaml
+  valuesFrom:
+    - kind: ConfigMap
+      name: telemetry
+      valuesKey: values.yaml
