@@ -22,5 +22,5 @@ data:
                 service:
                   name: telemetry-core
                   port:
-                    name: 80
+                    name: http
               pathType: Exact
