@@ -15,7 +15,7 @@ data:
         annotations:
           nginx.ingress.kubernetes.io/enable-global-auth: "false"
         rules:
-          - http:
+        - http:
             paths:
             - path: /feed
               backend:
