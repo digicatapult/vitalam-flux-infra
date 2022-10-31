@@ -7,4 +7,20 @@ data:
   values.yaml: |
     envVars:
       frontend:
-        SUBSTRATE_TELEMETRY_URL: "wss://telemetry-core"
+        SUBSTRATE_TELEMETRY_URL: "wss://localhost:3080/feed"
+    ingress:
+      core:
+        enabled: true
+        classname: nginx
+        annotations:
+          nginx.ingress.kubernetes.io/enable-global-auth: "false"
+        rules:
+          - http:
+            paths:
+            - path: /feed
+              backend:
+                service:
+                  name: telemetry-core
+                  port:
+                    name: 80
+              pathType: Exact
