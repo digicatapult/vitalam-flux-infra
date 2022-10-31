@@ -4,7 +4,7 @@ metadata:
   name: telemetry
   namespace: dscp
 data:
-  values.yaml:
+  values.yaml: |
     envVars:
       frontend:
         SUBSTRATE_TELEMETRY_URL: "wss://test"
