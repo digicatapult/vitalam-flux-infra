@@ -2,6 +2,21 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
 metadata:
+  name: telemetry
+  namespace: dscp
+spec:
+  interval: 10m0s
+  path: ./clusters/kind-cluster/infra/substrate-telemetry
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  validation: client
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
   name: telepresence
   namespace: ambassador
 spec:

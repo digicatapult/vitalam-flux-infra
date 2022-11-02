@@ -14,4 +14,5 @@ node:
     - "--unsafe-ws-external"
     - "--unsafe-rpc-external"
     - "--alice"
+    - "--telemetry-url 'ws://telemetry-shard.dscp.svc.cluster.local/submit 1'"
 storageClass: standard

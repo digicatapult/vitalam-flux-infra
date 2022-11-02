@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: telemetry
+  namespace: dscp
+data:
+  values.yaml: |
+    envVars:
+      frontend:
+        SUBSTRATE_TELEMETRY_URL: "ws://localhost:3080/feed"
+    ingress:
+      core:
+        enabled: true
+        classname: nginx
+        annotations:
+          nginx.ingress.kubernetes.io/enable-global-auth: "false"
+        tls: {}
+        rules:
+        - http:
+            paths:
+            - path: /feed
+              backend:
+                service:
+                  name: telemetry-core
+                  port:
+                    name: http
+              pathType: Exact
