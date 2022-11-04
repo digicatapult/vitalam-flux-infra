@@ -18,8 +18,8 @@ data:
       automigration:
         enabled: true
       dangerousForceHttp: true
+      dev: true
       config:
-        dev: true
         dsn: postgres://hydra:hydra@pg-hydra-postgresql:5432/hydra?sslmode=disable&max_conns=20&max_idle_conns=4
         urls:
           self:
