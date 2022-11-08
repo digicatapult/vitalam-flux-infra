@@ -15,4 +15,8 @@ node:
     - "--unsafe-rpc-external"
     - "--alice"
     - "--telemetry-url 'ws://telemetry-shard.dscp.svc.cluster.local/submit 1'"
+  serviceMonitor:
+    enabled: true
+    interval: 10s
+    scrapeTimeout: 10s
 storageClass: standard

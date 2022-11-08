@@ -9,3 +9,8 @@ ingress:
     - "/alice/dscp-identity-service/(.*)"
 dscpNode:
   enabled: false
+postgresql: 
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
