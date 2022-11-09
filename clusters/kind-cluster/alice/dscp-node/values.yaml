@@ -14,6 +14,7 @@ node:
     - "--unsafe-ws-external"
     - "--unsafe-rpc-external"
     - "--alice"
+    - "--prometheus-external"
     - "--telemetry-url 'ws://telemetry-shard.dscp.svc.cluster.local/submit 1'"
   serviceMonitor:
     enabled: true
