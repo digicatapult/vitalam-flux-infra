@@ -13,33 +13,33 @@ spec:
     name: flux-system
     namespace: flux-system
   validation: client
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
-kind: Kustomization
-metadata:
-  name: bob-sync
-  namespace: bob
-spec:
-  interval: 1m
-  path: ./clusters/kind-cluster/bob
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
-  validation: client
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
-kind: Kustomization
-metadata:
-  name: charlie-sync
-  namespace: charlie
-spec:
-  interval: 1m
-  path: ./clusters/kind-cluster/charlie
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
-  validation: client
+# ---
+# apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+# kind: Kustomization
+# metadata:
+#   name: bob-sync
+#   namespace: bob
+# spec:
+#   interval: 1m
+#   path: ./clusters/kind-cluster/bob
+#   prune: true
+#   sourceRef:
+#     kind: GitRepository
+#     name: flux-system
+#     namespace: flux-system
+#   validation: client
+# ---
+# apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+# kind: Kustomization
+# metadata:
+#   name: charlie-sync
+#   namespace: charlie
+# spec:
+#   interval: 1m
+#   path: ./clusters/kind-cluster/charlie
+#   prune: true
+#   sourceRef:
+#     kind: GitRepository
+#     name: flux-system
+#     namespace: flux-system
+#   validation: client

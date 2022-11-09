@@ -1,5 +1,5 @@
 node:
-  chain: local
+  chain: dev
   role: validator
   dataVolumeSize: 5Gi
   customNodeKey: "0000000000000000000000000000000000000000000000000000000000000001"
@@ -13,6 +13,7 @@ node:
     - "--rpc-cors=all"
     - "--unsafe-ws-external"
     - "--unsafe-rpc-external"
+    - "--dev"
     - "--alice"
     - "--prometheus-external"
     - "--telemetry-url 'ws://telemetry-shard.dscp.svc.cluster.local/submit 1'"
