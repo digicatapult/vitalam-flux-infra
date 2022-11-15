@@ -10,7 +10,8 @@ data:
         serviceMonitorSelectorNilUsesHelmValues: false
     grafana:
       dashboards:
-        polkadot:
-          gnetID: 13840
-          revision: 4
-          datasource: Prometheus
+        default:
+          polkadot:
+            gnetID: 13840
+            revision: 4
+            datasource: Prometheus
