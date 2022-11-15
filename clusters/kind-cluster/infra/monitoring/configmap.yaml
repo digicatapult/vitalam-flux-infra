@@ -5,4 +5,6 @@ metadata:
   namespace: dscp
 data:
   values.yaml: |
-    blah: true
+    prometheus:
+      prometheusSpec:
+        serviceMonitorSelectorNilUsesHelmValues: false
