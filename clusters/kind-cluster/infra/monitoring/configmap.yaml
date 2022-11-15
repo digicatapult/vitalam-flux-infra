@@ -8,3 +8,9 @@ data:
     prometheus:
       prometheusSpec:
         serviceMonitorSelectorNilUsesHelmValues: false
+    grafana:
+      dashboards:
+        polkadot:
+          gnetID: 13840
+          revision: 4
+          datasource: Prometheus
