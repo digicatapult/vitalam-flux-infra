@@ -11,6 +11,17 @@ data:
     grafana:
       persistence:
         enabled: true
+      plugins:
+        - camptocamp-prometheus-alertmanager-datasource
+      additionalDataSources:
+        - name: promethus-alertmanager
+          type: prometheus
+          uid: prometheus
+          url: http://{{ printf "%s-prometheus.svc" .Release.Name }}:9090
+          access: proxy
+          isDefault: false
+          jsonData:
+            timeInterval: 30s
       dashboardProviders:
         dashboardproviders.yaml:
           apiVersion: 1
