@@ -26,16 +26,24 @@ data:
         dashboardproviders.yaml:
           apiVersion: 1
           providers:
-          - name: 'default'
+          - name: 'polkadot'
             orgId: 1
             folder: 'Polkadot'
             type: file
             disableDeletion: false
             editable: true
             options:
-              path: /var/lib/grafana/dashboards/default
+              path: /var/lib/grafana/dashboards/polkadot
+          - name: 'postgres'
+            orgId: 1
+            folder: 'Postgres'
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/postgres
       dashboards:
-        default:
+        polkadot:
           polkadot:
             gnetId: 13840
             revision: 4
@@ -44,3 +52,10 @@ data:
               value: "Prometheus AlertManager"
             - name: DS_PROMETHEUS
               value: "Prometheus"
+        postgres:
+          postgres:
+            url: https://github.com/lstn/misc-grafana-dashboards/blob/master/dashboards/postgresql-database.json
+            datasource:
+            - name: DC_PROMETHEUS
+              value: "Prometheus"
+
