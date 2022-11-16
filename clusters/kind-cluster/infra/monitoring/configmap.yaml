@@ -34,22 +34,6 @@ data:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/polkadot
-          - name: 'postgres'
-            orgId: 2
-            folder: 'Postgres'
-            type: file
-            disableDeletion: false
-            editable: true
-            options:
-              path: /var/lib/grafana/dashboards/postgres
-          - name: 'nginx'
-            orgId: 3
-            folder: 'NginX'
-            type: file
-            disableDeletion: false
-            editable: true
-            options:
-              path: /var/lib/grafana/dashboards/nginx
       dashboards:
         polkadot:
           polkadot:
@@ -60,13 +44,11 @@ data:
               value: "Prometheus AlertManager"
             - name: DS_PROMETHEUS
               value: "Prometheus"
-        postgres:
           postgres:
             url: https://github.com/lstn/misc-grafana-dashboards/blob/master/dashboards/postgresql-database.json
             datasource:
             - name: DC_PROMETHEUS
               value: "Prometheus"
-        nginx:
           nginx:
             gnetId: 15827
             revision: 1
