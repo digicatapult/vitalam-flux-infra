@@ -17,7 +17,7 @@ data:
         - name: "Prometheus AlertManager"
           type: camptocamp-prometheus-alertmanager-datasource
           uid: prometheus-alertmanager
-          url: http://{{ template "kube-prometheus-stack.fullname" . }}-prometheus.{{ template "kube-prometheus-stack.namespace" . }}:{{ .Values.prometheus.service.port }}/{{ trimPrefix "/" .Values.prometheus.prometheusSpec.routePrefix }}
+          url: http://{{ template "kube-prometheus-stack.fullname" . }}-alertmanager.{{ template "kube-prometheus-stack.namespace" . }}:{{ .Values.alertmanager.service.port }}/{{ trimPrefix "/" .Values.alertmanager.alertmanagerSpec.routePrefix }}
           access: proxy
           isDefault: false
           jsonData:
@@ -32,12 +32,10 @@ data:
             type: file
             disableDeletion: false
             editable: true
-            options:
-              path: /var/lib/grafana/dashboards/default
       dashboards:
         default:
           polkadot:
-            gnetID: 13840
+            gnetId: 13840
             revision: 4
             datasource:
             - name: DS_PROMETHEUS_ALERTMANAGER
