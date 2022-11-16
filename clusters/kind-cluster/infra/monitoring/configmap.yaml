@@ -16,8 +16,8 @@ data:
       additionalDataSources:
         - name: promethus-alertmanager
           type: prometheus
-          uid: prometheus
-          url: http://{{ printf "%s-prometheus.svc" .Release.Name }}:9090
+          uid: prometheus-alertmanager
+          url: http://{{ template "kube-prometheus-stack.fullname" . }}-prometheus.{{ template "kube-prometheus-stack.namespace" . }}:{{ .Values.prometheus.service.port }}/{{ trimPrefix "/" .Values.prometheus.prometheusSpec.routePrefix }}
           access: proxy
           isDefault: false
           jsonData:
