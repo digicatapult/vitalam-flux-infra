@@ -44,7 +44,7 @@ data:
               path: /var/lib/grafana/dashboards/postgres
           - name: 'nginx'
             orgId: 3
-            folder 'NginX'
+            folder: 'NginX'
             type: file
             disableDeletion: false
             editable: true
