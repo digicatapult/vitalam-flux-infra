@@ -32,6 +32,8 @@ data:
             type: file
             disableDeletion: false
             editable: true
+            options:
+              path: /var/lib/grafana/dashboards/default
       dashboards:
         default:
           polkadot:
