@@ -9,6 +9,20 @@ data:
       prometheusSpec:
         serviceMonitorSelectorNilUsesHelmValues: false
     grafana:
+      persistence:
+        enabled: true
+      dashboardProviders:
+        dashboardproviders.yaml:
+          apiVersion: 1
+          providers:
+          - name: 'default'
+            orgId: 1
+            folder: 'Polkadot'
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/default
       dashboards:
         default:
           polkadot:
