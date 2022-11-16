@@ -14,8 +14,8 @@ data:
       plugins:
         - camptocamp-prometheus-alertmanager-datasource
       additionalDataSources:
-        - name: promethus-alertmanager
-          type: prometheus
+        - name: "Prometheus AlertManager"
+          type: camptocamp-prometheus-alertmanager-datasource
           uid: prometheus-alertmanager
           url: http://{{ template "kube-prometheus-stack.fullname" . }}-prometheus.{{ template "kube-prometheus-stack.namespace" . }}:{{ .Values.prometheus.service.port }}/{{ trimPrefix "/" .Values.prometheus.prometheusSpec.routePrefix }}
           access: proxy
@@ -39,4 +39,8 @@ data:
           polkadot:
             gnetID: 13840
             revision: 4
-            datasource: Prometheus
+            datasource:
+            - name: DS_PROMETHEUS_ALERTMANAGER
+              value: "Prometheus AlertManager"
+            - name: DS_PROMETHEUS
+              value: "Prometheus"
