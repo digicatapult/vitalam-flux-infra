@@ -45,12 +45,13 @@ data:
             - name: DS_PROMETHEUS
               value: "Prometheus"
           postgres:
-            url: https://github.com/lstn/misc-grafana-dashboards/blob/master/dashboards/postgresql-database.json
+            gnetId: 9628
+            revision: 7
             datasource:
             - name: DS_PROMETHEUS
               value: "Prometheus"
           nginx:
-            gnetId: 15827
+            gnetId: 9614
             revision: 1
             datasource:
             - name: DS_PROMETHEUS
