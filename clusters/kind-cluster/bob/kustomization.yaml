@@ -3,11 +3,11 @@ kind: Kustomization
 namespace: bob
 resources:
   - source.yaml
-  # - dscp-api
-  # - dscp-identity-service
+  - dscp-api
+  - dscp-identity-service
   - dscp-node
-  # - inteli-api
-  # - ipfs-node
+  - inteli-api
+  - ipfs-node
 configMapGenerator:
   - name: bob-values
     files:
