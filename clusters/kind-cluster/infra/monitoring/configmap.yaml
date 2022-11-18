@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: monitoring
+  namespace: dscp
+data:
+  values.yaml: |
+    prometheus:
+      prometheusSpec:
+        serviceMonitorSelectorNilUsesHelmValues: false
+    grafana:
+      persistence:
+        enabled: true
+      plugins:
+        - camptocamp-prometheus-alertmanager-datasource
+      additionalDataSources:
+        - name: "Prometheus AlertManager"
+          type: camptocamp-prometheus-alertmanager-datasource
+          uid: prometheus-alertmanager
+          url: http://{{ template "kube-prometheus-stack.fullname" . }}-alertmanager.{{ template "kube-prometheus-stack.namespace" . }}:{{ .Values.alertmanager.service.port }}/{{ trimPrefix "/" .Values.alertmanager.alertmanagerSpec.routePrefix }}
+          access: proxy
+          isDefault: false
+          jsonData:
+            timeInterval: 30s
+      dashboardProviders:
+        dashboardproviders.yaml:
+          apiVersion: 1
+          providers:
+          - name: 'polkadot'
+            orgId: 1
+            folder: 'Polkadot'
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/polkadot
+      dashboards:
+        polkadot:
+          polkadot:
+            gnetId: 13840
+            revision: 4
+            datasource:
+            - name: DS_PROMETHEUS_ALERTMANAGER
+              value: "Prometheus AlertManager"
+            - name: DS_PROMETHEUS
+              value: "Prometheus"
+          postgres:
+            gnetId: 9628
+            revision: 7
+            datasource:
+            - name: DS_PROMETHEUS
+              value: "Prometheus"
+          nginx:
+            gnetId: 9614
+            revision: 1
+            datasource:
+            - name: DS_PROMETHEUS
+              value: "Prometheus"
+

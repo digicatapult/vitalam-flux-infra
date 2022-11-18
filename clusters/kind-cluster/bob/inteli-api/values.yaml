@@ -7,3 +7,8 @@ config:
 ingress:
   paths:
     - "/bob/inteli-api/(.*)"
+postgresql: 
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true

@@ -14,6 +14,10 @@ data:
       global-auth-url: "http://oathkeeper-api.dscp.svc.cluster.local/decisions$request_uri"
     service:
       type: NodePort
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
     nodeSelector:
       ingress-ready: "true"
       kubernetes.io/os: linux
