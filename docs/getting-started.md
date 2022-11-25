@@ -136,7 +136,7 @@ spec:
       # `chart` refers to the name of the chart to deploy from the repository
       # and `version` the specific version
       chart: stats-api
-      version: '0.0.5'
+      version: "0.0.5"
   # secrets can be pulled in from sops secrets defined on a per-cluster basis
   # at /clusters/{CLUSTER_NAME}/secrets/api-redis-creds.yaml
   # The secrets must be present for all clusters!
@@ -163,7 +163,7 @@ spec:
       annotations:
         kubernetes.io/ingress.class: nginx
         nginx.ingress.kubernetes.io/rewrite-target: /$2
-      path: '/api(/|$)(.*)'
+      path: "/api(/|$)(.*)"
   interval: 10m0s
 ```
 
