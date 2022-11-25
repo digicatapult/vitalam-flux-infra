@@ -1,10 +1,10 @@
-# DSCP Flux Infra
+# Veritable Flux Infra
 
-Work in progress flux repo to bring up a DSCP kubernetes chain.
+Work in progress flux repo to bring up a Veritable kubernetes chain.
 
 ## Getting started
 
-To get started using the dscp-flux-infra in a local kind cluster please see [here](./docs/getting-started.md).
+To get started using the veritable-flux-infra in a local kind cluster please see [here](./docs/getting-started.md).
 
 ## Repository structure
 

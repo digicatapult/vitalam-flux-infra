@@ -17,15 +17,16 @@ Before getting started make sure you have the following installed:
 
 ## Setting up Kind and Flux
 
-Run 
+Run
+
 ```console
 ./scripts/add-kind-cluster.sh
 ```
 
 This will setup our kind cluster and also provision a local docker registry that is [accessible from within the kind cluster](https://kind.sigs.k8s.io/docs/user/local-registry/#using-the-registry).
 
+Run
 
-Run 
 ```console
 ./scripts/install-flux.sh
 ```
@@ -34,13 +35,16 @@ Once this has completed you will have a functioning flux cluster.
 
 ## Getting an API Token
 
-We use a combination of Ory [Hydra](https://www.ory.sh/docs/hydra) and Ory [Oathkeeper](https://www.ory.sh/docs/oathkeeper) for creating and storing OAuth2 access tokens which are in turn used to access the various APIs used in the dscp project.
+We use a combination of Ory [Hydra](https://www.ory.sh/docs/hydra) and Ory [Oathkeeper](https://www.ory.sh/docs/oathkeeper) for creating and storing OAuth2 access tokens which are in turn used to access the various APIs used in the Veritable project.
 
 To obtain an API token Run
+
 ```console
 ./scripts/get-hydra-token.sh
 ```
+
 Once this has completed you will need to set your token in the form of a header
+
 ```
 Authorization: Bearer <token>
 ```
@@ -132,7 +136,7 @@ spec:
       # `chart` refers to the name of the chart to deploy from the repository
       # and `version` the specific version
       chart: stats-api
-      version: "0.0.5"
+      version: '0.0.5'
   # secrets can be pulled in from sops secrets defined on a per-cluster basis
   # at /clusters/{CLUSTER_NAME}/secrets/api-redis-creds.yaml
   # The secrets must be present for all clusters!
@@ -159,7 +163,7 @@ spec:
       annotations:
         kubernetes.io/ingress.class: nginx
         nginx.ingress.kubernetes.io/rewrite-target: /$2
-      path: "/api(/|$)(.*)"
+      path: '/api(/|$)(.*)'
   interval: 10m0s
 ```
 
