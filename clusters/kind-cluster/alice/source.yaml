@@ -2,47 +2,11 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: dscp-node
+  name: digicatapult
   namespace: alice
 spec:
   interval: 10m
-  url: https://digicatapult.github.io/dscp-node
----
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: dscp-ipfs
-  namespace: alice
-spec:
-  interval: 10m
-  url: https://digicatapult.github.io/dscp-ipfs
----
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: dscp-api
-  namespace: alice
-spec:
-  interval: 10m
-  url: https://digicatapult.github.io/dscp-api
----
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: dscp-identity-service
-  namespace: alice
-spec:
-  interval: 10m
-  url: https://digicatapult.github.io/dscp-identity-service
----
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: inteli-api
-  namespace: bob
-spec:
-  interval: 10m
-  url: https://digicatapult.github.io/inteli-api
+  url: https://digicatapult.github.io/helm-charts
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository

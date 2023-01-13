@@ -16,7 +16,7 @@ spec:
       chart: inteli-api
       sourceRef:
         kind: HelmRepository
-        name: inteli-api
+        name: digicatapult
   valuesFrom:
   - kind: ConfigMap
     name: alice-values

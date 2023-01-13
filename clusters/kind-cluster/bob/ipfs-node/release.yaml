@@ -15,7 +15,7 @@ spec:
       chart: dscp-ipfs
       sourceRef:
         kind: HelmRepository
-        name: dscp-ipfs
+        name: digicatapult
   valuesFrom:
   - kind: ConfigMap
     name: bob-values

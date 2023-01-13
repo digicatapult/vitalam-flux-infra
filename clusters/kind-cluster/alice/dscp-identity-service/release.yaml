@@ -15,7 +15,7 @@ spec:
       chart: dscp-identity-service
       sourceRef:
         kind: HelmRepository
-        name: dscp-identity-service
+        name: digicatapult
   valuesFrom:
   - kind: ConfigMap
     name: alice-values

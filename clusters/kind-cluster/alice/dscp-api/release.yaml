@@ -15,7 +15,7 @@ spec:
       chart: dscp-api
       sourceRef:
         kind: HelmRepository
-        name: dscp-api
+        name: digicatapult
   valuesFrom:
   - kind: ConfigMap
     name: alice-values
