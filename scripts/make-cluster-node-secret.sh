@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 print_usage() {
-  echo "Makes a kubernetes secret containing keys for a dscp-node. The final line of this script will output a JSON object containing the new node's PeerId, BabeId and GrandpaId."
+  echo "Makes a kubernetes secret containing keys for a dscp-node. The final line of this script will output a JSON object containing the new node's PeerId, AuraId and GrandpaId."
   echo ""
   echo "Usage:"
   echo "  ./scripts/make-cluster-node-secret.sh [ -h ] [ -f ] [ -n <namespace> ] [ -c <container> ] <cluster_name> <node_name>"
@@ -158,7 +158,7 @@ create_k8s_secret() {
   local namespace=$2
   local node_name=$3
   local node_key=$4
-  local babe_seed=$5
+  local aura_seed=$5
   local grandpa_seed=$6
 
   printf "Generating k8s secret for $node_name..." >&2
@@ -166,7 +166,7 @@ create_k8s_secret() {
     --type=Opaque \
     --namespace=$namespace \
     --from-literal=node_id=$node_key \
-    --from-literal=babe_seed="$babe_seed" \
+    --from-literal=aura_seed="$aura_seed" \
     --from-literal=grandpa_seed="$grandpa_seed" \
     --dry-run=client \
     --output=yaml > ./clusters/${cluster}/secrets/${node_name}_${namespace}_node-keys.unc.yaml
@@ -191,18 +191,18 @@ pull_container $CONTAINER
 # Generate keys
 generate_node_key $CONTAINER
 generate_authority_key $CONTAINER Sr25519
-BABE_ADDR=$AUTH_ADDR
-BABE_SEED=$AUTH_KEY
+AURA_ADDR=$AUTH_ADDR
+AURA_SEED=$AUTH_KEY
 generate_authority_key $CONTAINER Ed25519
 GRANDPA_ADDR=$AUTH_ADDR
 GRANDPA_SEED=$AUTH_KEY
 
 # generate kubernetes secret
-create_k8s_secret "$CLUSTER" "$NAMESPACE" "$NODE_NAME" "$NODE_KEY" "$BABE_SEED" "$GRANDPA_SEED"
+create_k8s_secret "$CLUSTER" "$NAMESPACE" "$NODE_NAME" "$NODE_KEY" "$AURA_SEED" "$GRANDPA_SEED"
 
 # Generate output as JSON
 echo $(jq --null-input \
   --arg node_id $NODE_ID \
-  --arg babe_id $BABE_ADDR \
+  --arg aura_id $AURA_ADDR \
   --arg grandpa_id $GRANDPA_ADDR \
-  '{ "nodeId": $node_id, "babeId": $babe_id, "grandpaId": $grandpa_id }')
+  '{ "nodeId": $node_id, "auraId": $aura_id, "grandpaId": $grandpa_id }')
