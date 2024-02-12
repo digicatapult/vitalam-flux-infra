@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/instance: oathkeeper
     app.kubernetes.io/name: oathkeeper
   name: oathkeeper-api
-  namespace: dscp
+  namespace: sqnc
 spec:
   ingressClassName: nginx
   rules:

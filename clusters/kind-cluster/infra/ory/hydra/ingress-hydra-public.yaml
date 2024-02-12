@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/instance: hydra
     app.kubernetes.io/name: hydra
   name: hydra-public
-  namespace: dscp
+  namespace: sqnc
 spec:
   ingressClassName: nginx
   rules:

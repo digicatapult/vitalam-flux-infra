@@ -29,7 +29,7 @@ if [ "${running}" != 'true' ]; then
 fi
 
 # create a cluster with the local registry enabled in containerd
-cat <<EOF | kind create cluster --name dscp-flux-infra --config=-
+cat <<EOF | kind create cluster --name sqnc-flux-infra --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 containerdConfigPatches:

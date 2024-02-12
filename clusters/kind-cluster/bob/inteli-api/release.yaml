@@ -9,7 +9,7 @@ spec:
     remediation:
       retries: -1
   dependsOn:
-    - name: bob-dscp-api
+    - name: bob-sqnc-api
     - name: bob-identity-service
   chart:
     spec:

@@ -10,10 +10,10 @@
 
 HYDRA_ADMIN_URL=http://localhost:3080/hydra-admin/
 HYDRA_PUBLIC_URL=http://localhost:3080/hydra-public/
-CLIENT_ID=dscp-client-id
-CLIENT_SECRET=dscp-client-secret
-CONTEXT_NAME=kind-dscp-flux-infra
-NAMESPACE=dscp
+CLIENT_ID=sqnc-client-id
+CLIENT_SECRET=sqnc-client-secret
+CONTEXT_NAME=kind-sqnc-flux-infra
+NAMESPACE=sqnc
 
 print_usage() {
     echo "Retrieve an OAuth2 token from Ory Hydra"
@@ -27,13 +27,13 @@ print_usage() {
     echo "  -p        Specify an alternative hydra public url to use."
     echo "            (default: http://localhost:3080/hydra-public/)"
     echo "  -n        Specify an alternative namespace that postgres and hydra are located in."
-    echo "            (default: dscp)"
+    echo "            (default: sqnc)"
     echo "  -c        Specify the context name of your cluster"
-    echo "            (default: kind-dscp-flux-infra)"
+    echo "            (default: kind-sqnc-flux-infra)"
     echo "  -i        Specify an alternative alternative client-id to use for hydra"
-    echo "            (default: dscp-client-id)"
+    echo "            (default: sqnc-client-id)"
     echo "  -s        Specify an alternative alternative client-secret to use for hydra"
-    echo "            (default: dscp-client-secret)"
+    echo "            (default: sqnc-client-secret)"
     echo ""
     echo "Flags: "
     echo "  -h        Prints this message"

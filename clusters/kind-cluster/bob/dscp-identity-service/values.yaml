@@ -1,13 +1,13 @@
 config:
   logLevel: info
   selfAddress: 12D3KooWHdiAxVd8uMQR1hGWXccidmfCwLqcMpGwR6QcTP6QRMuD
-  externalNodeHost: bob-node-dscp-node-0
+  externalNodeHost: bob-node-sqnc-node-0
   externalOrigin: "http://localhost:3080"
-  externalPathPrefix: "bob/dscp-identity-service"
+  externalPathPrefix: "bob/sqnc-identity-service"
 ingress:
   paths:
-    - "/bob/dscp-identity-service/(.*)"
-dscpNode:
+    - "/bob/sqnc-identity-service/(.*)"
+sqncNode:
   enabled: false
 postgresql: 
   metrics:

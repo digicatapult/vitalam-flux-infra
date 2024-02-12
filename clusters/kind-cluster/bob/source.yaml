@@ -2,38 +2,38 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: dscp-node
+  name: sqnc-node
   namespace: bob
 spec:
   interval: 10m
-  url: https://digicatapult.github.io/dscp-node
+  url: https://digicatapult.github.io/sqnc-node
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: dscp-ipfs
+  name: sqnc-ipfs
   namespace: bob
 spec:
   interval: 10m
-  url: https://digicatapult.github.io/dscp-ipfs
+  url: https://digicatapult.github.io/sqnc-ipfs
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: dscp-api
+  name: sqnc-api
   namespace: bob
 spec:
   interval: 10m
-  url: https://digicatapult.github.io/dscp-api
+  url: https://digicatapult.github.io/sqnc-api
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: dscp-identity-service
+  name: sqnc-identity-service
   namespace: bob
 spec:
   interval: 10m
-  url: https://digicatapult.github.io/dscp-identity-service
+  url: https://digicatapult.github.io/sqnc-identity-service
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository

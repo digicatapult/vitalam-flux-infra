@@ -1,7 +1,7 @@
 config:
   logLevel: info
-  dscpApiHost: bob-dscp-api
-  identityServiceHost: bob-identity-service-dscp-identity-service
+  sqncApiHost: bob-sqnc-api
+  identityServiceHost: bob-identity-service-sqnc-identity-service
   externalOrigin: "http://localhost:3080"
   externalPathPrefix: "bob/inteli-api"
 ingress:

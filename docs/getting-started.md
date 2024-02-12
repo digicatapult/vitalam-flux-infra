@@ -34,7 +34,7 @@ Once this has completed you will have a functioning flux cluster.
 
 ## Getting an API Token
 
-We use a combination of Ory [Hydra](https://www.ory.sh/docs/hydra) and Ory [Oathkeeper](https://www.ory.sh/docs/oathkeeper) for creating and storing OAuth2 access tokens which are in turn used to access the various APIs used in the dscp project.
+We use a combination of Ory [Hydra](https://www.ory.sh/docs/hydra) and Ory [Oathkeeper](https://www.ory.sh/docs/oathkeeper) for creating and storing OAuth2 access tokens which are in turn used to access the various APIs used in the Sequence (SQNC) project.
 
 To obtain an API token Run
 ```console
@@ -171,7 +171,7 @@ To test your changes you will need to push them to a feature branch and instruct
 2. Update your local flux `GitRepository` resource to match the above. This is most easily done with the `flux` command line tool (substituting `{BRANCH_NAME}` appropriately):
 
 ```sh
-flux create source git --branch {BRANCH_NAME} --namespace flux-system --secret-ref flux-system --url https://github.com/digicatapult/dscp-flux-infra.git flux-system
+flux create source git --branch {BRANCH_NAME} --namespace flux-system --secret-ref flux-system --url https://github.com/digicatapult/sqnc-flux-infra.git flux-system
 ```
 
 `flux` will now reconcile the changes with the existing deployment. The `flux` command line tool can also be used to check the status of syncing of different resources, pause/resume reconciliation (very helpful when debugging changes made locally) and forcing a sync (for those too impatient for polling `flux` does).

@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: alice-dscp-api
+  name: alice-sqnc-api
   namespace: alice
 spec:
   install:
@@ -12,12 +12,12 @@ spec:
     - name: alice-ipfs
   chart:
     spec:
-      chart: dscp-api
+      chart: sqnc-api
       sourceRef:
         kind: HelmRepository
-        name: dscp-api
+        name: sqnc-api
   valuesFrom:
   - kind: ConfigMap
     name: alice-values
-    valuesKey: values-dscp-api.yaml
+    valuesKey: values-sqnc-api.yaml
   interval: 10m0s

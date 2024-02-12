@@ -12,12 +12,12 @@ spec:
     - name: alice-node
   chart:
     spec:
-      chart: dscp-identity-service
+      chart: sqnc-identity-service
       sourceRef:
         kind: HelmRepository
-        name: dscp-identity-service
+        name: sqnc-identity-service
   valuesFrom:
   - kind: ConfigMap
     name: alice-values
-    valuesKey: values-dscp-identity-service.yaml
+    valuesKey: values-sqnc-identity-service.yaml
   interval: 10m0s

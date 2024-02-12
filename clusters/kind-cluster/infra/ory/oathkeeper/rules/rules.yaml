@@ -2,10 +2,10 @@ apiVersion: oathkeeper.ory.sh/v1alpha1
 kind: Rule
 metadata:
   name: oathkeeper-authenticated-paths
-  namespace: dscp
+  namespace: sqnc
 spec:
   match:
-    url: <.*>/<alice|bob>/<inteli-api|dscp-api|dscp-identity-service>/<v1|v3>/<(?!swagger|api-docs).*>
+    url: <.*>/<alice|bob>/<inteli-api|sqnc-api|sqnc-identity-service>/<v1|v3>/<(?!swagger|api-docs).*>
     methods:
       - GET
       - POST
@@ -18,7 +18,7 @@ apiVersion: oathkeeper.ory.sh/v1alpha1
 kind: Rule
 metadata:
   name: oathkeeper-unauthenticated-paths
-  namespace: dscp
+  namespace: sqnc
 spec:
   match:
     url: <.*>/<(swagger|api-docs).*>

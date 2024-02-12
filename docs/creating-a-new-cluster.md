@@ -104,9 +104,9 @@ As mentioned in [managing secrets](./managing-secrets.md) we encrypt the secrets
 Run the following commands to generate a PGP key
 
 ```
-mktemp -d -t .dscp-cluster-gpg
+mktemp -d -t .sqnc-cluster-gpg
 
-GNUPGHOME=.dscp-cluster-gpg gpg \
+GNUPGHOME=.sqnc-cluster-gpg gpg \
 --quick-gen-key --batch \
 --passphrase '' --yes <cluster-name>
 ```
@@ -114,7 +114,7 @@ Export the public key as a certificate into the certs directory
 ```
 mkdir certs/<cluster-name>
 
-GNUPGHOME=.dscp-cluster-gpg gpg \
+GNUPGHOME=.sqnc-cluster-gpg gpg \
 --output certs/<cluster-name>/<cluster-name>.asc \
 --export --armor <cluster-name>
 ```
@@ -122,7 +122,7 @@ Commit this and push it up to our branch.
 
 We now need to import this key into the cluster
 ```
-GNUPGHOME=.dscp-cluster-gpg gpg \
+GNUPGHOME=.sqnc-cluster-gpg gpg \
 --export-secret-keys \
 --armor <cluster-name> \
 | kubectl create secret generic sops-gpg \
@@ -146,7 +146,7 @@ sops.asc:  5046 bytes
 ```
 Now delete the tmp dir we used to create the key
 ```
-rm -rf .dscp-cluster-gpg
+rm -rf .sqnc-cluster-gpg
 ```
 
 #### Creating the genesis
@@ -172,7 +172,7 @@ The described script allows for generating a new cluster with any number of desi
 
 would create a genesis for a new cluster called `new-cluster`. Three accounts `alice`, `bob` and `charlie` would be created in the namespaces `ns1`, `ns2` and `ns3` respectively. Three validator nodes called `red`, `green` and `blue` would be created in namespaces `ns1`, `ns2` and `ns3` and with owners `alice`, `bob` and `charlie` respectively. Two additional nodes (`bootnode` and `api-light`) would be created in `ns1` and owned by `alice`. Finally namespaces `ns2` and `ns3` would both contain an additional node called `api-light` owned by `bob` and `charlie` respectively.
 
-Additional options may be specified to configure the docker image used to generate the genesis (defaults to `digicatapult/dscp-node:latest`) and the kubernetes namespace secrets should be created in (defaults to `dscp`). The script writes the final raw genesis file to stdout so can be safely redirected. This should then either be hosted publicly or built into the node to be deployed so that the chain can be referenced.
+Additional options may be specified to configure the docker image used to generate the genesis (defaults to `digicatapult/sqnc-node:latest`) and the kubernetes namespace secrets should be created in (defaults to `sqnc`). The script writes the final raw genesis file to stdout so can be safely redirected. This should then either be hosted publicly or built into the node to be deployed so that the chain can be referenced.
 
 #### Creating additional secrets
 

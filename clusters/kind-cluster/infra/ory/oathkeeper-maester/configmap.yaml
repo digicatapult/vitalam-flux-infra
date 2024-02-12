@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: oathkeeper-maester-values
-  namespace: dscp
+  namespace: sqnc
 data:
   values.yaml: |
     oathkeeperFullnameOverride: oathkeeper

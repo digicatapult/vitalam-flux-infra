@@ -1,15 +1,15 @@
 config:
   logLevel: info
-  externalNodeHost: bob-node-dscp-node-0
-  externalIpfsHost: bob-ipfs-dscp-ipfs-api
+  externalNodeHost: bob-node-sqnc-node-0
+  externalIpfsHost: bob-ipfs-sqnc-ipfs-api
   externalIpfsPort: 5001
   accountKey: //Bob
   externalOrigin: "http://localhost:3080"
-  externalPathPrefix: "bob/dscp-api"
+  externalPathPrefix: "bob/sqnc-api"
 ingress:
   paths:
-    - "/bob/dscp-api/(.*)"
-dscpIpfs:
+    - "/bob/sqnc-api/(.*)"
+sqncIpfs:
   enabled: false
-dscpNode:
+sqncNode:
   enabled: false

@@ -3,7 +3,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
 metadata:
   name: monitoring
-  namespace: dscp
+  namespace: sqnc
 spec:
   interval: 10m0s
   path: ./clusters/kind-cluster/infra/monitoring
@@ -18,7 +18,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
 metadata:
   name: telemetry
-  namespace: dscp
+  namespace: sqnc
 spec:
   interval: 10m0s
   path: ./clusters/kind-cluster/infra/substrate-telemetry
@@ -48,7 +48,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
 metadata:
   name: nginx
-  namespace: dscp
+  namespace: sqnc
 spec:
   interval: 10m0s
   path: ./clusters/kind-cluster/infra/nginx
@@ -63,7 +63,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
 metadata:
   name: ory
-  namespace: dscp
+  namespace: sqnc
 spec:
   interval: 1m
   path: ./clusters/kind-cluster/infra/ory

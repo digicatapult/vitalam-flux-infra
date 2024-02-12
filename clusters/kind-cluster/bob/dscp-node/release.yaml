@@ -10,13 +10,13 @@ spec:
       retries: -1
   chart:
     spec:
-      chart: dscp-node
+      chart: sqnc-node
       version: "4.2.1"
       sourceRef:
         kind: HelmRepository
-        name: dscp-node
+        name: sqnc-node
   valuesFrom:
   - kind: ConfigMap
     name: bob-values
-    valuesKey: values-dscp-node.yaml
+    valuesKey: values-sqnc-node.yaml
   interval: 10m

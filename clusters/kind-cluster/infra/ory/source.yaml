@@ -2,7 +2,7 @@ apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
   name: ory
-  namespace: dscp
+  namespace: sqnc
 spec:
   interval: 10m
   url: https://k8s.ory.sh/helm/charts

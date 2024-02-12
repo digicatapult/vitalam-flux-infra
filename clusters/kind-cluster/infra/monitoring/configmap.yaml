@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: monitoring
-  namespace: dscp
+  namespace: sqnc
 data:
   values.yaml: |
     prometheus:

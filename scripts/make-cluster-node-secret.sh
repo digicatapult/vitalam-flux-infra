@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 print_usage() {
-  echo "Makes a kubernetes secret containing keys for a dscp-node. The final line of this script will output a JSON object containing the new node's PeerId, AuraId and GrandpaId."
+  echo "Makes a kubernetes secret containing keys for a sqnc-node. The final line of this script will output a JSON object containing the new node's PeerId, AuraId and GrandpaId."
   echo ""
   echo "Usage:"
   echo "  ./scripts/make-cluster-node-secret.sh [ -h ] [ -f ] [ -n <namespace> ] [ -c <container> ] <cluster_name> <node_name>"
@@ -13,12 +13,12 @@ print_usage() {
   echo "  -h              Print this message"
   echo "  -f              Force re-creation of new secret for an existing node. Note this is destructive"
   echo "  -c <container>  Container image to use for key generation"
-  echo "  -n <namespace>  Namespace in which to create the secret. Defaults to dscp"
+  echo "  -n <namespace>  Namespace in which to create the secret. Defaults to sqnc"
 }
 
 FORCE_RECREATE=
-NAMESPACE="dscp"
-CONTAINER="digicatapult/dscp-node:latest"
+NAMESPACE="sqnc"
+CONTAINER="digicatapult/sqnc-node:latest"
 while getopts ":n:c:fh" opt; do
   case ${opt} in
     h )

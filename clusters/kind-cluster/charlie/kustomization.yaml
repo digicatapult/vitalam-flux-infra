@@ -3,11 +3,11 @@ kind: Kustomization
 namespace: charlie
 resources:
   - source.yaml
-  - dscp-node
+  - sqnc-node
 configMapGenerator:
   - name: charlie-values
     files:
-      - values-dscp-node.yaml=dscp-node/values.yaml
+      - values-sqnc-node.yaml=sqnc-node/values.yaml
 configurations:
   - kustomize-config.yaml
 generatorOptions:

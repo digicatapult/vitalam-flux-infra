@@ -1,7 +1,7 @@
 config:
   logLevel: info
-  dscpApiHost: alice-dscp-api
-  identityServiceHost: alice-identity-service-dscp-identity-service
+  sqncApiHost: alice-sqnc-api
+  identityServiceHost: alice-identity-service-sqnc-identity-service
   externalOrigin: "http://localhost:3080"
   externalPathPrefix: "alice/inteli-api"
 ingress:
