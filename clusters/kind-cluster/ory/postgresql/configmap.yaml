@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hydra-postgresql
+  namespace: ory
+data:
+  values.yaml: |
+    auth:
+      postgresPassword: postgres
+      username: hydra
+      password: hydra
+      database: hydra

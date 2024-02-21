@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx
+  namespace: kube-system
+data:
+  values.yaml: |
+    watchIngressWithoutClass: true
+    ingressClassResource:
+      default: true
+    hostNetwork: true
+    dnsPolicy: ClusterFirstWithHostNet
+    config:
+      global-auth-url: "http://oathkeeper-api.ory.svc.cluster.local/decisions$request_uri"
+    service:
+      type: NodePort
+    nodeSelector:
+      ingress-ready: "true"
+      kubernetes.io/os: linux
+    tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/master
+        operator: Equal
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/control-plane
+        operator: Equal
+    containerPorts:
+      http: 80
+      https: 443

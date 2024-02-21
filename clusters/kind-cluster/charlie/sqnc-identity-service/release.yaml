@@ -1,0 +1,23 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: charlie-identity-service
+  namespace: charlie
+spec:
+  install:
+    remediation:
+      retries: -1
+  dependsOn:
+    - name: charlie-node
+  chart:
+    spec:
+      chart: sqnc-identity-service
+      sourceRef:
+        kind: HelmRepository
+        name: digicatapult
+  valuesFrom:
+  - kind: ConfigMap
+    name: charlie-values
+    valuesKey: values-sqnc-identity-service.yaml
+  interval: 10m0s

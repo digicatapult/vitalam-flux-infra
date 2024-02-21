@@ -4,10 +4,10 @@
 
 ### Prerequisites
 
-* A Kubernetes cluster
-    * [external-dns](https://github.com/kubernetes-sigs/external-dns) installed and configured to your choice of DNS provider
-    * The ability to create `loadBalancer` in your PaaS of choice
-* openssl or some other method of creating rsa keys (Github Deploy key is fine).
+- A Kubernetes cluster
+  - [external-dns](https://github.com/kubernetes-sigs/external-dns) installed and configured to your choice of DNS provider
+  - The ability to create `loadBalancer` in your PaaS of choice
+- openssl or some other method of creating rsa keys (Github Deploy key is fine).
 
 ### Procedure
 
@@ -34,17 +34,22 @@ You will also need to edit:
 Commit and push your changes. -->
 
 #### Install flux onto your cluster
+
 ```
 flux install
 ```
+
 Generate an RSA keypair and make sure you give this `read access` as deployKey on Github or your git server.
+
 ```
 openssl gen rsa -out id_rsa 4096
 openssl rsa -in id_rsa -pubout -out id_rsa.pub
 ```
+
 Install this keypair onto your k8s cluster and into your git server so we can pull flux repository.
 
 Example below uses github as an example:
+
 ```
 kubectl create secret generic --type=Opaque \
 --namespace=flux-system flux-system \
@@ -54,38 +59,45 @@ kubectl create secret generic --type=Opaque \
 ```
 
 Now delete the keypair from your machine:
+
 ```
 rm -rf id_rsa*
 ```
+
 #### Flux - git sources and kustomizations
 
 Now that we have flux installed and a key that we can use to get the repository we need to make some changes to the source files to build your cluster.
 
 Navigate to `clusters/<your-cluster>/base/flux-system/` and edit `gotk-sync.yaml` to update
-* `spec.url` to match your repo ssh location.
-* `spec.ref.branch` to match the branch you are pushing to.
-* `spec.path` in the Kustomization to match the path we are editing.
+
+- `spec.url` to match your repo ssh location.
+- `spec.ref.branch` to match the branch you are pushing to.
+- `spec.path` in the Kustomization to match the path we are editing.
 
 Once these changes have been made go ahead and commit them to git.
 
 You'll now need to edit or remove the following kustomizations in `clusters/<your-cluster>/base/`:
-* app-sync.yaml - Required - change `spec.path`
-* namespaces.yaml - Required - no changes
-* infra-sync.yaml - Optional - installs various infrastructure change `spec.path` if you want to install all the base infrastructure components (ebs-csi-driver, cert-manager, cloudwatch) or delete if unnecassary
-* secrets-sync.yaml - Required - change `spec.path`
+
+- app-sync.yaml - Required - change `spec.path`
+- namespaces.yaml - Required - no changes
+- infra-sync.yaml - Optional - installs various infrastructure change `spec.path` if you want to install all the base infrastructure components (ebs-csi-driver, cert-manager, cloudwatch) or delete if unnecassary
+- secrets-sync.yaml - Required - change `spec.path`
 
 Once again commit your changes and now push them to your remote branch.
 
 Next up we will need to add the git source to flux on our cluster
+
 ```
 flux create source git  --interval=1m \
 --namespace=flux-system --secret-ref=flux-system \
 --branch=<your branch> \
 --url=<your git ssh url> flux-system
 ```
-We should see that flux successfully creates and reconciles the source.  If it fails to do so please check the [flux2 documentation](https://fluxcd.io/docs/) and check you have successfully installed the rsa key as a secret.
+
+We should see that flux successfully creates and reconciles the source. If it fails to do so please check the [flux2 documentation](https://fluxcd.io/docs/) and check you have successfully installed the rsa key as a secret.
 
 Providing the previous step succeeded then we need to add the kustomization.
+
 ```
 flux create kustomization --interval=10m \
 --namespace=flux-system \
@@ -93,7 +105,8 @@ flux create kustomization --interval=10m \
 --prune --source=flux-system \
 --validation=client flux-system
 ```
-We should now have flux successully pulling and applying its initial `flux-system` kustomization.  However the other kustomizations will fail due to a lack of secrets for the cluster.
+
+We should now have flux successully pulling and applying its initial `flux-system` kustomization. However the other kustomizations will fail due to a lack of secrets for the cluster.
 
 #### Secrets
 
@@ -104,25 +117,29 @@ As mentioned in [managing secrets](./managing-secrets.md) we encrypt the secrets
 Run the following commands to generate a PGP key
 
 ```
-mktemp -d -t .dscp-cluster-gpg
+mktemp -d -t .sqnc-cluster-gpg
 
-GNUPGHOME=.dscp-cluster-gpg gpg \
+GNUPGHOME=.sqnc-cluster-gpg gpg \
 --quick-gen-key --batch \
 --passphrase '' --yes <cluster-name>
 ```
+
 Export the public key as a certificate into the certs directory
+
 ```
 mkdir certs/<cluster-name>
 
-GNUPGHOME=.dscp-cluster-gpg gpg \
+GNUPGHOME=.sqnc-cluster-gpg gpg \
 --output certs/<cluster-name>/<cluster-name>.asc \
 --export --armor <cluster-name>
 ```
+
 Commit this and push it up to our branch.
 
 We now need to import this key into the cluster
+
 ```
-GNUPGHOME=.dscp-cluster-gpg gpg \
+GNUPGHOME=.sqnc-cluster-gpg gpg \
 --export-secret-keys \
 --armor <cluster-name> \
 | kubectl create secret generic sops-gpg \
@@ -131,6 +148,7 @@ GNUPGHOME=.dscp-cluster-gpg gpg \
 ```
 
 Verify that our imported key has the correct length.
+
 ```
 $ kubectl describe secrets -n flux-system sops-gpg
 Name:         sops-gpg
@@ -144,9 +162,11 @@ Data
 ====
 sops.asc:  5046 bytes
 ```
+
 Now delete the tmp dir we used to create the key
+
 ```
-rm -rf .dscp-cluster-gpg
+rm -rf .sqnc-cluster-gpg
 ```
 
 #### Creating the genesis
@@ -172,7 +192,7 @@ The described script allows for generating a new cluster with any number of desi
 
 would create a genesis for a new cluster called `new-cluster`. Three accounts `alice`, `bob` and `charlie` would be created in the namespaces `ns1`, `ns2` and `ns3` respectively. Three validator nodes called `red`, `green` and `blue` would be created in namespaces `ns1`, `ns2` and `ns3` and with owners `alice`, `bob` and `charlie` respectively. Two additional nodes (`bootnode` and `api-light`) would be created in `ns1` and owned by `alice`. Finally namespaces `ns2` and `ns3` would both contain an additional node called `api-light` owned by `bob` and `charlie` respectively.
 
-Additional options may be specified to configure the docker image used to generate the genesis (defaults to `digicatapult/dscp-node:latest`) and the kubernetes namespace secrets should be created in (defaults to `dscp`). The script writes the final raw genesis file to stdout so can be safely redirected. This should then either be hosted publicly or built into the node to be deployed so that the chain can be referenced.
+Additional options may be specified to configure the docker image used to generate the genesis (defaults to `digicatapult/sqnc-node:latest`) and the kubernetes namespace secrets should be created in (defaults to `sqnc`). The script writes the final raw genesis file to stdout so can be safely redirected. This should then either be hosted publicly or built into the node to be deployed so that the chain can be referenced.
 
 #### Creating additional secrets
 

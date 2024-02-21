@@ -1,5 +1,5 @@
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: alice-sync
@@ -12,9 +12,8 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  validation: client
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: bob-sync
@@ -27,9 +26,8 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  validation: client
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: charlie-sync
@@ -42,4 +40,17 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  validation: client
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: nginx-sync
+  namespace: kube-system
+spec:
+  interval: 1m
+  path: ./clusters/kind-cluster/nginx
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system

@@ -1,0 +1,23 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: postgresql
+  namespace: ory
+spec:
+  install:
+    remediation:
+      retries: -1
+  releaseName: pg-hydra
+  chart:
+    spec:
+      chart: postgresql
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: ory
+  interval: 1m
+  valuesFrom:
+    - kind: ConfigMap
+      name: hydra-postgresql
+      

@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: alice-node
+  namespace: alice
+spec:
+  install:
+    remediation:
+      retries: -1
+  chart:
+    spec:
+      chart: sqnc-node
+      sourceRef:
+        kind: HelmRepository
+        name: digicatapult
+  valuesFrom:
+  - kind: ConfigMap
+    name: alice-values
+    valuesKey: values-sqnc-node.yaml
+  interval: 10m

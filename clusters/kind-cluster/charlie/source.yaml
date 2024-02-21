@@ -2,8 +2,8 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: dscp-node
+  name: digicatapult
   namespace: charlie
 spec:
   interval: 10m
-  url: https://digicatapult.github.io/dscp-node
+  url: https://digicatapult.github.io/helm-charts

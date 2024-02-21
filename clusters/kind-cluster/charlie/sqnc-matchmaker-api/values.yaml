@@ -1,0 +1,18 @@
+config:
+  logLevel: info
+  externalNodeHost: charlie-node-sqnc-node-0
+  externalIpfsHost: charlie-ipfs-sqnc-ipfs-api
+  externalIpfsPort: 5001
+  accountKey: //Bob
+  externalOrigin: "http://localhost:3080"
+  externalPathPrefix: "charlie/sqnc-matchmaker-api"
+  auth:
+    type: EXTERNAL
+ingress:
+  host: localhost
+  paths:
+    - "/charlie/sqnc-matchmaker-api/(.*)"
+ipfs:
+  enabled: false
+node:
+  enabled: false

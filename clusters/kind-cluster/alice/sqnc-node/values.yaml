@@ -1,0 +1,18 @@
+node:
+  chain: local
+  role: validator
+  dataVolumeSize: 1Gi
+  customNodeKey: "0000000000000000000000000000000000000000000000000000000000000001"
+  perNodeServices:
+    setPublicAddressToExternal:
+      enabled: false
+  flags:
+    - "--rpc-external"
+    - "--rpc-methods=Unsafe"
+    - "--rpc-cors=all"
+    - "--unsafe-rpc-external"
+    - "--alice"
+    - "--prometheus-external"
+storageClass: standard
+image:
+  tag: v11.0.0

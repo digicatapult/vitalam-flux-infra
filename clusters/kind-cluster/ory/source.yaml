@@ -1,0 +1,18 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: ory
+  namespace: ory
+spec:
+  interval: 10m
+  url: https://k8s.ory.sh/helm/charts
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: bitnami
+  namespace: ory
+spec:
+  interval: 10m
+  url: https://charts.bitnami.com/bitnami

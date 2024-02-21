@@ -10,9 +10,9 @@
 # creates the flux-system git source resource on the cluster
 # creates the flux-system kustomization on the cluster
 
-INFRA_GIT=https://github.com/digicatapult/dscp-flux-infra/
+INFRA_GIT=https://github.com/digicatapult/sqnc-flux-infra/
 INFRA_BRANCH=main
-CONTEXT_NAME=kind-dscp-flux-infra
+CONTEXT_NAME=kind-sqnc-flux-infra
 INFRA_BASE_PATH=./clusters/kind-cluster/base
 
 
@@ -24,11 +24,11 @@ print_usage() {
   echo ""
   echo "Options:"
   echo "  -g        Specify an alternative git repository. Note the default assumes http authentication"
-  echo "            (default: https://github.com/digicatapult/dscp-flux-infra/)"
+  echo "            (default: https://github.com/digicatapult/l3-flux-infra/)"
   echo "  -b        Specify an alternative base branch to use."
   echo "            (default: main)"
   echo "  -c        Specify the context name of your cluster"
-  echo "            (default: kind-dscp-flux-infra)"
+  echo "            (default: kind-sqnc-flux-infra)"
   echo "  -p        Specify an alternative base path"
   echo "            (default: ./clusters/kind-cluster/base)"
   echo ""

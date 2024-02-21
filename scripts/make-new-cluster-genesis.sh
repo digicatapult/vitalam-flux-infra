@@ -12,10 +12,10 @@ print_usage() {
   echo ""
   echo "Flags: "
   echo "  -h                                            Print this message"
-  echo "  -n <namespace>                                Namespace in which to create the secret. Defaults to dscp"
+  echo "  -n <namespace>                                Namespace in which to create the secret. Defaults to sqnc"
   echo "  -b <base_chain>                               Base chain-spec to generate spec from. Defaults to local"
   echo "  -c <container>                                Container image to use for key generation."
-  echo "                                                Defaults to digicatapult/dscp-node:latest"
+  echo "                                                Defaults to digicatapult/sqnc-node:latest"
   echo "  -o <owner>:<namespace>:<balance>              Adds a node owner account giving the specified balance."
   echo "                                                The secret for the owner will be placed in the Kubernetes <namespace>"
   echo "  -v <validator_node_name>:<namespace>:<owner>  Adds a validator node with name <validator_node_name> which will be owned by <owner>."
@@ -29,7 +29,7 @@ print_usage() {
 }
 
 BASE_CHAIN="local"
-CONTAINER="digicatapult/dscp-node:latest"
+CONTAINER="digicatapult/sqnc-node:latest"
 OWNER_NAMES=()
 VALIDATOR_NAMES=()
 ADDITIONAL_NAMES=()
@@ -278,7 +278,7 @@ generate_node() {
 
   local output=
   local node_id=
-  local aura_id=
+  local babe_id=
   local grandpa_id=
   local owner_name=
   local owner_namespace=
@@ -299,11 +299,11 @@ generate_node() {
     printf "OK\n" >&2
     # extract ids
     node_id=$(echo $output | jq -r '.nodeId')
-    aura_id=$(echo $output | jq -r '.auraId')
+    babe_id=$(echo $output | jq -r '.babeId')
     grandpa_id=$(echo $output | jq -r '.grandpaId')
     # update genesis
     if [ "$type" == "validator" ]; then
-      GENESIS=$(echo $GENESIS | jq --arg aura_id $aura_id '.genesis.runtime.aura.authorities += [$aura_id]')
+      GENESIS=$(echo $GENESIS | jq --arg babe_id $babe_id '.genesis.runtime.babe.authorities += [[$babe_id, 1]]')
       GENESIS=$(echo $GENESIS | jq --arg grandpa_id $grandpa_id '.genesis.runtime.grandpa.authorities += [[$grandpa_id, 1]]')
     fi
     # convert node_id to hex
@@ -354,7 +354,7 @@ GENESIS=$(echo $GENESIS | jq --arg cluster ${CLUSTER//[-]/_} '.id |= $cluster')
 GENESIS=$(echo $GENESIS | jq '.chainType |= "Live"')
 
 # remove all pallet configuration
-GENESIS=$(echo $GENESIS | jq '.genesis.runtime.aura.authorities |= []')
+GENESIS=$(echo $GENESIS | jq '.genesis.runtime.babe.authorities |= []')
 GENESIS=$(echo $GENESIS | jq '.genesis.runtime.grandpa.authorities |= []')
 GENESIS=$(echo $GENESIS | jq '.genesis.runtime.balances.balances |= []')
 GENESIS=$(echo $GENESIS | jq '.genesis.runtime.nodeAuthorization.nodes |= []')

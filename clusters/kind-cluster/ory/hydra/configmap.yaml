@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hydra-values
+  namespace: ory
+data:
+  values.yaml: |
+    configmap:
+      hashSumEnabled: true
+    ingress:
+      public:
+        annotations:
+          nginx.ingress.kubernetes.io/rewrite-target: /$1
+          nginx.ingress.kubernetes.io/use-regex: "true"
+          nginx.ingress.kubernetes.io/enable-global-auth: "false"
+        hosts:
+        - host: localhost
+          paths:
+          - path: "/hydra-public/(.*)"
+            pathType: ImplementationSpecific
+        enabled: true
+      admin:
+        annotations:
+          nginx.ingress.kubernetes.io/rewrite-target: /$1
+          nginx.ingress.kubernetes.io/use-regex: "true"
+          nginx.ingress.kubernetes.io/enable-global-auth: "false"
+        hosts:
+        - host: localhost
+          paths:
+          - path: "/hydra-admin/(.*)"
+            pathType: ImplementationSpecific
+        enabled: true
+    maester:
+      enabled: false
+    hydra:
+      automigration:
+        enabled: true
+      dangerousForceHttp: true
+      dev: true
+      config:
+        dsn: postgres://hydra:hydra@pg-hydra-postgresql:5432/hydra?sslmode=disable&max_conns=20&max_idle_conns=4
+        ttl:
+          access_token: 168h
+          refresh_token: 720h
+          id_token: 168h
+        urls:
+          self:
+            admin: http://hydra-admin:4445/
+            issuer: http://localhost:3080/api/
+          consent: http://localhost:3080/consent/
+        secrets:
+          system: ["00000000000000000000000000000000"]

@@ -12,12 +12,12 @@ spec:
     - name: alice-node
   chart:
     spec:
-      chart: dscp-ipfs
+      chart: sqnc-ipfs
       sourceRef:
         kind: HelmRepository
-        name: dscp-ipfs
+        name: digicatapult
   valuesFrom:
   - kind: ConfigMap
     name: alice-values
-    valuesKey: values-dscp-ipfs.yaml
+    valuesKey: values-sqnc-ipfs.yaml
   interval: 10m
