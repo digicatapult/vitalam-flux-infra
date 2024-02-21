@@ -24,7 +24,7 @@ print_usage() {
   echo ""
   echo "Options:"
   echo "  -g        Specify an alternative git repository. Note the default assumes http authentication"
-  echo "            (default: https://github.com/digicatapult/l3-flux-infra/)"
+  echo "            (default: https://github.com/digicatapult/sqnc-flux-infra/)"
   echo "  -b        Specify an alternative base branch to use."
   echo "            (default: main)"
   echo "  -c        Specify the context name of your cluster"
