@@ -104,7 +104,7 @@ This instructs `flux` that it should examine this helm repository for packages t
 The second resource is the `HelmRelease` that describes the actual service to deploy:
 
 ```yaml
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: demo-api
