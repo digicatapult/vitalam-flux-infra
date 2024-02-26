@@ -11,7 +11,7 @@ config:
 ingress:
   host: localhost
   paths:
-    - "/alice/sqnc-matchmaker-api/(.*)"
+    - path: "/alice/sqnc-matchmaker-api/(.*)"
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true"
 ipfs:

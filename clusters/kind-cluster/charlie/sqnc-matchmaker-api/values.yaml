@@ -11,7 +11,7 @@ config:
 ingress:
   host: localhost
   paths:
-    - "/charlie/sqnc-matchmaker-api/(.*)"
+    - path: "/charlie/sqnc-matchmaker-api/(.*)"
 ipfs:
   enabled: false
 node:
