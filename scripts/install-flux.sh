@@ -6,7 +6,6 @@
 
 # check for valid cluster without flux installed
 # install flux on the cluster
-# creates the github secret on the cluster
 # creates the flux-system git source resource on the cluster
 # creates the flux-system kustomization on the cluster
 
@@ -17,7 +16,7 @@ INFRA_BASE_PATH=./clusters/kind-cluster/base
 
 
 print_usage() {
-  echo "Installs flux onto a cluster and sets up the secrets, git sources and kustomizations necessary to get started"
+  echo "Installs flux onto a cluster and sets up the git sources and kustomizations necessary to get started"
   echo ""
   echo "Usage:"
   echo "  ./scripts/install-flux.sh [ -h ] [ -g <git_repository> ] [ -b <base_branch> ] [ -c <kind_context_name> ] [ -p <base_path> ]"
@@ -123,26 +122,12 @@ install_flux() {
     fi
 }
 
-install_github_secret() {
-    local context=$1
-    local secret=$2
-    printf "Installing the Github Secret on the cluster...\n"
-    kubectl create secret generic flux-system --namespace flux-system --context $context --from-literal=username=git --from-literal=password=$secret #&> /dev/null
-    local ret=$?
-    if [ "$ret" -eq 0 ]; then
-      printf "OK\nSecret \"flux-system\" successfully installed in $context\n"
-    elif [ "$ret" -ne 0 ]; then
-        printf "ERROR\nSecret \"flux-system\" failed to install in $context\n"
-        exit 1
-    fi
-}
-
 setup_flux_git_source() {
     local context=$1
     local repo=$2
     local branch=$3
     printf "Creating Git source from $repo on branch $branch in flux $context...\n"
-    flux create source git --context=$context --interval=1m --namespace=flux-system --secret-ref=flux-system --branch=$branch --url=$repo flux-system
+    flux create source git --context=$context --interval=1m --namespace=flux-system --branch=$branch --url=$repo flux-system
     local ret=$?
     if [ "$ret" -eq 0 ]; then
       printf "OK\nGit Source \"flux-system\" successfully installed in $context\n"
@@ -171,6 +156,5 @@ assert_command flux
 assert_env $CONTEXT_NAME
 assert_flux_env $CONTEXT_NAME
 install_flux $CONTEXT_NAME
-install_github_secret $CONTEXT_NAME $GITHUB_TOKEN
 setup_flux_git_source $CONTEXT_NAME $INFRA_GIT $INFRA_BRANCH
 setup_flux_kustomization $CONTEXT_NAME $INFRA_BASE_PATH
