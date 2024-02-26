@@ -1,21 +1,20 @@
-config:
-  logLevel: info
-  externalNodeHost: alice-node-sqnc-node-0
-  externalIpfsHost: alice-ipfs-sqnc-ipfs-api
-  externalIpfsPort: 5001
-  accountKey: //Alice
-  externalOrigin: "http://localhost:3080"
-  externalPathPrefix: "alice/sqnc-matchmaker-api"
-  auth:
-    type: EXTERNAL
+logLevel: info
+userUri: //Alice
+externalSqncNode:
+  host: alice-node-sqnc-node-0
+  port: 9944
+externalSqncIpf:
+  host: alice-ipfs-sqnc-ipfs-api
+  port: 5001
+
+  # externalOrigin: "http://localhost:3080"
+  # externalPathPrefix: "alice/sqnc-matchmaker-api"
+  # auth:
+  #   type: EXTERNAL
 ingress:
   host: localhost
   paths:
-    - path: "/alice"
+    - path: "/alice/sqnc-matchmaker-api/(.*)"
       pathType: Prefix
-  annotations:
-    nginx.ingress.kubernetes.io/use-regex: "true"
-ipfs:
-  enabled: false
 node:
   enabled: false
