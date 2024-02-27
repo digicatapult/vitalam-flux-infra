@@ -1,4 +1,4 @@
-logLevel: info
+logLevel: trace
 userUri: //Alice
 externalSqncNode:
   host: alice-node-sqnc-node-0
