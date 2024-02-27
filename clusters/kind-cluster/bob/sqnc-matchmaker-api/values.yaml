@@ -6,7 +6,7 @@ externalSqncNode:
 externalSqncIpfs:
   host: bob-ipfs-sqnc-ipfs-api
   port: 5001
-externalDscpIdentity:
+externalSqncIdentity:
   host: bob-identity-service-sqnc-identity-service
   port: 3000
 
