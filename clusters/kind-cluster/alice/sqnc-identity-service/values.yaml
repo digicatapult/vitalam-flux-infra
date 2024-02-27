@@ -5,7 +5,7 @@ externalSqncNode:
   port: 9944
 externalOrigin: "http://localhost:3080"
 externalPathPrefix: "alice/sqnc-identity-service"
-authType: EXTERNAL
+authType: NONE
 ingress:
   hostname: localhost
   paths:

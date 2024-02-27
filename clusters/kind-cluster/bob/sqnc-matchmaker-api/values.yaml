@@ -10,10 +10,6 @@ externalSqncIdentity:
   host: bob-identity-service-sqnc-identity-service
   port: 3000
 
-  # externalOrigin: "http://localhost:3080"
-  # externalPathPrefix: "bob/sqnc-matchmaker-api"
-  # auth:
-  #   type: EXTERNAL
 ingress:
   host: localhost
   paths:
