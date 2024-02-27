@@ -1,5 +1,7 @@
 logLevel: trace
 userUri: //Alice
+image:
+  tag: v2.2.11
 externalSqncNode:
   host: alice-node-sqnc-node-0
   port: 9944
