@@ -1,0 +1,15 @@
+logLevel: info
+selfAddress: 12D3KooWHdiAxVd8uMQR1hGWXccidmfCwLqcMpGwR6QcTP6QRMuD
+externalSqncNode:
+  host: bob-node-sqnc-node-0
+  port: 9944
+externalOrigin: "http://localhost:3080"
+externalPathPrefix: "bob/sqnc-identity-service"
+authType: NONE
+ingress:
+  hostname: localhost
+  paths:
+    - path: "/bob/sqnc-identity-service/(.*)"
+      pathType: Prefix
+node:
+  enabled: false

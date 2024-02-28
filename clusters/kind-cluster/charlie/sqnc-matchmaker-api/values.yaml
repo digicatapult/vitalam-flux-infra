@@ -1,0 +1,19 @@
+logLevel: info
+userUri: //Charlie
+externalSqncNode:
+  host: charlie-node-sqnc-node-0
+  port: 9944
+externalSqncIpfs:
+  host: charlie-ipfs-sqnc-ipfs-api
+  port: 5001
+externalSqncIdentity:
+  host: charlie-identity-service-sqnc-identity-service
+  port: 3000
+
+ingress:
+  host: localhost
+  paths:
+    - path: "/charlie/sqnc-matchmaker-api/(.*)"
+      pathType: Prefix
+node:
+  enabled: false

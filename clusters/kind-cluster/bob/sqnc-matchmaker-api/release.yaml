@@ -2,22 +2,22 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: alice-ipfs
-  namespace: alice
+  name: bob-sqnc-matchmaker-api
+  namespace: bob
 spec:
   install:
     remediation:
       retries: -1
   dependsOn:
-    - name: alice-node
+    - name: bob-ipfs
   chart:
     spec:
-      chart: sqnc-ipfs
+      chart: sqnc-matchmaker-api
       sourceRef:
         kind: HelmRepository
         name: digicatapult
   valuesFrom:
   - kind: ConfigMap
-    name: alice-values
-    valuesKey: values-sqnc-ipfs.yaml
-  interval: 10m
+    name: bob-values
+    valuesKey: values-sqnc-matchmaker-api.yaml
+  interval: 10m0s

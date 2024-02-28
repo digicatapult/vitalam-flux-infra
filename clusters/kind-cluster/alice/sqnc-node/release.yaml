@@ -2,22 +2,20 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: alice-ipfs
+  name: alice-node
   namespace: alice
 spec:
   install:
     remediation:
       retries: -1
-  dependsOn:
-    - name: alice-node
   chart:
     spec:
-      chart: sqnc-ipfs
+      chart: sqnc-node
       sourceRef:
         kind: HelmRepository
         name: digicatapult
   valuesFrom:
   - kind: ConfigMap
     name: alice-values
-    valuesKey: values-sqnc-ipfs.yaml
+    valuesKey: values-sqnc-node.yaml
   interval: 10m

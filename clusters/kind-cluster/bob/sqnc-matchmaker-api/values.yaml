@@ -1,0 +1,19 @@
+logLevel: info
+userUri: //Bob
+externalSqncNode:
+  host: bob-node-sqnc-node-0
+  port: 9944
+externalSqncIpfs:
+  host: bob-ipfs-sqnc-ipfs-api
+  port: 5001
+externalSqncIdentity:
+  host: bob-identity-service-sqnc-identity-service
+  port: 3000
+
+ingress:
+  host: localhost
+  paths:
+    - path: "/bob/sqnc-matchmaker-api/(.*)"
+      pathType: Prefix
+node:
+  enabled: false

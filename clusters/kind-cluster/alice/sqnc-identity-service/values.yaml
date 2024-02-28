@@ -1,0 +1,15 @@
+logLevel: info
+selfAddress: 12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp
+externalSqncNode:
+  host: alice-node-sqnc-node-0
+  port: 9944
+externalOrigin: "http://localhost:3080"
+externalPathPrefix: "alice/sqnc-identity-service"
+authType: NONE
+ingress:
+  hostname: localhost
+  paths:
+    - path: "/alice/sqnc-identity-service/(.*)"
+      pathType: Prefix
+node:
+  enabled: false

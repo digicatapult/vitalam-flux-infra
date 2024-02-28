@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: bob-ipfs
@@ -12,12 +12,12 @@ spec:
     - name: bob-node
   chart:
     spec:
-      chart: dscp-ipfs
+      chart: sqnc-ipfs
       sourceRef:
         kind: HelmRepository
-        name: dscp-ipfs
+        name: digicatapult
   valuesFrom:
   - kind: ConfigMap
     name: bob-values
-    valuesKey: values-dscp-ipfs.yaml
+    valuesKey: values-sqnc-ipfs.yaml
   interval: 10m
