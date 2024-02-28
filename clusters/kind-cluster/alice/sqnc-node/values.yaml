@@ -14,5 +14,3 @@ node:
     - "--alice"
     - "--prometheus-external"
 storageClass: standard
-image:
-  tag: v11.0.0
