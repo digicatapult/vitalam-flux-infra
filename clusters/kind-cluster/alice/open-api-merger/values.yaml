@@ -3,13 +3,14 @@ paths:
   - http://alice-identity-service-sqnc-identity-service:3000/v1/api-docs
   - http://alice-sqnc-matchmaker-api:3000/v1/api-docs
 baseUrl:
-  - http://localhost:3080/alice/
+  - http://localhost:3080/
+prepend: "some-random-prepend"
 ingress:
   hostname: localhost
   paths:
-    - path: /swagger/(.*)
+    - path: /alice/swagger/(.*)
       pathType: Prefix
-    - path: /api-docs/(.*)
+    - path: /alice/api-docs/(.*)
       pathType: Prefix
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
