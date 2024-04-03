@@ -8,9 +8,9 @@ prepend: /alice
 ingress:
   hostname: localhost
   paths:
-    - path: ./swagger/(.*)
+    - path: /swagger/(.*)
       pathType: Prefix
-    - path: ./api-docs/(.*)
+    - path: /api-docs/(.*)
       pathType: Prefix
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
