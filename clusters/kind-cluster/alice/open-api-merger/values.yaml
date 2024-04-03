@@ -6,10 +6,8 @@ baseUrl:
   - http://localhost:3080/
 ingress:
   hostname: localhost
-  paths:
-    - path: /alice/swagger/(.*)
-      pathType: Prefix
-    - path: /alice/api-docs/(.*)
-      pathType: Prefix
+  # paths:
+  #   - path: /alice/(swagger|api-docs)
+  #     pathType: Prefix
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
