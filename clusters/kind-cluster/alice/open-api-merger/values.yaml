@@ -4,6 +4,9 @@ paths:
   - http://alice-sqnc-matchmaker-api:3000/v1/api-docs
 baseUrl:
   - http://localhost:3080/
+image:
+  debug: true
+  tag: v1.0.69
 ingress:
   hostname: localhost
   # paths:
