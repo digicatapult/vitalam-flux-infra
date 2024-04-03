@@ -5,10 +5,11 @@ paths:
 output: output/output.swagger.json
 baseUrl:
   - http://localhost:3080/
+prepend: ""
 ingress:
   hostname: localhost
   paths:
-    - path: /alice/swagger(.*)
+    - path: /alice/swagger/(.*)
       pathType: Prefix
     - path: /alice/api-docs(.*)
       pathType: Prefix
