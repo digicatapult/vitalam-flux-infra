@@ -3,29 +3,19 @@ paths:
   - http://alice-identity-service-sqnc-identity-service:3000/v1/api-docs
   - http://alice-sqnc-matchmaker-api:3000/v1/api-docs
 baseUrl:
-  - http://localhost:3080/alice/identity
-  - http://localhost:3080/alice/matchmaker
+  - http://localhost:3080/alice
+prepend: "v1"
 image:
   debug: true
   tag: v1.0.69
 ingress:
   hostname: localhost
   paths:
-    - path: /alice/(swagger(/.*)?)
+    - path: /attachment/(swagger(/.*)?)
       pathType: Prefix
-    - path: /alice/(api-docs(/.*)?)
+    - path: /demandA/(api-docs(/.*)?)
       pathType: Prefix
-  extraPaths:
-    - path: /alice/identity/(.+)
-      pathType: Prefix
-      backend:
-        serviceName: alice-identity-service-sqnc-identity-service
-        servicePort: 3000
-    - path: /alice/matchmaker/(.+)
-      pathType: Prefix
-      backend:
-        serviceName: alice-sqnc-matchmaker-api
-        servicePort: 3000
+    - path: /{demandAId}/(api-docs(/.*)?)
 
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
