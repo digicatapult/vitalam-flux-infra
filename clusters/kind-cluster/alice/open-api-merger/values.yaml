@@ -4,18 +4,16 @@ paths:
   - http://alice-sqnc-matchmaker-api:3000/v1/api-docs
 baseUrl:
   - http://localhost:3080/
-prepend: "alice"
+# prepend: "alice"
 image:
   debug: true
   tag: v1.0.69
 ingress:
   hostname: localhost
   paths:
-    - path: /v1/attachment
+    - path: /alice/(api-docs(/.*)?)
       pathType: Prefix
-    - path: /v1/demandA
-      pathType: Prefix
-    - path: /v1/{demandAId}
+    - path: /alice/(swagger(/.*)?)
       pathType: Prefix
 
   annotations:
