@@ -1,7 +1,7 @@
 logLevel: info
 paths:
   - http://alice-identity-service-sqnc-identity-service:3000/v1/api-docs
-  - http://alice-sqnc-matchmaker-api:3000/v1/api-docs
+  - http://alice-sqnc-matchmaker-api:3000/api-docs
 baseUrl:
   - http://localhost:3080/alice/
 prepend: "/v1"
