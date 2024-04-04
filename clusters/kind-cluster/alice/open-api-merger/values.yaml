@@ -15,18 +15,6 @@ ingress:
       pathType: Prefix
     - path: /(swagger(/.*)?)
       pathType: Prefix
-    - path: /(v1(/.*)?)
-      pathType: Prefix
 
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
-  # extraRules:
-  # - host:
-  #     http:
-  #       paths:
-  #       - path: /members
-  #         backend:
-  #           service:
-  #             name: alice-open-api-openapi-merger
-  #             port:
-  #               name: http
