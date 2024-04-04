@@ -4,7 +4,7 @@ paths:
   - http://alice-sqnc-matchmaker-api:3000/v1/api-docs
 baseUrl:
   - http://localhost:3080/alice/
-prepend: "/v1/api-docs"
+prepend: "/v1"
 image:
   debug: true
   tag: v1.0.69
