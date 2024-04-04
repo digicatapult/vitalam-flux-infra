@@ -9,7 +9,7 @@ authType: NONE
 ingress:
   hostname: localhost
   paths:
-    - path: /alice/v1/members(.*)
+    - path: /alice/(v1/members(/.*)?)
       pathType: Prefix
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
