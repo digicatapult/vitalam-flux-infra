@@ -21,3 +21,19 @@ metadata:
     app.kubernetes.io/instance: sqnc
     app.kubernetes.io/version: latest
   name: charlie
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.kubernetes.io/instance: sqnc
+    app.kubernetes.io/version: latest
+  name: sqnc
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: monitoring
+  labels:
+    app.kubernetes.io/component: monitoring
+    pod-security.kubernetes.io/enforce: privileged

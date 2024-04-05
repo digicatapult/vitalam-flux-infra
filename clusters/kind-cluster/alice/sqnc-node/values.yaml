@@ -13,4 +13,7 @@ node:
     - "--unsafe-rpc-external"
     - "--alice"
     - "--prometheus-external"
+  serviceMonitor:
+    enabled: true
+    namespace: monitoring
 storageClass: standard
