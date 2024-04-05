@@ -1,7 +1,4 @@
 kube-state-metrics:
-  # For kube-prometheus-stacks that are already installed and configured with
-  # custom collectors, commenting out the collectors and extraArgs below will
-  # retain any existing kube-state-metrics configuration.
   collectors: [ ]
   extraArgs:
     - --custom-resource-state-only=true
@@ -12,7 +9,6 @@ kube-state-metrics:
           - kustomize.toolkit.fluxcd.io
           - helm.toolkit.fluxcd.io
           - notification.toolkit.fluxcd.io
-          - image.toolkit.fluxcd.io
         resources:
           - gitrepositories
           - buckets
@@ -24,9 +20,6 @@ kube-state-metrics:
           - alerts
           - providers
           - receivers
-          - imagerepositories
-          - imagepolicies
-          - imageupdateautomations
         verbs: [ "list", "watch" ]
   customResourceState:
     enabled: true
