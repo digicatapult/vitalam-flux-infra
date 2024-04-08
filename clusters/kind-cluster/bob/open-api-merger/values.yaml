@@ -1,0 +1,19 @@
+logLevel: info
+paths:
+  - http://bob-identity-service-sqnc-identity-service:3000/v1/api-docs
+  - http://bob-sqnc-matchmaker-api:3000/api-docs
+baseUrl:
+  - http://localhost:3080/bob/
+image:
+  debug: true
+  tag: v1.0.69
+ingress:
+  hostname: localhost
+  paths:
+    - path: /(api-docs(/.*)?)
+      pathType: Prefix
+    - path: /(swagger(/.*)?)
+      pathType: Prefix
+
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
