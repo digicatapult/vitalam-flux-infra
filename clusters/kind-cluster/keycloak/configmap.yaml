@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: keycloak
+  namespace: kube-system
+data:
+  values.yaml: |
+    keycloakConfigCli:
+      configuration:
+        realm.json: |
+          {
+            "realm": "third-party-realm",
+            "enabled": true,
+            "clientId": "client-id",
+            "clientSecret": "client-secret",
+            "authenticationFlowBindingOverrides": {},
+            "defaultRoles": [],
+            "disableUserInfo": false,
+            "displayName": "Third Party Realm",
+            "userManagedAccessAllowed": true
+          }
