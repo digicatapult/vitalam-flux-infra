@@ -10,7 +10,7 @@ externalSqncIdentity:
   host: alice-identity-service-sqnc-identity-service
   port: 3000
 ingress:
-  host: localhost
+  hostname: localhost
   paths:
     # - path: /alice/sqnc-matchmaker-api/(.*)
     #   pathType: Prefix
