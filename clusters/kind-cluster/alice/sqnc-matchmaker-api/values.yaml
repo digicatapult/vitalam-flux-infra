@@ -12,11 +12,15 @@ externalSqncIdentity:
 ingress:
   hostname: localhost
   paths:
-    # - path: /alice/sqnc-matchmaker-api/(.*)
-    #   pathType: Prefix
     - path: /alice/(v1/attachment(/.*)?)
       pathType: Prefix
     - path: /alice/(v1/demandA(/.*)?)
+      pathType: Prefix
+    - path: /alice/(v1/demandB(/.*)?)
+      pathType: Prefix
+    - path: /alice/(v1/match2(/.*)?)
+      pathType: Prefix
+    - path: /alice/(v1/transaction(/.*)?)
       pathType: Prefix
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1

@@ -6,13 +6,12 @@ baseUrl:
   - http://localhost:3080/alice/
 image:
   debug: true
-  tag: v1.0.69
 ingress:
   hostname: localhost
   paths:
-    - path: /(api-docs(/.*)?)
+    - path: /alice/(api-docs(/.*)?)
       pathType: Prefix
-    - path: /(swagger(/.*)?)
+    - path: /alice/(swagger(/.*)?)
       pathType: Prefix
 
   annotations:
