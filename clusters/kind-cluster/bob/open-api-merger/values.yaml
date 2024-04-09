@@ -6,13 +6,12 @@ baseUrl:
   - http://localhost:3080/bob/
 image:
   debug: true
-  tag: v1.0.69
 ingress:
   hostname: localhost
   paths:
-    - path: /(api-docs(/.*)?)
+    - path: /bob/(api-docs(/.*)?)
       pathType: Prefix
-    - path: /(swagger(/.*)?)
+    - path: /bob/(swagger(/.*)?)
       pathType: Prefix
 
   annotations:
