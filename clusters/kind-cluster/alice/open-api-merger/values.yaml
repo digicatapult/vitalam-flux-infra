@@ -9,9 +9,9 @@ image:
 ingress:
   hostname: localhost
   paths:
-    - path: /alice/(api-docs(/.*)?)
+    - path: /(alice/api-docs(/.*)?)
       pathType: Prefix
-    - path: /alice/(swagger(/.*)?)
+    - path: /(alice/swagger(/.*)?)
       pathType: Prefix
 
   annotations:
