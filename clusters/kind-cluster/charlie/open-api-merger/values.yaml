@@ -5,8 +5,6 @@ paths:
 baseUrl:
   - http://localhost:3080/charlie/
 apiPublicUrlPrefix: /charlie
-image:
-  debug: true
 ingress:
   hostname: localhost
   paths:
@@ -14,6 +12,5 @@ ingress:
       pathType: Prefix
     - path: /charlie/(swagger(/.*)?)
       pathType: Prefix
-
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
