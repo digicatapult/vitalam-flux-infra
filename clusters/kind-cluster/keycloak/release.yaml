@@ -2,7 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: keycloak
-  namespace: kube-system
+  namespace: keycloak
 spec:
   install:
     remediation:
