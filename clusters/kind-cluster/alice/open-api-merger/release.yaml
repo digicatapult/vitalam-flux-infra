@@ -1,0 +1,24 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: alice-open-api
+  namespace: alice
+spec:
+  install:
+    remediation:
+      retries: -1
+  dependsOn:
+    - name: alice-identity-service
+    - name: alice-sqnc-matchmaker-api
+  chart:
+    spec:
+      chart: openapi-merger
+      sourceRef:
+        kind: HelmRepository
+        name: digicatapult
+  valuesFrom:
+    - kind: ConfigMap
+      name: alice-values
+      valuesKey: values-open-api-merger.yaml
+  interval: 10m0s
