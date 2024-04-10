@@ -6,8 +6,6 @@ externalSqncNode:
 externalOrigin: "http://localhost:3080"
 externalPathPrefix: "bob/sqnc-identity-service"
 authType: NONE
-image:
-  tag: v1.11.13
 ingress:
   hostname: localhost
   paths:
