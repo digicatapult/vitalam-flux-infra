@@ -1,0 +1,9 @@
+keycloakConfigCli:
+  enabled: true
+  configuration:
+    realm.json: |
+      {
+        "enabled": true,
+        "realm": "simple",
+        "registrationAllowed": true
+      }
