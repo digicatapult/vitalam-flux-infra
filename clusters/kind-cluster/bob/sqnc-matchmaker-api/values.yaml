@@ -11,7 +11,7 @@ externalSqncIdentity:
   port: 3000
 
 ingress:
-  host: localhost
+  hostname: localhost
   paths:
     - path: /bob/(v1/attachment(/.*)?)
       pathType: Prefix
