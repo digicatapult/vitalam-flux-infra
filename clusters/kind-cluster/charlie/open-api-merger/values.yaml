@@ -1,0 +1,19 @@
+logLevel: info
+paths:
+  - http://charlie-identity-service-sqnc-identity-service:3000/api-docs
+  - http://bob-sqnc-matchmaker-api:3000/api-docs
+baseUrl:
+  - http://localhost:3080/charlie/
+apiPublicUrlPrefix: /charlie
+image:
+  debug: true
+ingress:
+  hostname: localhost
+  paths:
+    - path: /charlie/(api-docs(/.*)?)
+      pathType: Prefix
+    - path: /charlie/(swagger(/.*)?)
+      pathType: Prefix
+
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1

@@ -6,10 +6,14 @@ externalSqncNode:
 externalOrigin: "http://localhost:3080"
 externalPathPrefix: "charlie/sqnc-identity-service"
 authType: NONE
+image:
+  tag: v1.11.13
 ingress:
   hostname: localhost
   paths:
-    - path: /charlie/sqnc-identity-service/(.*)
+    - path: /charlie/(v1/members(/.*)?)
+      pathType: Prefix
+    - path: /charlie/(v1/self(/.*)?)
       pathType: Prefix
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
