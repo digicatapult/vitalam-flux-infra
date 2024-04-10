@@ -4,13 +4,13 @@ paths:
   - http://bob-sqnc-matchmaker-api:3000/api-docs
 baseUrl:
   - http://localhost:3080/bob/
-apiDocsUrlPath: /bob/api-docs
+apiPublicUrlPrefix: /bob
 image:
   debug: true
 ingress:
   hostname: localhost
   paths:
-    - path: /(bob/api-docs(/.*)?)
+    - path: /bob/(api-docs(/.*)?)
       pathType: Prefix
     - path: /bob/(swagger(/.*)?)
       pathType: Prefix
