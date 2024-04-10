@@ -10,7 +10,7 @@ image:
 ingress:
   hostname: localhost
   paths:
-    - path: /bob/(api-docs(/.*)?)
+    - path: /(bob/api-docs(/.*)?)
       pathType: Prefix
     - path: /bob/(swagger(/.*)?)
       pathType: Prefix
