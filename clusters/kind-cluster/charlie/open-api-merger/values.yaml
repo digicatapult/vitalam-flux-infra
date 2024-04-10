@@ -1,7 +1,7 @@
 logLevel: info
 paths:
   - http://charlie-identity-service-sqnc-identity-service:3000/api-docs
-  - http://bob-sqnc-matchmaker-api:3000/api-docs
+  - http://charlie-sqnc-matchmaker-api:3000/api-docs
 baseUrl:
   - http://localhost:3080/charlie/
 apiPublicUrlPrefix: /charlie
