@@ -232,8 +232,8 @@ generate_sudo() {
     printf "OK\n" >&2
     SUDO_SEED=$(echo $output | jq -r .secretPhrase)
     SUDO_ADDR=$(echo $output | jq -r .ss58Address)
-    GENESIS=$(echo $GENESIS | jq --arg sudo $SUDO_ADDR --arg balance 1152921504606846976 '.genesis.runtime.balances.balances += [[$sudo, ($balance | tonumber)]]')
-    GENESIS=$(echo $GENESIS | jq --arg sudo $SUDO_ADDR '.genesis.runtime.sudo.key |= $sudo')
+    GENESIS=$(echo $GENESIS | jq --arg sudo $SUDO_ADDR --arg balance 1152921504606846976 '.genesis.runtimeGenesis.patch.balances.balances += [[$sudo, ($balance | tonumber)]]')
+    GENESIS=$(echo $GENESIS | jq --arg sudo $SUDO_ADDR '.genesis.runtimeGenesis.patch.sudo.key |= $sudo')
   else
     printf "FAIL\n" >&2
     echo "$output" >&2
@@ -256,8 +256,8 @@ generate_owner() {
     printf "OK\n" >&2
     account_id=$(echo $output | jq -r '.accountId')
     OWNER_ACCOUNTS+=("${owner_name}:${owner_namespace}:${account_id}")
-    GENESIS=$(echo $GENESIS | jq --arg account_id $account_id --arg balance $owner_balance '.genesis.runtime.balances.balances += [[$account_id, ($balance | tonumber)]]')
-    GENESIS=$(echo $GENESIS | jq --arg account_id $account_id '.genesis.runtime.membership.members += [$account_id]')
+    GENESIS=$(echo $GENESIS | jq --arg account_id $account_id --arg balance $owner_balance '.genesis.runtimeGenesis.patch.balances.balances += [[$account_id, ($balance | tonumber)]]')
+    GENESIS=$(echo $GENESIS | jq --arg account_id $account_id '.genesis.runtimeGenesis.patch.membership.members += [$account_id]')
   else
     printf "FAIL\n" >&2
     echo "$output" >&2
@@ -303,8 +303,8 @@ generate_node() {
     grandpa_id=$(echo $output | jq -r '.grandpaId')
     # update genesis
     if [ "$type" == "validator" ]; then
-      GENESIS=$(echo $GENESIS | jq --arg babe_id $babe_id '.genesis.runtime.babe.authorities += [[$babe_id, 1]]')
-      GENESIS=$(echo $GENESIS | jq --arg grandpa_id $grandpa_id '.genesis.runtime.grandpa.authorities += [[$grandpa_id, 1]]')
+      GENESIS=$(echo $GENESIS | jq --arg babe_id $babe_id '.genesis.runtimeGenesis.patch.babe.authorities += [[$babe_id, 1]]')
+      GENESIS=$(echo $GENESIS | jq --arg grandpa_id $grandpa_id '.genesis.runtimeGenesis.patch.grandpa.authorities += [[$grandpa_id, 1]]')
     fi
     # convert node_id to hex
     node_id=$(docker run --rm -a stdout python:alpine /bin/sh -c "\
@@ -312,10 +312,10 @@ generate_node() {
       printf \"$node_id\" | base58 -d | xxd -p | tr -d '[:space:]' | tr '[:lower:]' '[:upper:]'" 2>/dev/null)
     node_id=($(echo $node_id | fold -w2))
 
-    GENESIS=$(echo $GENESIS | jq --arg owner $node_owner_account '.genesis.runtime.nodeAuthorization.nodes += [[[], $owner]]')
+    GENESIS=$(echo $GENESIS | jq --arg owner $node_owner_account '.genesis.runtimeGenesis.patch.nodeAuthorization.nodes += [[[], $owner]]')
     for byte in "${node_id[@]}"
     do
-      GENESIS=$(echo $GENESIS | jq --arg byte $(echo "obase=10; ibase=16; $byte" | bc) '.genesis.runtime.nodeAuthorization.nodes[-1][0] += [($byte | tonumber)]')
+      GENESIS=$(echo $GENESIS | jq --arg byte $(echo "obase=10; ibase=16; $byte" | bc) '.genesis.runtimeGenesis.patch.nodeAuthorization.nodes[-1][0] += [($byte | tonumber)]')
     done
   else
     printf "FAIL\n" >&2
@@ -354,11 +354,11 @@ GENESIS=$(echo $GENESIS | jq --arg cluster ${CLUSTER//[-]/_} '.id |= $cluster')
 GENESIS=$(echo $GENESIS | jq '.chainType |= "Live"')
 
 # remove all pallet configuration
-GENESIS=$(echo $GENESIS | jq '.genesis.runtime.babe.authorities |= []')
-GENESIS=$(echo $GENESIS | jq '.genesis.runtime.grandpa.authorities |= []')
-GENESIS=$(echo $GENESIS | jq '.genesis.runtime.balances.balances |= []')
-GENESIS=$(echo $GENESIS | jq '.genesis.runtime.nodeAuthorization.nodes |= []')
-GENESIS=$(echo $GENESIS | jq '.genesis.runtime.membership.members |= []')
+GENESIS=$(echo $GENESIS | jq '.genesis.runtimeGenesis.patch.babe.authorities |= []')
+GENESIS=$(echo $GENESIS | jq '.genesis.runtimeGenesis.patch.grandpa.authorities |= []')
+GENESIS=$(echo $GENESIS | jq '.genesis.runtimeGenesis.patch.balances.balances |= []')
+GENESIS=$(echo $GENESIS | jq '.genesis.runtimeGenesis.patch.nodeAuthorization.nodes |= []')
+GENESIS=$(echo $GENESIS | jq '.genesis.runtimeGenesis.patch.membership.members |= []')
 
 # Generate sudo
 generate_sudo $CONTAINER
@@ -381,7 +381,7 @@ do
   generate_node "additional" $CLUSTER $CONTAINER $additional_name
 done
 
-GENESIS_DIR=$(mktemp -d -t inteli-genesis.XXXXXX)
+GENESIS_DIR=$(mktemp -d -t sqnc-genesis.XXXXXX)
 echo $GENESIS > $GENESIS_DIR/genesis.json
 
 GENESIS=$(docker run --rm -a stdout --mount type=bind,source="$GENESIS_DIR",target=/config $CONTAINER \
