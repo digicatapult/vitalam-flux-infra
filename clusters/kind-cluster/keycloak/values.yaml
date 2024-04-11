@@ -11,17 +11,13 @@ keycloakConfigCli:
 ingress:
   enabled: true
   hostname: localhost
-#   path: /keycloak/(/.*)?
-#   annotations:
-#     nginx.ingress.kubernetes.io/rewrite-target: /$1
+  path: /keycloak(/.*)
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
 adminIngress:
   enabled: true
   hostname: localhost
-#   path: /keycloak-admin/(/.*)?
-#   annotations:
-#     nginx.ingress.kubernetes.io/rewrite-target: /$1
-# image:
-#   debug: true
-# logging:
-#   output: json
-#   level: DEBUG
+  path: /keycloak-admin(/.*)
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+
