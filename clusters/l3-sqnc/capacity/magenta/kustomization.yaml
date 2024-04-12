@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: magenta
+resources:
+  - sqnc-node #is this meant to be like a sqnc-magenta-node ??
+configMapGenerator:
+  - name: magenta-values
+    files:
+      - values-capacity-magenta-node.yaml=sqnc-node/values.yaml
+
+configurations:
+  - kustomize-config.yaml
+generatorOptions:
+  disableNameSuffixHash: true
