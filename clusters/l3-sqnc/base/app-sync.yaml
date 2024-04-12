@@ -2,29 +2,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: capacity-magenta-sync
+  name: capacity-sync
   namespace: capacity
 spec:
   interval: 1m
-  path: ./clusters/l3-sqnc/capacity/magenta
+  path: ./clusters/l3-sqnc/capacity
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: capacity-red-sync
-  namespace: capacity
-spec:
-  interval: 1m
-  path: ./clusters/l3-sqnc/capacity/red
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
----
-

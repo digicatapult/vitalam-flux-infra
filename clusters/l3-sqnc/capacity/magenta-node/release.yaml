@@ -17,7 +17,7 @@ spec:
   valuesFrom:
     - kind: ConfigMap
       name: capacity-values
-      valuesKey: values-capacity-node.yaml
+      valuesKey: values-capacity-magenta.yaml
     - kind: Secret
       name: magenta-keys
       valuesKey: babe_seed

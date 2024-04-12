@@ -17,7 +17,7 @@ spec:
   valuesFrom:
     - kind: ConfigMap
       name: capacity-values
-      valuesKey: values-capacity-node.yaml
+      valuesKey: values-capacity-red.yaml
     - kind: Secret
       name: red-keys
       valuesKey: babe_seed
