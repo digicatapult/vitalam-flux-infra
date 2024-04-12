@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: capacity-magenta-node
+  name: capacity-red-node
   namespace: capacity
 spec:
   install:
@@ -19,15 +19,15 @@ spec:
       name: capacity-values
       valuesKey: values-capacity-node.yaml
     - kind: Secret
-      name: magenta-keys
+      name: red-keys
       valuesKey: babe_seed
       targetPath: node.keys[0].seed
     - kind: Secret
-      name: magenta-keys
+      name: red-keys
       valuesKey: grandpa_seed
       targetPath: node.keys[1].seed
     - kind: Secret
-      name: magenta-keys
+      name: red-keys
       valuesKey: node_id
       targetPath: node.customNodeKey
   interval: 10m
