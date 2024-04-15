@@ -1,0 +1,33 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: red
+  namespace: capacity
+spec:
+  install:
+    remediation:
+      retries: -1
+  chart:
+    spec:
+      chart: sqnc-node
+      sourceRef:
+        kind: HelmRepository
+        name: digicatapult
+  valuesFrom:
+    - kind: ConfigMap
+      name: capacity-values
+      valuesKey: values-red.yaml
+    - kind: Secret
+      name: red-keys
+      valuesKey: babe_seed
+      targetPath: node.keys[0].seed
+    - kind: Secret
+      name: red-keys
+      valuesKey: grandpa_seed
+      targetPath: node.keys[1].seed
+    - kind: Secret
+      name: red-keys
+      valuesKey: node_id
+      targetPath: node.customNodeKey
+  interval: 10m
