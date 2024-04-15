@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: capacity-magenta-node
+  name: magenta
   namespace: capacity
 spec:
   install:
@@ -17,7 +17,7 @@ spec:
   valuesFrom:
     - kind: ConfigMap
       name: capacity-values
-      valuesKey: values-capacity-magenta.yaml
+      valuesKey: values-magenta.yaml
     - kind: Secret
       name: magenta-keys
       valuesKey: babe_seed
