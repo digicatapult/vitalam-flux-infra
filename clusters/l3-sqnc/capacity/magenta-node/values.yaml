@@ -18,4 +18,4 @@ node:
     - "--rpc-cors=all"
     - "--unsafe-rpc-external"
     - "--prometheus-external"
-storageClass: managed-csi
+storageClass: managed-csi-premium
