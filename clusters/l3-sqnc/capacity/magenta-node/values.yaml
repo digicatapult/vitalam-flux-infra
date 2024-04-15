@@ -5,13 +5,6 @@ node:
   perNodeServices:
     setPublicAddressToExternal:
       enabled: false
-  keys:
-    - type: "babe"
-      scheme: "sr25519"
-      seed: babe_seed
-    - type: "gran"
-      scheme: "ed25519"
-      seed: grandpa_seed
   flags:
     - "--rpc-external"
     - "--rpc-methods=Unsafe"
