@@ -1,24 +1,21 @@
 node:
   chain: local
   role: validator
-  dataVolumeSize: 1Gi
-  customNodeKey: "0000000000000000000000000000000000000000000000000000000000000003"
+  dataVolumeSize: 100Gi
   perNodeServices:
     setPublicAddressToExternal:
       enabled: false
-  keys: {
+  keys:
     - type: "babe"
       scheme: "sr25519"
+      seed: babe_seed
     - type: "gran"
       scheme: "ed25519"
-  }
-  # seed: "//Alice//babe"
+      seed: grandpa_seed
   flags:
-    # - "--rpc-external"
-    # - "--rpc-methods=Unsafe"
-    # - "--rpc-cors=all"
-    # - "--unsafe-rpc-external"
-    # - "--capacity-magenta"
-    # - "--prometheus-external"
-    # - "--bootnodes '/dns4/alice-node-sqnc-node-0-rc-p2p.alice.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp'"
-storageClass: standard
+    - "--rpc-external"
+    - "--rpc-methods=Unsafe"
+    - "--rpc-cors=all"
+    - "--unsafe-rpc-external"
+    - "--prometheus-external"
+storageClass: managed-csi
