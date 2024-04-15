@@ -1,0 +1,21 @@
+node:
+  chain: local
+  role: validator
+  dataVolumeSize: 100Gi
+  customNodeKey: "0000000000000000000000000000000000000000000000000000000000000003"
+  perNodeServices:
+    setPublicAddressToExternal:
+      enabled: false
+  keys:
+    - type: "babe"
+      scheme: "sr25519"
+    - type: "gran"
+      scheme: "ed25519"
+  flags:
+    - "--rpc-external"
+    - "--rpc-methods=Unsafe"
+    - "--rpc-cors=all"
+    - "--unsafe-rpc-external"
+    - "--prometheus-external"
+    - "--bootnodes '/dns4/magenta-sqnc-node-0-rc-p2p.capacity.svc.cluster.local/tcp/30333/p2p/12D3KooWDvUB5uBh6msz4D1Te3vkfiod9FyMwPvHM56W46c1osKk'"
+storageClass: managed-csi-premium
