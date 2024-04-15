@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: oauth2-proxy
+  namespace: oauth2-proxy
+  labels:
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    meta.helm.sh/release-name: oauth2-proxy
+    meta.helm.sh/release-namespace: oauth2-proxy
+data:
+  values.yaml: |
+    ingress:
+      enabled: true
+      hostname: localhost
+      path: /oauth2-proxy
+    configuration:
+      clientID: "oauth2-proxy"
+      clientSecret: "bxpYRyeY3WvcSjCtZ8mXQUKny9DGDECj"
+      redirectUrl: "http://localhost:3080/oauth2-proxy/oauth2/callback"

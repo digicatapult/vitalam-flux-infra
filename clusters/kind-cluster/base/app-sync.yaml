@@ -68,3 +68,17 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: oauth2-proxy-sync
+  namespace: oauth2-proxy
+spec:
+  interval: 1m
+  path: ./clusters/kind-cluster/oauth2-proxy
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system

@@ -29,3 +29,11 @@ metadata:
     app.kubernetes.io/instance: sqnc
     app.kubernetes.io/version: latest
   name: keycloak
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.kubernetes.io/instance: sqnc
+    app.kubernetes.io/version: latest
+  name: oauth2-proxy
