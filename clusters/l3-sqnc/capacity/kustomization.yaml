@@ -3,11 +3,13 @@ kind: Kustomization
 namespace: capacity
 resources:
   - magenta-node
+  - red-node
   - source.yaml
 configMapGenerator:
   - name: capacity-values
     files:
       - values-magenta.yaml=magenta-node/values.yaml
+      - values-red.yaml=red-node/values.yaml
 configurations:
   - kustomize-config.yaml
 generatorOptions:
