@@ -1,5 +1,5 @@
 node:
-  chain: local
+  chain: l3-sqnc
   role: validator
   dataVolumeSize: 100Gi
   perNodeServices:
