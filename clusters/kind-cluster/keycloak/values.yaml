@@ -7,16 +7,17 @@ keycloakConfigCli:
         "realm": "simple",
         "registrationAllowed": true
       }
-# ingress:
-#   enabled: true
-#   hostname: localhost
-#   path: /keycloak(/.*)
-#   annotations:
-#     nginx.ingress.kubernetes.io/rewrite-target: /$1
-adminIngress:
+httpRelativePath: /auth
+ingress:
   enabled: true
   hostname: localhost
-  path: /keycloak-admin(/.*)
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
+  # path: /auth(/.*)
+  # annotations:
+  #   nginx.ingress.kubernetes.io/rewrite-target: /$1
+# adminIngress:
+#   enabled: true
+#   hostname: localhost
+#   path: /keycloak-admin(/.*)
+#   annotations:
+#     nginx.ingress.kubernetes.io/rewrite-target: /$1
 
