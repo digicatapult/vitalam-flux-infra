@@ -19,10 +19,12 @@ keycloakConfigCli:
               "alwaysDisplayInConsole": false,
               "clientAuthenticatorType": "client-secret",
               "redirectUris": [
-                "/realms/simple/account/*"
+                "/realms/simple/account/*",
+                "https://www.keycloak.org/app/*"
               ],
               "webOrigins": [
-                "+"
+                "http://localhost:3080",
+                "https://www.keycloak.org"
               ],
               "notBefore": 0,
               "bearerOnly": false,
