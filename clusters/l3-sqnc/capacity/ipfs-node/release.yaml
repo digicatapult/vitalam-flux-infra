@@ -21,4 +21,12 @@ spec:
     - kind: ConfigMap
       name: values-ipfs
       valuesKey: values-ipfs.yaml
+    - kind: Secret
+      name: capacity-ipfs-keys
+      valuesKey: publicKey
+      targetPath: ipfs.publicKey
+    - kind: Secret
+      name: capacity-ipfs-keys
+      valuesKey: privateKey
+      targetPath: ipfs.privateKey
   interval: 10m
