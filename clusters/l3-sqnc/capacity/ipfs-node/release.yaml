@@ -1,0 +1,32 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: ipfs-capacity
+  namespace: capacity
+spec:
+  install:
+    remediation:
+      retries: -1
+  dependsOn:
+    - name: magenta-node
+    - name: red-node
+  chart:
+    spec:
+      chart: sqnc-ipfs
+      sourceRef:
+        kind: HelmRepository
+        name: digicatapult
+  valuesFrom:
+    - kind: ConfigMap
+      name: capacity-values
+      valuesKey: values-ipfs.yaml
+    - kind: Secret
+      name: capacity-ipfs-keys
+      valuesKey: publicKey
+      targetPath: ipfs.publicKey
+    - kind: Secret
+      name: capacity-ipfs-keys
+      valuesKey: privateKey
+      targetPath: ipfs.privateKey
+  interval: 10m
