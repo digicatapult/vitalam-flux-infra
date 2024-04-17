@@ -8,9 +8,9 @@ apiPublicUrlPrefix: /alice
 ingress:
   hostname: localhost
   paths:
-    - path: /alice/(api-docs(/.*)?)
+    - path: /fred/(api-docs(/.*)?)
       pathType: Prefix
-    - path: /alice/(swagger(/.*)?)
+    - path: /fred/(swagger(/.*)?)
       pathType: Prefix
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
