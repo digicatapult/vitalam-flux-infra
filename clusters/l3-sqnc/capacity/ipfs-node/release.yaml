@@ -9,8 +9,7 @@ spec:
     remediation:
       retries: -1
   dependsOn:
-    - name: magenta-node
-    - name: red-node
+    - name: magenta
   chart:
     spec:
       chart: sqnc-ipfs
