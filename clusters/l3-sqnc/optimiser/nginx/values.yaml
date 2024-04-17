@@ -1,0 +1,34 @@
+watchIngressWithoutClass: false
+scope:
+  enabled: true
+ingressClassResource:
+  name: nginx-3pl-a
+  default: false
+config:
+    global-auth-url: "http://oathkeeper-api.ory.svc.cluster.local/decisions$request_uri"
+service:
+  type: LoadBalancer
+  annotations: 
+    service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
+    external-dns.alpha.kubernetes.io/hostname: 3pl-a.dsch-l3.com
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/common-name: 3pl-a.dsch-l3.com
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+extraArgs:
+  default-ssl-certificate: "3pl-a/3pl-a-dsch-l3-com-prod-tls"
+nodeSelector:
+  kubernetes.io/os: linux
+tolerations:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/master
+    operator: Equal
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/control-plane
+    operator: Equal
+containerPorts:
+  http: 80
+  https: 443
+  metrics: 10254
