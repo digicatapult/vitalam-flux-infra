@@ -1,0 +1,23 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: ipfs-order
+  namespace: order
+spec:
+  install:
+    remediation:
+      retries: -1
+  dependsOn:
+    - name: blue
+  chart:
+    spec:
+      chart: sqnc-ipfs
+      sourceRef:
+        kind: HelmRepository
+        name: digicatapult
+  valuesFrom:
+    - kind: ConfigMap
+      name: order-values
+      valuesKey: values-ipfs.yaml
+  interval: 10m

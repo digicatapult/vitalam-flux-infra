@@ -1,0 +1,23 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: ipfs-optimiser
+  namespace: optimiser
+spec:
+  install:
+    remediation:
+      retries: -1
+  dependsOn:
+    - name: yellow
+  chart:
+    spec:
+      chart: sqnc-ipfs
+      sourceRef:
+        kind: HelmRepository
+        name: digicatapult
+  valuesFrom:
+    - kind: ConfigMap
+      name: optimiser-values
+      valuesKey: values-ipfs.yaml
+  interval: 10m
