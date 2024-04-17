@@ -19,7 +19,7 @@ spec:
         name: digicatapult
   valuesFrom:
     - kind: ConfigMap
-      name: values-ipfs
+      name: capacity-values
       valuesKey: values-ipfs.yaml
     - kind: Secret
       name: capacity-ipfs-keys
