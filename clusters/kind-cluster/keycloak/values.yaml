@@ -7,10 +7,14 @@ keycloakConfigCli:
         "realm": "simple",
         "registrationAllowed": true
       }
-httpRelativePath: /auth
+httpRelativePath: /auth/
+proxy: edge
 ingress:
   enabled: true
   hostname: localhost
+extraEnvVars:
+  - name: KC_HOSTNAME_PATH
+    value: /auth/
   # path: /auth(/.*)
   # annotations:
   #   nginx.ingress.kubernetes.io/rewrite-target: /$1
