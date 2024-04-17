@@ -6,10 +6,6 @@ metadata:
 data:
   values.yaml: |
     watchIngressWithoutClass: true
-    # containerSecurityContext:
-    #   readOnlyRootFilesystem: false
-    # readOnlyRootFilesystem: false
-    # runAsGroup: 0
     resourcesPreset: micro
     ingressClassResource:
       default: true
