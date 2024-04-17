@@ -4,7 +4,6 @@ namespace: order
 resources:
   - blue-node
   - cyan-node
-
   - source.yaml
 configMapGenerator:
   - name: order-values
