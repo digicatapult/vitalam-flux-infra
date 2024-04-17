@@ -1,8 +1,9 @@
+#
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
   name: bitnami
-  namespace: 3pl-a
+  namespace: optimiser
 spec:
   interval: 10m
   url: https://charts.bitnami.com/bitnami
