@@ -7,7 +7,7 @@ metadata:
 spec:
   interval: 1m0s
   ref:
-    branch: main
+    branch: feat/openapi-oauth2
   url: https://github.com/digicatapult/sqnc-flux-infra.git
 
 ---
