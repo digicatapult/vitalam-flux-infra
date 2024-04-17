@@ -18,5 +18,3 @@ node:
     - "--prometheus-external"
     - "--bootnodes '/dns4/magenta-sqnc-node-0-rc-p2p.capacity.svc.cluster.local/tcp/30333/p2p/12D3KooWDvUB5uBh6msz4D1Te3vkfiod9FyMwPvHM56W46c1osKk'"
 storageClass: managed-csi-premium
-serviceMonitor:
-  enabled: true
