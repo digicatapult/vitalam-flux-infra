@@ -1,14 +1,26 @@
+# Keycloak
+
 Identity in SQNC is managed using [`Keycloak`](https://www.keycloak.org/)
 
-After following instructions in [getting-started](./getting-started.md) to start a flux cluster, run `kubectl port-forward -n keycloak service/keycloak 8080:80` then the admin console for Keycloak will be available at http://localhost:8080/admin.
+## Admin
+
+After following instructions in [getting-started](./getting-started.md) to start a flux cluster, the admin console for Keycloak is available at http://localhost:3080/auth/.
 
 Default user is `user`
-Password can be retrieved with `kubectl -n keycloak get secret keycloak -o jsonpath='{.data.admin-password}' | base64 -d && echo`
+Password is retrieved with `kubectl -n keycloak get secret keycloak -o jsonpath='{.data.admin-password}' | base64 -d && echo`
 
-The Keycloak instance comes with a realm named `simple`, set up to use Keycloak's built-in simple user login/registration. The default client for logging in is at http://localhost:8080/realms/simple/account/.
+The Keycloak instance comes with a realm named `simple`, set up to use Keycloak's built-in simple user login/registration. The default client for logging in is http://localhost:3080/auth/realms/simple/account/.
 
-Debugging
-`kubectl get services -n keycloak`
-`flux get kustomizations -A`
-`kubectl describe configmaps -n keycloak`
-`flux reconcile helmrelease keycloak -n keycloak`
+## Verifying against Keycloak's test app
+
+Keycloak provide a web app https://www.keycloak.org/app/ to test authorisation flow is working.
+
+Enter the following details:
+
+```
+Keycloak URL: http://localhost:3080/auth/
+Realm: simple
+Client: account-console
+```
+
+Clicking `Save` then `Sign in` should redirect to the `simple` realm sign in/register page. `Register` a new user using any details. After registering, the client should be logged into that user and display `Hello {First name} {Last name}`.
