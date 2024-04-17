@@ -18,3 +18,5 @@ node:
     - "--unsafe-rpc-external"
     - "--prometheus-external"
 storageClass: managed-csi-premium
+serviceMonitor:
+  enabled: true
