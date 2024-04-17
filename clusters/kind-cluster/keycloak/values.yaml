@@ -19,6 +19,11 @@ extraEnvVars:
     value: "3080"
   - name: KC_HOSTNAME_ADMIN_URL
     value: "http://localhost:3080/auth/"
+  - name: KC_HOSTNAME_URL
+    value: "http://localhost:3080/auth/"
+  - name: KC_HOSTNAME_DEBUG
+    value: true
+
   # path: /auth(/.*)
   # annotations:
   #   nginx.ingress.kubernetes.io/rewrite-target: /$1
