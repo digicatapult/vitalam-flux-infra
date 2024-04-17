@@ -22,7 +22,7 @@ extraEnvVars:
   - name: KC_HOSTNAME_URL
     value: "http://localhost:3080/auth/"
   - name: KC_HOSTNAME_DEBUG
-    value: true
+    value: "true"
 
   # path: /auth(/.*)
   # annotations:
