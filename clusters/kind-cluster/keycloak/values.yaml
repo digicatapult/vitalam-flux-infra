@@ -88,14 +88,3 @@ extraEnvVars:
     value: "http://localhost:3080/auth/"
   - name: KC_HOSTNAME_DEBUG
     value: "true"
-
-  # path: /auth(/.*)
-  # annotations:
-  #   nginx.ingress.kubernetes.io/rewrite-target: /$1
-# adminIngress:
-#   enabled: true
-#   hostname: localhost
-#   path: /keycloak-admin(/.*)
-#   annotations:
-#     nginx.ingress.kubernetes.io/rewrite-target: /$1
-
