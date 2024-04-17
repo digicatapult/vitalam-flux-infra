@@ -1,6 +1,6 @@
 # Keycloak
 
-Identity in SQNC is managed using [`Keycloak`](https://www.keycloak.org/)
+Authentication in SQNC is managed using [`Keycloak`](https://www.keycloak.org/)
 
 ## Admin
 
