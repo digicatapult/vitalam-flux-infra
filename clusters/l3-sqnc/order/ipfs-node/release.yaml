@@ -9,7 +9,7 @@ spec:
     remediation:
       retries: -1
   dependsOn:
-    - name: blue
+    - name: blue-node
   chart:
     spec:
       chart: sqnc-ipfs
