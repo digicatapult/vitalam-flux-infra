@@ -3,5 +3,6 @@ externalSqncNode:
   port: 9944
 persistence:
   storageClass: managed-csi-premium
+  size: 60Gi
 sqncNode:
   enabled: false
