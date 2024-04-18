@@ -4,15 +4,11 @@ scope:
 ingressClassResource:
   name: nginx-capacity
   default: false
-config:
-    global-auth-url: "http://oathkeeper-api.ory.svc.cluster.local/decisions$request_uri"
 service:
   type: LoadBalancer
   annotations: 
     service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
     external-dns.alpha.kubernetes.io/hostname: capacity.dsch-l3.com
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    cert-manager.io/common-name: capacity.dsch-l3.com
 metrics:
   enabled: true
   serviceMonitor:
