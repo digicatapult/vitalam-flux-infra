@@ -19,5 +19,5 @@ spec:
   valuesFrom:
     - kind: ConfigMap
       name: capacity-values
-      valuesKey: values-sqnc-identity-service.yaml
+      valuesKey: values-identity-service.yaml
   interval: 10m0s

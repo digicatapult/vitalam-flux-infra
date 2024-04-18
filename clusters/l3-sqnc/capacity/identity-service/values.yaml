@@ -1,13 +1,13 @@
 logLevel: info
-selfAddress: 5Df4d56pDyPz3RM3RBLYC7nyhhL9mGXchrV1dkyYPt5u8H88
+selfAddress: 5Gh5cFC3sPS7pK8SN41Ytp6VFsMyPpvKxtrrcLpkf19u9W83
 externalSqncNode:
-  host: blue-node-sqnc-node-0
+  host: magenta-sqnc-node-0
   port: 9944
 authType: EXTERNAL
-externalOrigin: "https://order.dsch-l3.com"
+externalOrigin: "https://capacity.dsch-l3.com"
 ingress:
-  ingressClassName: nginx-optimiser
-  hostname: order.dsch-l3.com
+  ingressClassName: nginx-capacity
+  hostname: capacity.dsch-l3.com
   paths:
     - path: /(v1/members(/.*)?)
       pathType: Prefix
