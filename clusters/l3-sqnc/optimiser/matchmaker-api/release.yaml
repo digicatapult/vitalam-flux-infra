@@ -21,4 +21,8 @@ spec:
     - kind: ConfigMap
       name: optimiser-values
       valuesKey: values-matchmaker-api.yaml
+    - kind: Secret
+      name: optimiser-matchmaker-postgres-creds
+      valuesKey: password
+      targetPath: postgresql.auth.password
   interval: 10m0s
