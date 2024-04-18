@@ -5,6 +5,7 @@ resources:
   - magenta-node
   - red-node
   - ipfs-node
+  - nginx
   - source.yaml
 configMapGenerator:
   - name: capacity-values

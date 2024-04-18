@@ -5,6 +5,7 @@ resources:
   - blue-node
   - cyan-node
   - ipfs-node
+  - nginx
   - source.yaml
 configMapGenerator:
   - name: order-values

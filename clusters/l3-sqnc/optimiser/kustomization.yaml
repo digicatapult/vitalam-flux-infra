@@ -5,6 +5,7 @@ resources:
   - green-node
   - yellow-node
   - ipfs-node
+  - nginx
   - source.yaml
 configMapGenerator:
   - name: optimiser-values
