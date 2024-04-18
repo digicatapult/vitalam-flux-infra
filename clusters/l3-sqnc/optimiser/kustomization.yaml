@@ -14,7 +14,7 @@ configMapGenerator:
       - values-green.yaml=green-node/values.yaml
       - values-yellow.yaml=yellow-node/values.yaml
       - values-ipfs.yaml=ipfs-node/values.yaml
-      - values-identity-service.yaml = identity-service/values.yaml
+      - values-identity-service.yaml=identity-service/values.yaml
       - values-nginx.yaml=nginx/values.yaml
 configurations:
   - kustomize-config.yaml
