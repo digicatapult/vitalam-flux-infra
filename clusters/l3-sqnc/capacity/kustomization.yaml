@@ -6,7 +6,6 @@ resources:
   - red-node
   - ipfs-node
   - nginx
-  // include nginx keys
   - source.yaml
 configMapGenerator:
   - name: capacity-values
