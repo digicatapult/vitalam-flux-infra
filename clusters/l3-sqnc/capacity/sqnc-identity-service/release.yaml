@@ -9,7 +9,7 @@ spec:
     remediation:
       retries: -1
   dependsOn:
-    - name: magenta ### ????
+    - name: magenta
   chart:
     spec:
       chart: sqnc-identity-service
