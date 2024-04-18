@@ -18,6 +18,6 @@ spec:
         name: digicatapult
   valuesFrom:
     - kind: ConfigMap
-      name: capacity-values
+      name: order-values
       valuesKey: values-identity-service.yaml
   interval: 10m0s
