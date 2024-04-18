@@ -9,8 +9,6 @@ service:
   annotations: 
     service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
     external-dns.alpha.kubernetes.io/hostname: order.dsch-l3.com
-extraArgs:
-  default-ssl-certificate: "order/order-dsch-l3-com-prod-tls"
 nodeSelector:
   kubernetes.io/os: linux
 tolerations:
