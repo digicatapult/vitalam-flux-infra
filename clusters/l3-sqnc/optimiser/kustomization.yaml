@@ -13,6 +13,7 @@ configMapGenerator:
       - values-green.yaml=green-node/values.yaml
       - values-yellow.yaml=yellow-node/values.yaml
       - values-ipfs.yaml=ipfs-node/values.yaml
+      - values-nginx.yaml=nginx/values.yaml
 configurations:
   - kustomize-config.yaml
 generatorOptions:
