@@ -1,5 +1,5 @@
 logLevel: info
-selfAddress: 12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp ## ???
+selfAddress: 5Df4d56pDyPz3RM3RBLYC7nyhhL9mGXchrV1dkyYPt5u8H88
 externalSqncNode:
   host: blue-node-sqnc-node-0
   port: 9944

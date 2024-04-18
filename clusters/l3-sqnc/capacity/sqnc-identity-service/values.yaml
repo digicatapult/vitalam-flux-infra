@@ -1,5 +1,5 @@
 logLevel: info
-selfAddress: 12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp ## ???
+selfAddress: 5Gh5cFC3sPS7pK8SN41Ytp6VFsMyPpvKxtrrcLpkf19u9W83
 externalSqncNode:
   host: magenta-sqnc-node-0
   port: 9944
