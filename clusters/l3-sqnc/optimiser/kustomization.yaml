@@ -18,7 +18,6 @@ configMapGenerator:
       - values-identity-service.yaml=identity-service/values.yaml
       - values-nginx.yaml=nginx/values.yaml
       - values-matchmaker-api.yaml=matchmaker-api/values.yaml
-
 configurations:
   - kustomize-config.yaml
 generatorOptions:
