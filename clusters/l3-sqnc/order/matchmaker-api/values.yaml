@@ -1,0 +1,22 @@
+logLevel: info
+userUri: 5Df4d56pDyPz3RM3RBLYC7nyhhL9mGXchrV1dkyYPt5u8H88
+externalSqncNode:
+  host: blue-node-sqnc-node-0
+  port: 9944
+externalSqncIpfs:
+  host: ipfs-order-sqnc-ipfs-api
+  port: 5001
+externalSqncIdentity:
+  host: order-identity-service-sqnc-identity-service
+  port: 3000
+authType: EXTERNAL
+ingress:
+  ingressClassName: nginx-order
+  hostname: order.dsch-l3.com
+node:
+  enabled: false
+postgresql:
+  primary:
+    persistence:
+      storageClass: managed-csi-premium
+      size: 15Gi
