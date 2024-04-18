@@ -3,17 +3,23 @@ selfAddress: 12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp ## ???
 externalSqncNode:
   host: magenta-sqnc-node-0
   port: 9944
-authType: EXTERNAL ## or none??
-externalOrigin: "http://localhost:3080"
+authType: EXTERNAL
+externalOrigin: "https://capacity.dsch-l3.com"
 externalPathPrefix: "capacity/sqnc-identity-service"
 ingress:
-  hostname: localhost
+  ingressClassName: nginx-optimiser
+  hostname: capacity.dsch-l3.com
   paths:
-    - path: /capacity/(v1/members(/.*)?)
+    - path: /(v1/members(/.*)?)
       pathType: Prefix
-    - path: /capacity/(v1/self(/.*)?)
+    - path: /(v1/self(/.*)?)
       pathType: Prefix
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
 node:
   enabled: false
+postgresql:
+  primary:
+    persistence:
+      storageClass: managed-csi-premium
+      size: 5Gi
