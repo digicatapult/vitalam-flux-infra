@@ -9,7 +9,8 @@ spec:
     remediation:
       retries: -1
   dependsOn:
-    - name: ipfs-node
+    - name: ipfs-optimiser
+    - name: optimiser-identity-service
   chart:
     spec:
       chart: sqnc-matchmaker-api
