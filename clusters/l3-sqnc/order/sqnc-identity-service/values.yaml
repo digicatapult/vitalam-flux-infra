@@ -5,7 +5,6 @@ externalSqncNode:
   port: 9944
 authType: EXTERNAL
 externalOrigin: "https://order.dsch-l3.com"
-externalPathPrefix: "order/sqnc-identity-service"
 ingress:
   ingressClassName: nginx-optimiser
   hostname: order.dsch-l3.com
