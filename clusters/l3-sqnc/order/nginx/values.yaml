@@ -21,4 +21,3 @@ tolerations:
 containerPorts:
   http: 80
   https: 443
-  metrics: 10254
