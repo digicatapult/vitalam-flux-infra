@@ -1,0 +1,17 @@
+logLevel: info
+selfAddress: 5Df4d56pDyPz3RM3RBLYC7nyhhL9mGXchrV1dkyYPt5u8H88
+externalSqncNode:
+  host: blue-node-sqnc-node-0
+  port: 9944
+authType: EXTERNAL
+externalOrigin: "https://order.dsch-l3.com"
+ingress:
+  ingressClassName: nginx-order
+  hostname: order.dsch-l3.com
+node:
+  enabled: false
+postgresql:
+  primary:
+    persistence:
+      storageClass: managed-csi-premium
+      size: 5Gi
