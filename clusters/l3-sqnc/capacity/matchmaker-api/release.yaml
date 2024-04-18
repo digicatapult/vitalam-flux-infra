@@ -1,0 +1,23 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: capacity-matchmaker-api
+  namespace: capacity
+spec:
+  install:
+    remediation:
+      retries: -1
+  dependsOn:
+    - name: ipfs-node
+  chart:
+    spec:
+      chart: sqnc-matchmaker-api
+      sourceRef:
+        kind: HelmRepository
+        name: digicatapult
+  valuesFrom:
+    - kind: ConfigMap
+      name: capacity-values
+      valuesKey: values-matchmaker-api.yaml
+  interval: 10m0s

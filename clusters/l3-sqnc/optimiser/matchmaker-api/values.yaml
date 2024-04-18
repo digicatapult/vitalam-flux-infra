@@ -1,0 +1,23 @@
+logLevel: info
+userUri: 5HdXyANz5ySq8FPBxhdbm2d8FjPRKZHEAnNtypaAWix8BDRJ
+externalSqncNode:
+  host: yellow-node-sqnc-node-0
+  port: 9944
+externalSqncIpfs:
+  host: ipfs-optimiser-sqnc-ipfs-api
+  port: 5001
+externalSqncIdentity:
+  host: optimiser-identity-service-sqnc-identity-service
+  port: 3000
+authType: EXTERNAL
+ingress:
+  enabled: false
+  ingressClassName: nginx-optimiser
+  hostname: optimiser.dsch-l3.com
+node:
+  enabled: false
+postgresql:
+  primary:
+    persistence:
+      storageClass: managed-csi-premium
+      size: 15Gi

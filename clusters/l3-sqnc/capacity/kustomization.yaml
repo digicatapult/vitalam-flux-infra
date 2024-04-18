@@ -6,6 +6,7 @@ resources:
   - red-node
   - ipfs-node
   - identity-service
+  - matchmaker-api
   - nginx
   - source.yaml
 configMapGenerator:
@@ -16,6 +17,7 @@ configMapGenerator:
       - values-ipfs.yaml=ipfs-node/values.yaml
       - values-identity-service.yaml=identity-service/values.yaml
       - values-nginx.yaml=nginx/values.yaml
+      - values-matchmaker-api.yaml=matchmaker-api/values.yaml
 configurations:
   - kustomize-config.yaml
 generatorOptions:
