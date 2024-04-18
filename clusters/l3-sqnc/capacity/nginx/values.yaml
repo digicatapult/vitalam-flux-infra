@@ -1,4 +1,4 @@
-watchIngressWithoutClass: false
+watchIngressWithoutClass: true
 scope:
   enabled: true
 ingressClassResource:
