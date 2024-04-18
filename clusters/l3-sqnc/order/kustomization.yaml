@@ -5,6 +5,7 @@ resources:
   - blue-node
   - cyan-node
   - ipfs-node
+  - nginx
   - source.yaml
 configMapGenerator:
   - name: order-values
@@ -12,6 +13,7 @@ configMapGenerator:
       - values-blue.yaml=blue-node/values.yaml
       - values-cyan.yaml=cyan-node/values.yaml
       - values-ipfs.yaml=ipfs-node/values.yaml
+      - values-nginx.yaml=nginx/values.yaml
 configurations:
   - kustomize-config.yaml
 generatorOptions:
