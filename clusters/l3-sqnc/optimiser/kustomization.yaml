@@ -6,6 +6,7 @@ resources:
   - yellow-node
   - sqnc-identity-service
   - ipfs-node
+  - nginx
   - source.yaml
 configMapGenerator:
   - name: optimiser-values
@@ -14,7 +15,7 @@ configMapGenerator:
       - values-yellow.yaml=yellow-node/values.yaml
       - values-ipfs.yaml=ipfs-node/values.yaml
       - values-sqnc-identity-service.yaml = sqnc-identity-service/values.yaml
-
+      - values-nginx.yaml=nginx/values.yaml
 configurations:
   - kustomize-config.yaml
 generatorOptions:

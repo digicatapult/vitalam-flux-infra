@@ -6,6 +6,7 @@ resources:
   - red-node
   - ipfs-node
   - sqnc-identity-service
+  - nginx
   - source.yaml
 configMapGenerator:
   - name: capacity-values
@@ -14,6 +15,7 @@ configMapGenerator:
       - values-red.yaml=red-node/values.yaml
       - values-ipfs.yaml=ipfs-node/values.yaml
       - values-sqnc-identity-service.yaml = sqnc-identity-service/values.yaml
+      - values-nginx.yaml=nginx/values.yaml
 configurations:
   - kustomize-config.yaml
 generatorOptions:
