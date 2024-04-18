@@ -6,6 +6,7 @@ externalSqncNode:
 authType: EXTERNAL
 externalOrigin: "https://capacity.dsch-l3.com"
 ingress:
+  enabled: false
   ingressClassName: nginx-capacity
   hostname: capacity.dsch-l3.com
 node:
