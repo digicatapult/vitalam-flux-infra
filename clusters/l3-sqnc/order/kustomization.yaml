@@ -4,6 +4,7 @@ namespace: order
 resources:
   - blue-node
   - cyan-node
+  - sqnc-identity-service
   - ipfs-node
   - source.yaml
 configMapGenerator:
@@ -12,6 +13,8 @@ configMapGenerator:
       - values-blue.yaml=blue-node/values.yaml
       - values-cyan.yaml=cyan-node/values.yaml
       - values-ipfs.yaml=ipfs-node/values.yaml
+      - values-sqnc-identity-service.yaml = sqnc-identity-service/values.yaml
+
 configurations:
   - kustomize-config.yaml
 generatorOptions:
