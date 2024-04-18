@@ -8,11 +8,6 @@ externalOrigin: "https://optimiser.dsch-l3.com"
 ingress:
   ingressClassName: nginx-optimiser
   hostname: optimiser.dsch-l3.com
-  paths:
-    - path: /(v1/members(/.*)?)
-      pathType: Prefix
-    - path: /(v1/self(/.*)?)
-      pathType: Prefix
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
 node:
