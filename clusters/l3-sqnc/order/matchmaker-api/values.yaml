@@ -11,6 +11,7 @@ externalSqncIdentity:
   port: 3000
 authType: EXTERNAL
 ingress:
+  enabled: false
   ingressClassName: nginx-order
   hostname: order.dsch-l3.com
 node:
