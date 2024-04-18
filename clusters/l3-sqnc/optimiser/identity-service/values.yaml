@@ -6,6 +6,7 @@ externalSqncNode:
 authType: EXTERNAL
 externalOrigin: "https://optimiser.dsch-l3.com"
 ingress:
+  enabled: false
   ingressClassName: nginx-optimiser
   hostname: optimiser.dsch-l3.com
 node:

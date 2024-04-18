@@ -6,6 +6,7 @@ externalSqncNode:
 authType: EXTERNAL
 externalOrigin: "https://order.dsch-l3.com"
 ingress:
+  enabled: false
   ingressClassName: nginx-order
   hostname: order.dsch-l3.com
 node:
