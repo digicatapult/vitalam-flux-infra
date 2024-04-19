@@ -10,11 +10,11 @@ node:
       scheme: "sr25519"
     - type: "gran"
       scheme: "ed25519"
-
   flags:
     - "--rpc-external"
     - "--rpc-methods=Unsafe"
     - "--rpc-cors=all"
     - "--unsafe-rpc-external"
     - "--prometheus-external"
+    - "--state-pruning=100000"
 storageClass: managed-csi-premium
