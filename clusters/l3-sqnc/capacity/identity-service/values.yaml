@@ -11,6 +11,8 @@ ingress:
   hostname: capacity.dsch-l3.com
 node:
   enabled: false
+serviceMonitor:
+  enabled: true
 postgresql:
   primary:
     persistence:
