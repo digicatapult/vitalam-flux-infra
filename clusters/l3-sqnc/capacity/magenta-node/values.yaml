@@ -1,0 +1,20 @@
+node:
+  chain: l3-sqnc
+  role: validator
+  dataVolumeSize: 100Gi
+  perNodeServices:
+    setPublicAddressToExternal:
+      enabled: false
+  keys:
+    - type: "babe"
+      scheme: "sr25519"
+    - type: "gran"
+      scheme: "ed25519"
+
+  flags:
+    - "--rpc-external"
+    - "--rpc-methods=Unsafe"
+    - "--rpc-cors=all"
+    - "--unsafe-rpc-external"
+    - "--prometheus-external"
+storageClass: managed-csi-premium

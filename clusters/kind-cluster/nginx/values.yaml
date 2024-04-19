@@ -1,4 +1,5 @@
 watchIngressWithoutClass: true
+resourcesPreset: micro
 ingressClassResource:
   default: true
 hostNetwork: true

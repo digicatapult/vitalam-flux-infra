@@ -1,0 +1,24 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: charlie-open-api
+  namespace: charlie
+spec:
+  install:
+    remediation:
+      retries: -1
+  dependsOn:
+    - name: charlie-identity-service
+    - name: charlie-sqnc-matchmaker-api
+  chart:
+    spec:
+      chart: openapi-merger
+      sourceRef:
+        kind: HelmRepository
+        name: digicatapult
+  valuesFrom:
+    - kind: ConfigMap
+      name: charlie-values
+      valuesKey: values-open-api-merger.yaml
+  interval: 10m0s

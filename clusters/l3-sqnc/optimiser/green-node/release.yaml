@@ -1,0 +1,33 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: green-node
+  namespace: optimiser
+spec:
+  install:
+    remediation:
+      retries: -1
+  chart:
+    spec:
+      chart: sqnc-node
+      sourceRef:
+        kind: HelmRepository
+        name: digicatapult
+  valuesFrom:
+    - kind: ConfigMap
+      name: optimiser-values
+      valuesKey: values-green.yaml
+    - kind: Secret
+      name: green-keys
+      valuesKey: babe_seed
+      targetPath: node.keys[0].seed
+    - kind: Secret
+      name: green-keys
+      valuesKey: grandpa_seed
+      targetPath: node.keys[1].seed
+    - kind: Secret
+      name: green-keys
+      valuesKey: node_id
+      targetPath: node.customNodeKey
+  interval: 10m

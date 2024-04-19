@@ -1,0 +1,18 @@
+logLevel: info
+selfAddress: 5Gh5cFC3sPS7pK8SN41Ytp6VFsMyPpvKxtrrcLpkf19u9W83
+externalSqncNode:
+  host: magenta-sqnc-node-0
+  port: 9944
+authType: EXTERNAL
+externalOrigin: "https://capacity.dsch-l3.com"
+ingress:
+  enabled: false
+  ingressClassName: nginx-capacity
+  hostname: capacity.dsch-l3.com
+node:
+  enabled: false
+postgresql:
+  primary:
+    persistence:
+      storageClass: managed-csi-premium
+      size: 5Gi

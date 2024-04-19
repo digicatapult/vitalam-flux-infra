@@ -1,0 +1,8 @@
+externalSqncNode:
+  host: magenta-sqnc-node-0
+  port: 9944
+persistence:
+  storageClass: managed-csi-premium
+  size: 60Gi
+sqncNode:
+  enabled: false

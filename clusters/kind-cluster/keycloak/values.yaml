@@ -1,0 +1,92 @@
+keycloakConfigCli:
+  enabled: true
+  configuration:
+    realm.json: |
+      {
+        "enabled": true,
+        "realm": "simple",
+        "registrationAllowed": true,
+        "clients": [
+            {
+              "clientId": "account-console",
+              "name": "${client_account-console}",
+              "description": "",
+              "rootUrl": "${authBaseUrl}",
+              "adminUrl": "",
+              "baseUrl": "/realms/simple/account/",
+              "surrogateAuthRequired": false,
+              "enabled": true,
+              "alwaysDisplayInConsole": false,
+              "clientAuthenticatorType": "client-secret",
+              "redirectUris": [
+                "/realms/simple/account/*",
+                "https://www.keycloak.org/app/*"
+              ],
+              "webOrigins": [
+                "http://localhost:3080",
+                "https://www.keycloak.org"
+              ],
+              "notBefore": 0,
+              "bearerOnly": false,
+              "consentRequired": false,
+              "standardFlowEnabled": true,
+              "implicitFlowEnabled": false,
+              "directAccessGrantsEnabled": false,
+              "serviceAccountsEnabled": false,
+              "publicClient": true,
+              "frontchannelLogout": false,
+              "protocol": "openid-connect",
+              "attributes": {
+                "oidc.ciba.grant.enabled": "false",
+                "backchannel.logout.session.required": "true",
+                "post.logout.redirect.uris": "+",
+                "display.on.consent.screen": "false",
+                "oauth2.device.authorization.grant.enabled": "false",
+                "pkce.code.challenge.method": "S256",
+                "backchannel.logout.revoke.offline.tokens": "false"
+              },
+              "authenticationFlowBindingOverrides": {},
+              "fullScopeAllowed": false,
+              "nodeReRegistrationTimeout": 0,
+              "protocolMappers": [
+                {
+                  "id": "bf89b84b-60b8-46a4-91f4-159b7ca32d2e",
+                  "name": "audience resolve",
+                  "protocol": "openid-connect",
+                  "protocolMapper": "oidc-audience-resolve-mapper",
+                  "consentRequired": false,
+                  "config": {}
+                }
+              ],
+              "defaultClientScopes": [
+                "web-origins",
+                "acr",
+                "roles",
+                "profile",
+                "email"
+              ],
+              "optionalClientScopes": [
+                "address",
+                "phone",
+                "offline_access",
+                "microprofile-jwt"
+              ]
+            }
+          ]
+      }
+httpRelativePath: /auth/
+proxy: edge
+ingress:
+  enabled: true
+  hostname: localhost
+extraEnvVars:
+  - name: KC_HOSTNAME_PATH
+    value: /auth/
+  - name: KC_HOSTNAME_PORT
+    value: "3080"
+  - name: KC_HOSTNAME_ADMIN_URL
+    value: "http://localhost:3080/auth/"
+  - name: KC_HOSTNAME_URL
+    value: "http://localhost:3080/auth/"
+  - name: KC_HOSTNAME_DEBUG
+    value: "true"
