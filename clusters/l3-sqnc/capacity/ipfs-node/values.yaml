@@ -6,3 +6,5 @@ persistence:
   size: 60Gi
 sqncNode:
   enabled: false
+serviceMonitor:
+  enabled: true

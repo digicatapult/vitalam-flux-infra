@@ -21,3 +21,5 @@ postgresql:
     persistence:
       storageClass: managed-csi-premium
       size: 15Gi
+serviceMonitor:
+  enabled: true
