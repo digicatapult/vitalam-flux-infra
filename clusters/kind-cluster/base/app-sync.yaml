@@ -8,6 +8,8 @@ spec:
   interval: 1m
   path: ./clusters/kind-cluster/alice
   prune: true
+  dependsOn:
+    - monitoring-sync
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -22,6 +24,8 @@ spec:
   interval: 1m
   path: ./clusters/kind-cluster/bob
   prune: true
+  dependsOn:
+    - monitoring-sync
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -36,6 +40,8 @@ spec:
   interval: 1m
   path: ./clusters/kind-cluster/charlie
   prune: true
+  dependsOn:
+    - monitoring-sync
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -50,6 +56,8 @@ spec:
   interval: 1m
   path: ./clusters/kind-cluster/nginx
   prune: true
+  dependsOn:
+    - monitoring-sync
   sourceRef:
     kind: GitRepository
     name: flux-system
