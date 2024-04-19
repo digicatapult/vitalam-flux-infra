@@ -9,7 +9,7 @@ spec:
   path: ./clusters/kind-cluster/alice
   prune: true
   dependsOn:
-    - monitoring-sync
+    - name: monitoring-sync
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -25,7 +25,7 @@ spec:
   path: ./clusters/kind-cluster/bob
   prune: true
   dependsOn:
-    - monitoring-sync
+    - name: monitoring-sync
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -41,7 +41,7 @@ spec:
   path: ./clusters/kind-cluster/charlie
   prune: true
   dependsOn:
-    - monitoring-sync
+    - name: monitoring-sync
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -57,7 +57,7 @@ spec:
   path: ./clusters/kind-cluster/nginx
   prune: true
   dependsOn:
-    - monitoring-sync
+    - name: monitoring-sync
   sourceRef:
     kind: GitRepository
     name: flux-system
