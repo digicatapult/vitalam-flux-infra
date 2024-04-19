@@ -1,4 +1,4 @@
-logLevel: info
+logLevel: debug
 userUri: 5Gh5cFC3sPS7pK8SN41Ytp6VFsMyPpvKxtrrcLpkf19u9W83
 externalSqncNode:
   host: magenta-sqnc-node-0
