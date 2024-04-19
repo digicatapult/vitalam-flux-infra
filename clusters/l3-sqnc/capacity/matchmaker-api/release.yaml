@@ -21,4 +21,8 @@ spec:
     - kind: ConfigMap
       name: capacity-values
       valuesKey: values-matchmaker-api.yaml
+    - kind: Secret
+      name: capacity-matchmaker-postgres-creds
+      valuesKey: password
+      targetPath: postgresql.auth.password
   interval: 10m0s
