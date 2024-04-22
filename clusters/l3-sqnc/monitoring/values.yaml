@@ -2,7 +2,7 @@ alertmanager:
   enabled: true
   serviceMonitor:
     selfMonitor: true
-    namespace: capacity
+    namespace: monitoring
   config:
     receivers:
       - name: "null"
@@ -14,7 +14,7 @@ alertmanager:
 prometheus:
   serviceMonitor:
     selfMonitor: true
-    namespace: capacity
+    namespace: monitoring
   prometheusSpec:
     retention: 24h
     resources:
@@ -32,7 +32,7 @@ grafana:
   defaultDashboardsEnabled: false
   serviceMonitor:
     enabled: true
-    namespace: capacity
+    namespace: monitoring
   persistence:
     enabled: true
   adminPassword: grafana
