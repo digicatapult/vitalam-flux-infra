@@ -1,3 +1,5 @@
+# pulled from https://github.com/fluxcd/flux2-monitoring-example/blob/main/monitoring/controllers/kube-prometheus-stack/kube-state-metrics-config.yaml
+# configuration docs: https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-state-metrics#configuration
 kube-state-metrics:
   collectors: [ ]
   extraArgs:
