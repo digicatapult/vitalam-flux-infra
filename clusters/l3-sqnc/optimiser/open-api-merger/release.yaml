@@ -1,0 +1,24 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: optimiser-open-api
+  namespace: optimiser
+spec:
+  install:
+    remediation:
+      retries: -1
+  dependsOn:
+    - name: optimiser-identity-service
+    - name: optimiser-matchmaker-api
+  chart:
+    spec:
+      chart: openapi-merger
+      sourceRef:
+        kind: HelmRepository
+        name: digicatapult
+  valuesFrom:
+    - kind: ConfigMap
+      name: optimiser-values
+      valuesKey: values-open-api-merger.yaml
+  interval: 10m0s

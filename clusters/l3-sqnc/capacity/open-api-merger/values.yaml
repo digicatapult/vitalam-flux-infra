@@ -1,0 +1,17 @@
+logLevel: info
+paths:
+  - http://capacity-identity-service-sqnc-identity-service:3000/api-docs
+  - http://capacity-matchmaker-api:3000/api-docs
+baseUrl:
+  - https://capacity.dsch-l3.com
+ingress:
+  ingressClassName: nginx-capacity
+  enabled: false
+  hostname: capacity.dsch-l3.com
+  paths:
+    - path: /(api-docs(/.*)?)
+      pathType: Prefix
+    - path: /(swagger(/.*)?)
+      pathType: Prefix
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1

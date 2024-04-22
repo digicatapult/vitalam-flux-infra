@@ -1,0 +1,17 @@
+logLevel: info
+paths:
+  - http://optimiser-identity-service-sqnc-identity-service:3000/api-docs
+  - http://optimiser-matchmaker-api:3000/api-docs
+baseUrl:
+  - https://optimiser.dsch-l3.com
+ingress:
+  ingressClassName: nginx-optimiser
+  enabled: false
+  hostname: optimiser.dsch-l3.com
+  paths:
+    - path: /(api-docs(/.*)?)
+      pathType: Prefix
+    - path: /(swagger(/.*)?)
+      pathType: Prefix
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
