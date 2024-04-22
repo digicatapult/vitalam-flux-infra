@@ -16,3 +16,12 @@ postgresql:
     persistence:
       storageClass: managed-csi-premium
       size: 5Gi
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      namespace: order
+      relabelings:
+        - action: replace
+          sourceLabels: [namespace]
+          targetLabel: kubernetes_namespace

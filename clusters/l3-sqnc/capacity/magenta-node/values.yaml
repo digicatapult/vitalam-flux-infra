@@ -17,4 +17,7 @@ node:
     - "--unsafe-rpc-external"
     - "--prometheus-external"
     - "--state-pruning=100000"
+  serviceMonitor:
+    enabled: true
+    namespace: capacity
 storageClass: managed-csi-premium
