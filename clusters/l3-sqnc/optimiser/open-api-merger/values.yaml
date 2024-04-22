@@ -1,7 +1,7 @@
 logLevel: info
 paths:
   - http://optimiser-identity-service-sqnc-identity-service:3000/api-docs
-  - http://optimiser-matchmaker-api:3000/api-docs
+  - http://optimiser-matchmaker-api-sqnc-matchmaker-api:3000/api-docs
 baseUrl:
   - https://optimiser.dsch-l3.com
 ingress:

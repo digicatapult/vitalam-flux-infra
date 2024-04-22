@@ -1,7 +1,7 @@
 logLevel: info
 paths:
   - http://order-identity-service-sqnc-identity-service:3000/api-docs
-  - http://order-matchmaker-api:3000/api-docs
+  - http://order-matchmaker-api-sqnc-matchmaker-api:3000/api-docs
 baseUrl:
   - https://order.dsch-l3.com
 ingress:

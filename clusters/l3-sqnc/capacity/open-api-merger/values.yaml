@@ -1,7 +1,7 @@
 logLevel: info
 paths:
   - http://capacity-identity-service-sqnc-identity-service:3000/api-docs
-  - http://capacity-matchmaker-api:3000/api-docs
+  - http://capacity-matchmaker-api-sqnc-matchmaker-api:3000/api-docs
 baseUrl:
   - https://capacity.dsch-l3.com
 ingress:
