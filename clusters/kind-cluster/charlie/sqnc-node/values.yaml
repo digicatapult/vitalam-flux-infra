@@ -14,4 +14,7 @@ node:
     - "--charlie"
     - "--prometheus-external"
     - "--bootnodes '/dns4/alice-node-sqnc-node-0-rc-p2p.alice.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp'"
+  serviceMonitor:
+    enabled: true
+    namespace: monitoring
 storageClass: standard
