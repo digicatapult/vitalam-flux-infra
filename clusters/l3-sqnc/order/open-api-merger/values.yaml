@@ -5,6 +5,8 @@ paths:
 baseUrl:
   - https://order.dsch-l3.com
 ingress:
+  ingressClassName: nginx-order
+  enabled: false
   hostname: order.dsch-l3.com
   paths:
     - path: /(api-docs(/.*)?)

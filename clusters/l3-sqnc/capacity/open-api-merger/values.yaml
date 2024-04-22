@@ -5,6 +5,8 @@ paths:
 baseUrl:
   - https://capacity.dsch-l3.com
 ingress:
+  ingressClassName: nginx-capacity
+  enabled: false
   hostname: capacity.dsch-l3.com
   paths:
     - path: /(api-docs(/.*)?)

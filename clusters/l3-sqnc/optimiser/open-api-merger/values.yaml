@@ -5,6 +5,8 @@ paths:
 baseUrl:
   - https://optimiser.dsch-l3.com
 ingress:
+  ingressClassName: nginx-optimiser
+  enabled: false
   hostname: optimiser.dsch-l3.com
   paths:
     - path: /(api-docs(/.*)?)
