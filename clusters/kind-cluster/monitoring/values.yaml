@@ -22,6 +22,11 @@ prometheus:
       matchLabels:
         app.kubernetes.io/component: monitoring
 grafana:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hosts:
+      - localhost
   defaultDashboardsEnabled: false
   serviceMonitor:
     enabled: true

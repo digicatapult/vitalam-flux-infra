@@ -17,7 +17,7 @@ tolerations:
     key: node-role.kubernetes.io/control-plane
     operator: Equal
 containerPorts:
-  http: 80
+  http: 8080
   https: 443
 metrics:
   enabled: true
