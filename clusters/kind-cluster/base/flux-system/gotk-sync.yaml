@@ -7,7 +7,7 @@ metadata:
 spec:
   interval: 1m0s
   ref:
-    branch: bugfix/kind-monitoring-install-error
+    branch: main
   url: https://github.com/digicatapult/sqnc-flux-infra.git
 
 ---
