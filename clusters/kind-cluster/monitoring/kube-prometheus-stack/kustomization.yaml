@@ -1,6 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: monitoring
+metadata:
+  name: kube-prometheus-stack-sync
+  namespace: monitoring
 resources:
   - source.yaml
   - release.yaml
@@ -14,15 +16,6 @@ configMapGenerator:
       - kube-state-metrics-config.yaml
     options:
       labels:
-        app.kubernetes.io/part-of: flux
-        app.kubernetes.io/component: monitoring
-  - name: flux-grafana-dashboards
-    files:
-      - dashboards/control-plane.json
-      - dashboards/cluster.json
-    options:
-      labels:
-        grafana_dashboard: "1"
         app.kubernetes.io/part-of: flux
         app.kubernetes.io/component: monitoring
 configurations:
