@@ -4,7 +4,7 @@ namespace: monitoring
 resources:
   - source.yaml
   - release.yaml
-  # - podmonitor.yaml
+  - podmonitor.yaml
 configMapGenerator:
   - name: monitoring-values
     files:
