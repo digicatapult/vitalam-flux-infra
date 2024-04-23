@@ -26,3 +26,13 @@ ingress:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
 node:
   enabled: false
+postgresql:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      namespace: monitoring
+      relabelings:
+        - action: replace
+          sourceLabels: [namespace]
+          targetLabel: kubernetes_namespace

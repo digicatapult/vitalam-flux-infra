@@ -5,6 +5,10 @@ resources:
   - magenta-node
   - red-node
   - ipfs-node
+  - identity-service
+  - matchmaker-api
+  - nginx
+  - open-api-merger
   - source.yaml
 configMapGenerator:
   - name: capacity-values
@@ -12,6 +16,10 @@ configMapGenerator:
       - values-magenta.yaml=magenta-node/values.yaml
       - values-red.yaml=red-node/values.yaml
       - values-ipfs.yaml=ipfs-node/values.yaml
+      - values-identity-service.yaml=identity-service/values.yaml
+      - values-nginx.yaml=nginx/values.yaml
+      - values-matchmaker-api.yaml=matchmaker-api/values.yaml
+      - values-open-api-merger.yaml=open-api-merger/values.yaml
 configurations:
   - kustomize-config.yaml
 generatorOptions:
