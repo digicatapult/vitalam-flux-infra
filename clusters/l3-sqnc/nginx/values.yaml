@@ -3,7 +3,7 @@ scope:
   enabled: true
 ingressClassResource:
   name: nginx
-  default: false
+  default: true
 service:
   type: LoadBalancer
   annotations: 
