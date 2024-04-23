@@ -35,7 +35,6 @@ grafana:
     namespace: monitoring
   persistence:
     enabled: true
-  adminPassword: grafana
   plugins:
     - camptocamp-prometheus-alertmanager-datasource
   additionalDataSources:

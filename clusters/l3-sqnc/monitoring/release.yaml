@@ -30,3 +30,7 @@ spec:
   - kind: ConfigMap
     name: monitoring-values
     valuesKey: values.yaml
+  - kind: Secret
+    name: monitoring-secrets
+    valuesKey: grafana_password
+    targetPath: grafana.adminPassword
