@@ -4,7 +4,7 @@ namespace: monitoring
 resources:
   - source.yaml
   - release.yaml
-  - podmonitor.yaml
+  - monitoring-podmonitor-sync.yaml
 configMapGenerator:
   - name: monitoring-values
     files:
@@ -16,14 +16,7 @@ configMapGenerator:
       labels:
         app.kubernetes.io/part-of: flux
         app.kubernetes.io/component: monitoring
-  - name: flux-grafana-dashboards
-    files:
-      - dashboards/control-plane.json
-      - dashboards/cluster.json
-    options:
-      labels:
-        grafana_dashboard: "1"
-        app.kubernetes.io/part-of: flux
-        app.kubernetes.io/component: monitoring
 configurations:
   - kustomize-config.yaml
+generatorOptions:
+  disableNameSuffixHash: true

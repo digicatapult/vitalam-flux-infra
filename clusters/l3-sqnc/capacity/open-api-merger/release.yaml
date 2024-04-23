@@ -1,0 +1,24 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: capacity-open-api
+  namespace: capacity
+spec:
+  install:
+    remediation:
+      retries: -1
+  dependsOn:
+    - name: capacity-identity-service
+    - name: capacity-matchmaker-api
+  chart:
+    spec:
+      chart: openapi-merger
+      sourceRef:
+        kind: HelmRepository
+        name: digicatapult
+  valuesFrom:
+    - kind: ConfigMap
+      name: capacity-values
+      valuesKey: values-open-api-merger.yaml
+  interval: 10m0s
