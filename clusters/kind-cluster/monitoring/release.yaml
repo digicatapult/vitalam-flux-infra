@@ -28,3 +28,4 @@ spec:
   - kind: ConfigMap
     name: monitoring-values
     valuesKey: values.yaml
+  interval: 10m0s
