@@ -33,6 +33,11 @@ grafana:
   serviceMonitor:
     enabled: true
     namespace: monitoring
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hosts:
+      - grafana.dsch-l3.com
   persistence:
     enabled: true
   plugins:
