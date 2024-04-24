@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: order
+resources:
+  - blue-node
+  - cyan-node
+  - identity-service
+  - matchmaker-api
+  - ipfs-node
+  - nginx
+  - open-api-merger
+  - source.yaml
+configMapGenerator:
+  - name: order-values
+    files:
+      - values-blue.yaml=blue-node/values.yaml
+      - values-cyan.yaml=cyan-node/values.yaml
+      - values-ipfs.yaml=ipfs-node/values.yaml
+      - values-identity-service.yaml=identity-service/values.yaml
+      - values-nginx.yaml=nginx/values.yaml
+      - values-matchmaker-api.yaml=matchmaker-api/values.yaml
+      - values-open-api-merger.yaml=open-api-merger/values.yaml
+configurations:
+  - kustomize-config.yaml
+generatorOptions:
+  disableNameSuffixHash: true

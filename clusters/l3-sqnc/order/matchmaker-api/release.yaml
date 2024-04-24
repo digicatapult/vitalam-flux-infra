@@ -1,0 +1,28 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: order-matchmaker-api
+  namespace: order
+spec:
+  install:
+    remediation:
+      retries: -1
+  dependsOn:
+    - name: ipfs-order
+    - name: order-identity-service
+  chart:
+    spec:
+      chart: sqnc-matchmaker-api
+      sourceRef:
+        kind: HelmRepository
+        name: digicatapult
+  valuesFrom:
+    - kind: ConfigMap
+      name: order-values
+      valuesKey: values-matchmaker-api.yaml
+    - kind: Secret
+      name: order-matchmaker-postgres-creds
+      valuesKey: password
+      targetPath: postgresql.auth.password
+  interval: 10m0s

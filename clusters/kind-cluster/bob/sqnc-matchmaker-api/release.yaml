@@ -1,0 +1,23 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: bob-sqnc-matchmaker-api
+  namespace: bob
+spec:
+  install:
+    remediation:
+      retries: -1
+  dependsOn:
+    - name: bob-ipfs
+  chart:
+    spec:
+      chart: sqnc-matchmaker-api
+      sourceRef:
+        kind: HelmRepository
+        name: digicatapult
+  valuesFrom:
+  - kind: ConfigMap
+    name: bob-values
+    valuesKey: values-sqnc-matchmaker-api.yaml
+  interval: 10m0s

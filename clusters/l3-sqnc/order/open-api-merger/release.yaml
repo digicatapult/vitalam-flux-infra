@@ -1,0 +1,24 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: order-open-api
+  namespace: order
+spec:
+  install:
+    remediation:
+      retries: -1
+  dependsOn:
+    - name: order-identity-service
+    - name: order-matchmaker-api
+  chart:
+    spec:
+      chart: openapi-merger
+      sourceRef:
+        kind: HelmRepository
+        name: digicatapult
+  valuesFrom:
+    - kind: ConfigMap
+      name: order-values
+      valuesKey: values-open-api-merger.yaml
+  interval: 10m0s

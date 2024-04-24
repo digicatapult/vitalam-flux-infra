@@ -1,0 +1,23 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: bob-identity-service
+  namespace: bob
+spec:
+  install:
+    remediation:
+      retries: -1
+  dependsOn:
+    - name: bob-node
+  chart:
+    spec:
+      chart: sqnc-identity-service
+      sourceRef:
+        kind: HelmRepository
+        name: digicatapult
+  valuesFrom:
+  - kind: ConfigMap
+    name: bob-values
+    valuesKey: values-sqnc-identity-service.yaml
+  interval: 10m0s

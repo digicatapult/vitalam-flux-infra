@@ -1,0 +1,9 @@
+externalSqncNode:
+  host: charlie-node-sqnc-node-0
+  port: 9944
+ipfs:
+  bootNodeAddress: /dns4/alice-ipfs-sqnc-ipfs-0-swarm.alice.svc.cluster.local/tcp/4001/p2p/12D3KooWGnnDccXt956NhFkUki48216AwogbfWTcN33mjinFkNNT
+persistence:
+  storageClass: standard
+sqncNode:
+  enabled: false

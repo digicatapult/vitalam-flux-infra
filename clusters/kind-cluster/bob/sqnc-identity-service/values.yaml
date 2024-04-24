@@ -1,0 +1,29 @@
+logLevel: info
+selfAddress: 12D3KooWHdiAxVd8uMQR1hGWXccidmfCwLqcMpGwR6QcTP6QRMuD
+externalSqncNode:
+  host: bob-node-sqnc-node-0
+  port: 9944
+externalOrigin: "http://localhost:3080"
+externalPathPrefix: "bob/sqnc-identity-service"
+authType: NONE
+ingress:
+  hostname: localhost
+  paths:
+    - path: /bob/(v1/members(/.*)?)
+      pathType: Prefix
+    - path: /bob/(v1/self(/.*)?)
+      pathType: Prefix
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+node:
+  enabled: false
+postgresql:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      namespace: monitoring
+      relabelings:
+        - action: replace
+          sourceLabels: [namespace]
+          targetLabel: kubernetes_namespace

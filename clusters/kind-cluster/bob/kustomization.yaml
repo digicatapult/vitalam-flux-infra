@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: bob
+resources:
+  - source.yaml
+  - sqnc-matchmaker-api
+  - sqnc-identity-service
+  - sqnc-node
+  - ipfs-node
+  - open-api-merger
+configMapGenerator:
+  - name: bob-values
+    files:
+      - values-sqnc-node.yaml=sqnc-node/values.yaml
+      - values-sqnc-ipfs.yaml=ipfs-node/values.yaml
+      - values-sqnc-matchmaker-api.yaml=sqnc-matchmaker-api/values.yaml
+      - values-sqnc-identity-service.yaml=sqnc-identity-service/values.yaml
+      - values-open-api-merger.yaml=open-api-merger/values.yaml
+configurations:
+  - kustomize-config.yaml
+generatorOptions:
+  disableNameSuffixHash: true
