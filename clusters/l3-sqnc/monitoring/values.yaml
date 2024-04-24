@@ -40,6 +40,13 @@ grafana:
       - grafana.dsch-l3.com
   persistence:
     enabled: true
+    type: pvc
+    storageClassName: managed-csi-premium
+    accessModes:
+      - ReadWriteOnce
+    size: 10Gi
+    finalizers:
+      - kubernetes.io/pvc-protection
   plugins:
     - camptocamp-prometheus-alertmanager-datasource
   additionalDataSources:
