@@ -11,16 +11,34 @@ alertmanager:
       #   webhook_configs:
       #     - send_resolved: true
       #       url: <secret>
+  alertmanagerSpec:
+    replicas: 2
 prometheus:
   serviceMonitor:
     selfMonitor: true
     namespace: monitoring
+  service:
+    sessionAffinity: ClientIP # Ensures grafana always pulls from the same replica
   prometheusSpec:
-    retention: 24h
+    replicas: 2
+    podAntiAffinity: soft
+    retention: 12h
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: managed-csi-premium
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 50Gi
     resources:
       requests:
         cpu: 200m
         memory: 200Mi
+      limits:
+        cpu: 2000m
+        memory: 2Gi
     serviceMonitorSelectorNilUsesHelmValues: false
     serviceMonitorNamespaceSelector: { }
     podMonitorSelectorNilUsesHelmValues: false
