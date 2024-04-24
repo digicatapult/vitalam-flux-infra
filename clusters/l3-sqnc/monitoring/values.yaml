@@ -13,6 +13,7 @@ alertmanager:
       #       url: <secret>
   alertmanagerSpec:
     replicas: 2
+    podAntiAffinity: soft
 prometheus:
   serviceMonitor:
     selfMonitor: true
