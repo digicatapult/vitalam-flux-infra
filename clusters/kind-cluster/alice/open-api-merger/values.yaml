@@ -15,3 +15,9 @@ ingress:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
     nginx.ingress.kubernetes.io/enable-global-auth: "false"
+security:
+  type: "oauth2"
+  oauth2:
+    authorizationUrl: "/auth/realms/simple/protocol/openid-connect/auth"
+    tokenUrl: "/auth/realms/simple/protocol/openid-connect/token"
+    scopes: {}
