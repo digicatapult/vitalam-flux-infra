@@ -1,14 +1,16 @@
 configuration:
   clientID: "account-console"
-  clientSecret: "account-console" #todo
-  redirectURL: "http://localhost:3080/auth/realms/simple/account/"
+  clientSecret: "Rb6zYre2lZ27JSJh6okWVu2qgo1Q7N3H" #todo
+  redirectURL: "http://localhost:3080/swagger/"
   oidcIssuerURL: "http://localhost:3080/auth/realms/simple/"
   content: |
-    provider="keycloak"
+    provider="keycloak-oidc"
     provider_display_name="Keycloak"
+    redirect_urls="http://localhost:3080/alice/swagger/"
+    redirect_urls="http://localhost:3080/bob/swagger/"
     login_url="http://localhost:3080/auth/realms/simple/protocol/openid-connect/auth"
     redeem_url="http://localhost:3080/auth/realms/simple/protocol/openid-connect/token"
-    validate_url="http://localhost:3080/auth/realms/simple/protocol/openid-connect/userinfo"
+    validate_url="http://localhost:3080/auth/realms/simple/protocol/openid-connect/token/introspect"
     profile_url="http://localhost:3080/auth/realms/simple/protocol/openid-connect/userinfo"
     ssl_insecure_skip_verify=true
     email_domains = [ "*" ]
