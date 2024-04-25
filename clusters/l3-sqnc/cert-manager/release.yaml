@@ -17,7 +17,7 @@ spec:
         name: bitnami
   interval: 10m0s
   # Default values
-  # https://github.com/bitnami/charts/blob/master/bitnami/nginx-ingress-controller/values.yaml
+  # https://github.com/bitnami/charts/blob/master/bitnami/cert-manager/values.yaml
   valuesFrom:
     - kind: ConfigMap
       name: cert-manager-values
