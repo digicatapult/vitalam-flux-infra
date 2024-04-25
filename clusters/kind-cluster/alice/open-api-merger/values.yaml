@@ -21,3 +21,5 @@ security:
     authorizationUrl: "/auth/realms/simple/protocol/openid-connect/auth"
     tokenUrl: "/auth/realms/simple/protocol/openid-connect/token"
     scopes: {}
+image:
+  tag: v1.1.0
