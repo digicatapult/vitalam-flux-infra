@@ -6,8 +6,10 @@ configuration:
   content: |
     provider="keycloak-oidc"
     provider_display_name="Keycloak"
-    redirect_urls="http://localhost:3080/alice/swagger/"
-    redirect_urls="http://localhost:3080/bob/swagger/"
+    redirect_urls=[
+      "http://localhost:3080/alice/swagger/",
+      "http://localhost:3080/bob/swagger/"
+    ]
     login_url="http://localhost:3080/auth/realms/simple/protocol/openid-connect/auth"
     redeem_url="http://localhost:3080/auth/realms/simple/protocol/openid-connect/token"
     validate_url="http://localhost:3080/auth/realms/simple/protocol/openid-connect/token/introspect"
