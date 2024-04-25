@@ -1,7 +1,6 @@
 configuration:
   clientID: "account-console"
   clientSecret: "Rb6zYre2lZ27JSJh6okWVu2qgo1Q7N3H" #todo
-  oidcIssuerUrl: "http://localhost:3080/auth/realms/simple/"
   content: |
     provider="keycloak-oidc"
     provider_display_name="Keycloak"
@@ -9,3 +8,4 @@ configuration:
     email_domains = [ "*" ]
     upstreams = [ "file:///dev/null" ]
     scope="openid"
+    oidc_issuer_url="http://localhost:3080/auth/realms/simple/"
