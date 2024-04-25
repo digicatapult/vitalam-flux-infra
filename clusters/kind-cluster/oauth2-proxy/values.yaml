@@ -1,7 +1,7 @@
 configuration:
   clientID: "account-console"
   clientSecret: "Rb6zYre2lZ27JSJh6okWVu2qgo1Q7N3H" #todo
-  oidcIssuerURL: "http://localhost:3080/auth/realms/simple/"
+  oidcIssuerUrl: "http://localhost:3080/auth/realms/simple/"
   content: |
     provider="keycloak-oidc"
     provider_display_name="Keycloak"
