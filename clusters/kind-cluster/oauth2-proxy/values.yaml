@@ -9,3 +9,7 @@ configuration:
     upstreams = [ "file:///dev/null" ]
     scope="openid"
     oidc_issuer_url="http://localhost:3080/auth/realms/simple/"
+    skip_oidc_discovery=true
+    oidc_jwks_url="http://localhost:3080/auth/realms/simple/protocol/openid-connect/certs"
+    login_url="http://localhost:3080/auth/realms/simple/protocol/openid-connect/auth"
+    redeem_url="http://localhost:3080/auth/realms/simple/protocol/openid-connect/token"
