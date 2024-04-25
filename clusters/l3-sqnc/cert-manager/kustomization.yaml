@@ -9,6 +9,6 @@ configMapGenerator:
     files:
       - values-cert-manager.yaml=values.yaml
 configurations:
-  - kustomize-config.yaml
+  - kustomization-config.yaml
 generatorOptions:
   disableNameSuffixHash: true
