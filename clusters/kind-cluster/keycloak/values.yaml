@@ -78,6 +78,8 @@ httpRelativePath: /auth/
 proxy: edge
 ingress:
   enabled: true
+  annotations:
+    nginx.ingress.kubernetes.io/enable-global-auth: "false"
   hostname: localhost
 extraEnvVars:
   - name: KC_HOSTNAME_PATH

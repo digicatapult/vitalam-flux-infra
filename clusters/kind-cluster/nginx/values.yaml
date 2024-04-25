@@ -4,6 +4,8 @@ ingressClassResource:
   default: true
 hostNetwork: true
 dnsPolicy: ClusterFirstWithHostNet
+config:
+  global-auth-url: http://oauth2-proxy.kube-system.svc.cluster.local/oauth2/auth
 service:
   type: NodePort
 nodeSelector:
