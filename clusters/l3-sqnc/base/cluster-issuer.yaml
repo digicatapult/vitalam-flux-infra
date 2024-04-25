@@ -1,0 +1,19 @@
+
+spec:
+  acme:
+    email: opensource@digicatapult.org.uk
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    solvers:
+    - dns01:
+        azureDNS:
+          subscriptionID: TODO 
+          resourceGroupName: l3-k8s-prod
+          hostedZoneName: dsch-l3.com
+          # Azure Cloud Environment, default to AzurePublicCloud
+          environment: AzurePublicCloud
+          # optional, only required if node pools have more than 1 managed identity assigned
+          managedIdentity:
+            # client id of the node pool managed identity (can not be set at the same time as resourceID)
+            clientID: f3eedc6c-0460-4cac-94da-a068fcdd5ddd
