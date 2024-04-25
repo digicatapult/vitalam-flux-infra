@@ -12,4 +12,3 @@ configurations:
   - kustomize-config.yaml
 generatorOptions:
   disableNameSuffixHash: true
-  
