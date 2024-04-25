@@ -12,3 +12,4 @@ configurations:
   - kustomization-config.yaml
 generatorOptions:
   disableNameSuffixHash: true
+
