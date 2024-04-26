@@ -8,23 +8,21 @@ keycloakConfigCli:
         "registrationAllowed": true,
         "clients": [
             {
-              "clientId": "account-console",
-              "name": "${client_account-console}",
-              "description": "",
-              "rootUrl": "${authBaseUrl}",
+              "clientId": "alice-swagger",
+              "name": "Alice Swagger",
+              "description": "Client for the Alice persona's swagger access ",
+              "rootUrl": "http://localhost:3080/alice/swagger",
               "adminUrl": "",
-              "baseUrl": "/realms/simple/account/",
+              "baseUrl": "/",
               "surrogateAuthRequired": false,
               "enabled": true,
               "alwaysDisplayInConsole": false,
               "clientAuthenticatorType": "client-secret",
               "redirectUris": [
-                "/realms/simple/account/*",
-                "https://www.keycloak.org/app/*"
+                "/*"
               ],
               "webOrigins": [
-                "http://localhost:3080",
-                "https://www.keycloak.org"
+                "+"
               ],
               "notBefore": 0,
               "bearerOnly": false,
@@ -32,30 +30,66 @@ keycloakConfigCli:
               "standardFlowEnabled": true,
               "implicitFlowEnabled": false,
               "directAccessGrantsEnabled": false,
-              "serviceAccountsEnabled": false,
-              "publicClient": true,
-              "frontchannelLogout": false,
+              "serviceAccountsEnabled": true,
+              "publicClient": false,
+              "frontchannelLogout": true,
               "protocol": "openid-connect",
               "attributes": {
                 "oidc.ciba.grant.enabled": "false",
                 "backchannel.logout.session.required": "true",
-                "post.logout.redirect.uris": "+",
-                "display.on.consent.screen": "false",
+                "post.logout.redirect.uris": "/*",
                 "oauth2.device.authorization.grant.enabled": "false",
-                "pkce.code.challenge.method": "S256",
-                "backchannel.logout.revoke.offline.tokens": "false"
+                "backchannel.logout.revoke.offline.tokens": "false",
+                "login_theme": "",
+                "display.on.consent.screen": false,
+                "frontchannel.logout.url": "",
+                "backchannel.logout.url": ""
               },
               "authenticationFlowBindingOverrides": {},
-              "fullScopeAllowed": false,
-              "nodeReRegistrationTimeout": 0,
+              "fullScopeAllowed": true,
+              "nodeReRegistrationTimeout": -1,
               "protocolMappers": [
                 {
-                  "id": "bf89b84b-60b8-46a4-91f4-159b7ca32d2e",
-                  "name": "audience resolve",
+                  "name": "Client Host",
                   "protocol": "openid-connect",
-                  "protocolMapper": "oidc-audience-resolve-mapper",
+                  "protocolMapper": "oidc-usersessionmodel-note-mapper",
                   "consentRequired": false,
-                  "config": {}
+                  "config": {
+                    "user.session.note": "clientHost",
+                    "introspection.token.claim": "true",
+                    "id.token.claim": "true",
+                    "access.token.claim": "true",
+                    "claim.name": "clientHost",
+                    "jsonType.label": "String"
+                  }
+                },
+                {
+                  "name": "Client ID",
+                  "protocol": "openid-connect",
+                  "protocolMapper": "oidc-usersessionmodel-note-mapper",
+                  "consentRequired": false,
+                  "config": {
+                    "user.session.note": "client_id",
+                    "introspection.token.claim": "true",
+                    "id.token.claim": "true",
+                    "access.token.claim": "true",
+                    "claim.name": "client_id",
+                    "jsonType.label": "String"
+                  }
+                },
+                {
+                  "name": "Client IP Address",
+                  "protocol": "openid-connect",
+                  "protocolMapper": "oidc-usersessionmodel-note-mapper",
+                  "consentRequired": false,
+                  "config": {
+                    "user.session.note": "clientAddress",
+                    "introspection.token.claim": "true",
+                    "id.token.claim": "true",
+                    "access.token.claim": "true",
+                    "claim.name": "clientAddress",
+                    "jsonType.label": "String"
+                  }
                 }
               ],
               "defaultClientScopes": [
@@ -70,7 +104,223 @@ keycloakConfigCli:
                 "phone",
                 "offline_access",
                 "microprofile-jwt"
-              ]
+              ],
+              "access": {
+                "view": true,
+                "configure": true,
+                "manage": true
+              },
+              "authorizationServicesEnabled": false
+            },
+            {
+              "clientId": "bob-swagger",
+              "name": "Bob Swagger",
+              "description": "Client for the Bob persona's swagger access ",
+              "rootUrl": "http://localhost:3080/bob/swagger",
+              "adminUrl": "",
+              "baseUrl": "/",
+              "surrogateAuthRequired": false,
+              "enabled": true,
+              "alwaysDisplayInConsole": false,
+              "clientAuthenticatorType": "client-secret",
+              "redirectUris": [
+                "/*"
+              ],
+              "webOrigins": [
+                "+"
+              ],
+              "notBefore": 0,
+              "bearerOnly": false,
+              "consentRequired": false,
+              "standardFlowEnabled": true,
+              "implicitFlowEnabled": false,
+              "directAccessGrantsEnabled": false,
+              "serviceAccountsEnabled": true,
+              "publicClient": false,
+              "frontchannelLogout": true,
+              "protocol": "openid-connect",
+              "attributes": {
+                "oidc.ciba.grant.enabled": "false",
+                "backchannel.logout.session.required": "true",
+                "post.logout.redirect.uris": "/*",
+                "oauth2.device.authorization.grant.enabled": "false",
+                "backchannel.logout.revoke.offline.tokens": "false",
+                "login_theme": "",
+                "display.on.consent.screen": false,
+                "frontchannel.logout.url": "",
+                "backchannel.logout.url": ""
+              },
+              "authenticationFlowBindingOverrides": {},
+              "fullScopeAllowed": true,
+              "nodeReRegistrationTimeout": -1,
+              "protocolMappers": [
+                {
+                  "name": "Client Host",
+                  "protocol": "openid-connect",
+                  "protocolMapper": "oidc-usersessionmodel-note-mapper",
+                  "consentRequired": false,
+                  "config": {
+                    "user.session.note": "clientHost",
+                    "introspection.token.claim": "true",
+                    "id.token.claim": "true",
+                    "access.token.claim": "true",
+                    "claim.name": "clientHost",
+                    "jsonType.label": "String"
+                  }
+                },
+                {
+                  "name": "Client ID",
+                  "protocol": "openid-connect",
+                  "protocolMapper": "oidc-usersessionmodel-note-mapper",
+                  "consentRequired": false,
+                  "config": {
+                    "user.session.note": "client_id",
+                    "introspection.token.claim": "true",
+                    "id.token.claim": "true",
+                    "access.token.claim": "true",
+                    "claim.name": "client_id",
+                    "jsonType.label": "String"
+                  }
+                },
+                {
+                  "name": "Client IP Address",
+                  "protocol": "openid-connect",
+                  "protocolMapper": "oidc-usersessionmodel-note-mapper",
+                  "consentRequired": false,
+                  "config": {
+                    "user.session.note": "clientAddress",
+                    "introspection.token.claim": "true",
+                    "id.token.claim": "true",
+                    "access.token.claim": "true",
+                    "claim.name": "clientAddress",
+                    "jsonType.label": "String"
+                  }
+                }
+              ],
+              "defaultClientScopes": [
+                "web-origins",
+                "acr",
+                "roles",
+                "profile",
+                "email"
+              ],
+              "optionalClientScopes": [
+                "address",
+                "phone",
+                "offline_access",
+                "microprofile-jwt"
+              ],
+              "access": {
+                "view": true,
+                "configure": true,
+                "manage": true
+              },
+              "authorizationServicesEnabled": false
+            },
+            {
+              "clientId": "charlie-swagger",
+              "name": "Charlie Swagger",
+              "description": "Client for the Charlie persona's swagger access ",
+              "rootUrl": "http://localhost:3080/charlie/swagger",
+              "adminUrl": "",
+              "baseUrl": "/",
+              "surrogateAuthRequired": false,
+              "enabled": true,
+              "alwaysDisplayInConsole": false,
+              "clientAuthenticatorType": "client-secret",
+              "redirectUris": [
+                "/*"
+              ],
+              "webOrigins": [
+                "+"
+              ],
+              "notBefore": 0,
+              "bearerOnly": false,
+              "consentRequired": false,
+              "standardFlowEnabled": true,
+              "implicitFlowEnabled": false,
+              "directAccessGrantsEnabled": false,
+              "serviceAccountsEnabled": true,
+              "publicClient": false,
+              "frontchannelLogout": true,
+              "protocol": "openid-connect",
+              "attributes": {
+                "oidc.ciba.grant.enabled": "false",
+                "backchannel.logout.session.required": "true",
+                "post.logout.redirect.uris": "/*",
+                "oauth2.device.authorization.grant.enabled": "false",
+                "backchannel.logout.revoke.offline.tokens": "false",
+                "login_theme": "",
+                "display.on.consent.screen": false,
+                "frontchannel.logout.url": "",
+                "backchannel.logout.url": ""
+              },
+              "authenticationFlowBindingOverrides": {},
+              "fullScopeAllowed": true,
+              "nodeReRegistrationTimeout": -1,
+              "protocolMappers": [
+                {
+                  "name": "Client Host",
+                  "protocol": "openid-connect",
+                  "protocolMapper": "oidc-usersessionmodel-note-mapper",
+                  "consentRequired": false,
+                  "config": {
+                    "user.session.note": "clientHost",
+                    "introspection.token.claim": "true",
+                    "id.token.claim": "true",
+                    "access.token.claim": "true",
+                    "claim.name": "clientHost",
+                    "jsonType.label": "String"
+                  }
+                },
+                {
+                  "name": "Client ID",
+                  "protocol": "openid-connect",
+                  "protocolMapper": "oidc-usersessionmodel-note-mapper",
+                  "consentRequired": false,
+                  "config": {
+                    "user.session.note": "client_id",
+                    "introspection.token.claim": "true",
+                    "id.token.claim": "true",
+                    "access.token.claim": "true",
+                    "claim.name": "client_id",
+                    "jsonType.label": "String"
+                  }
+                },
+                {
+                  "name": "Client IP Address",
+                  "protocol": "openid-connect",
+                  "protocolMapper": "oidc-usersessionmodel-note-mapper",
+                  "consentRequired": false,
+                  "config": {
+                    "user.session.note": "clientAddress",
+                    "introspection.token.claim": "true",
+                    "id.token.claim": "true",
+                    "access.token.claim": "true",
+                    "claim.name": "clientAddress",
+                    "jsonType.label": "String"
+                  }
+                }
+              ],
+              "defaultClientScopes": [
+                "web-origins",
+                "acr",
+                "roles",
+                "profile",
+                "email"
+              ],
+              "optionalClientScopes": [
+                "address",
+                "phone",
+                "offline_access",
+                "microprofile-jwt"
+              ],
+              "access": {
+                "view": true,
+                "configure": true,
+                "manage": true
+              },
+              "authorizationServicesEnabled": false
             }
           ]
       }
