@@ -1,5 +1,5 @@
 logLevel: info
-selfAddress: 12D3KooWHdiAxVd8uMQR1hGWXccidmfCwLqcMpGwR6QcTP6QRMuD
+selfAddress: 5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty
 externalSqncNode:
   host: bob-node-sqnc-node-0
   port: 9944
