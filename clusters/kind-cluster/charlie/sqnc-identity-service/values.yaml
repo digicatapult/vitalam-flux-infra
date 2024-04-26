@@ -1,5 +1,5 @@
 logLevel: info
-selfAddress: 12D3KooWSCufgHzV4fCwRijfH2k3abrpAJxTKxEvN1FDuRXA2U9x
+selfAddress: 5FLSigC9HGRKVhB9FiEo4Y3koPsNmBmLJbpXg2mp1hXcS59Y
 externalSqncNode:
   host: charlie-node-sqnc-node-0
   port: 9944
