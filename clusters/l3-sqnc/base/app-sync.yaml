@@ -54,3 +54,16 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: flux-system
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  path: ./clusters/l3-sqnc/cert-issuer
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
