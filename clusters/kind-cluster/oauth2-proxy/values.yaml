@@ -13,3 +13,6 @@ configuration:
     oidc_jwks_url="http://keycloak.keycloak.svc.cluster.local/realms/simple/protocol/openid-connect/certs"
     login_url="http://keycloak.keycloak.svc.cluster.local/realms/simple/protocol/openid-connect/auth"
     redeem_url="http://keycloak.keycloak.svc.cluster.local/realms/simple/protocol/openid-connect/token"
+    request_logging=true
+    auth_logging=true
+    standard_logging=true

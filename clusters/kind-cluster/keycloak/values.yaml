@@ -92,3 +92,7 @@ extraEnvVars:
     value: "http://localhost:3080/auth/"
   - name: KC_HOSTNAME_DEBUG
     value: "true"
+  - name: KC_LOG_LEVEL
+    value: "TRACE"
+  - name: KC_LOG_CONSOLE_OUTPUT
+    value: "json"
