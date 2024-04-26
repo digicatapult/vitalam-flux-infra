@@ -2,13 +2,3 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - release.yaml
-# DAVE: do we need this as I Was not able to find any values like we did for
-# cert-manager so I guess this is not needed, please confirm.
-configMapGenerator:
-  - name: cert-issuer-values
-    files:
-      - values-cert-issuer.yaml=/values.yaml
-configurations:
-  - kustomize-config.yaml
-generatorOptions:
-  disableNameSuffixHash: true
