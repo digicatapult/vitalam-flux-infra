@@ -5,8 +5,8 @@ paths:
 baseUrl:
   - http://localhost:3080/alice/
 apiPublicUrlPrefix: /alice
-oauthClientId: "account-console"
-oauthAppName: "Account Console"
+oauthClientId: "alice-swagger"
+oauthAppName: "Alice Swagger"
 oauthUsePkce: true
 ingress:
   hostname: localhost
