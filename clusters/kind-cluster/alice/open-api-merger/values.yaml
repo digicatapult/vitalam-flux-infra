@@ -5,6 +5,9 @@ paths:
 baseUrl:
   - http://localhost:3080/alice/
 apiPublicUrlPrefix: /alice
+oauthClientId: "account-console"
+oauthAppName: "Account Console"
+oauthUsePkce: true
 ingress:
   hostname: localhost
   paths:
@@ -14,3 +17,15 @@ ingress:
       pathType: Prefix
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
+securitySchema:
+  name: "oauth2"
+  type: "oauth2"
+  enabled: true
+  oauth2:
+    flows:
+      - authorizationCode
+      - clientCredentials
+    authorizationUrl: "/auth/realms/simple/protocol/openid-connect/auth"
+    tokenUrl: "/auth/realms/simple/protocol/openid-connect/token"
+    refreshUrl: "/auth/realms/simple/protocol/openid-connect/token"
+    scopes: {}
