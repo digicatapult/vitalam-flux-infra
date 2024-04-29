@@ -1,0 +1,21 @@
+config:
+  vouch:
+    allowAllUsers: true
+    cookie:
+      domain: localhost
+      secure: false
+    logLevel: debug
+
+  oauth:
+    provider: oidc
+    auth_url: http://keycloak.keycloak.svc.cluster.local/auth/realms/simple/protocol/openid-connect/auth
+    token_url: http://keycloak.keycloak.svc.cluster.local/auth/realms/simple/protocol/openid-connect/token
+    user_info_url: http://keycloak.keycloak.svc.cluster.local/auth/realms/simple/protocol/openid-connect/userinfo
+    code_challenge_method: S256
+    scopes:
+      - openid
+      - email
+      - profile
+    client_id: account-console
+    client_secret: Rb6zYre2lZ27JSJh6okWVu2qgo1Q7N3H
+    callback_url: http://localhost:3080/alice/swagger/

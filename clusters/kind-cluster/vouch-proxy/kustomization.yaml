@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: kube-system
+resources:
+  - release.yaml
+  - source.yaml
+generatorOptions:
+  disableNameSuffixHash: true
+configMapGenerator:
+  - name: vouch-proxy-values
+    files:
+      - values.yaml
