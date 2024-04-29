@@ -5,7 +5,7 @@ ingressClassResource:
 hostNetwork: true
 dnsPolicy: ClusterFirstWithHostNet
 config:
-    global-auth-url: "http://vouch.kube-system.svc.cluster.local:9090/$request_uri"
+    global-auth-url: "http://vouch.kube-system.svc.cluster.local:9090/validate?$request_uri"
 service:
   type: NodePort
 nodeSelector:
