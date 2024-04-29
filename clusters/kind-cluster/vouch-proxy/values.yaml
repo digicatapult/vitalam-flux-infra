@@ -17,5 +17,5 @@ config:
       - email
       - profile
     client_id: account-console
-    client_secret: Rb6zYre2lZ27JSJh6okWVu2qgo1Q7N3H
+    client_secret: 0FW6k5OFI0EpbOvLFZZ0F7Gu5RBracvu
     callback_url: http://localhost:3080/alice/swagger/
