@@ -329,6 +329,8 @@ proxy: edge
 ingress:
   enabled: true
   hostname: localhost
+  annotations:
+    nginx.ingress.kubernetes.io/enable-global-auth: "false"
 extraEnvVars:
   - name: KC_HOSTNAME_PATH
     value: /auth/

@@ -17,6 +17,7 @@ ingress:
       pathType: Prefix
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/enable-global-auth: "false"
 securitySchema:
   name: "oauth2"
   type: "oauth2"
