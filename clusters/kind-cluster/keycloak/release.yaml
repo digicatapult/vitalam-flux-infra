@@ -23,5 +23,5 @@ spec:
       valuesKey: values.yaml
     - kind: ConfigMap
       name: keycloak-values
-      valuesKey: configuration-alice.yaml
+      valuesKey: configuration-alice.json
       targetPath: keycloakConfigCli.configuration.alice\.json
