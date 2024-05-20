@@ -3,9 +3,10 @@ selfAddress: 5FLSigC9HGRKVhB9FiEo4Y3koPsNmBmLJbpXg2mp1hXcS59Y
 externalSqncNode:
   host: charlie-node-sqnc-node-0
   port: 9944
-externalOrigin: "http://localhost:3080"
-externalPathPrefix: "charlie/sqnc-identity-service"
-authType: NONE
+auth:
+  clientId: 'sequence'
+  publicUrlPrefix: "http://localhost:3080/auth/realms/alice/protocol/openid-connect"
+  internalUrlPrefix: "http://keycloak.keycloak.svc.cluster.local:3080/realms/alice/protocol/openid-connect"
 ingress:
   hostname: localhost
   paths:

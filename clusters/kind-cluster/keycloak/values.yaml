@@ -4,7 +4,7 @@ keycloakConfigCli:
     realm.json: |
       {
         "enabled": true,
-        "realm": "simple",
+        "realm": "alice",
         "registrationAllowed": true,
         "clients": [
             {
