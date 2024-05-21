@@ -24,6 +24,6 @@ securitySchema:
   oauth2:
     flows:
       - clientCredentials
-    tokenUrl: "/auth/realms/simple/protocol/openid-connect/token"
-    refreshUrl: "/auth/realms/simple/protocol/openid-connect/token"
+    tokenUrl: "/auth/realms/charlie/protocol/openid-connect/token"
+    refreshUrl: "/auth/realms/charlie/protocol/openid-connect/token"
     scopes: {}

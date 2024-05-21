@@ -9,7 +9,10 @@ externalSqncIpfs:
 externalSqncIdentity:
   host: bob-identity-service-sqnc-identity-service
   port: 3000
-
+auth:
+  clientId: 'sequence'
+  publicUrlPrefix: "http://localhost:3080/auth/realms/bob/protocol/openid-connect"
+  internalUrlPrefix: "http://keycloak.keycloak.svc.cluster.local/realms/bob/protocol/openid-connect"
 ingress:
   hostname: localhost
   paths:

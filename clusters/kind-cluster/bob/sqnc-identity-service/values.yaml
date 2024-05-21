@@ -3,9 +3,10 @@ selfAddress: 5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty
 externalSqncNode:
   host: bob-node-sqnc-node-0
   port: 9944
-externalOrigin: "http://localhost:3080"
-externalPathPrefix: "bob/sqnc-identity-service"
-authType: NONE
+auth:
+  clientId: 'sequence'
+  publicUrlPrefix: "http://localhost:3080/auth/realms/bob/protocol/openid-connect"
+  internalUrlPrefix: "http://keycloak.keycloak.svc.cluster.local/realms/bob/protocol/openid-connect"
 ingress:
   hostname: localhost
   paths:

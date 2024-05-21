@@ -23,9 +23,7 @@ securitySchema:
   enabled: true
   oauth2:
     flows:
-      - authorizationCode
       - clientCredentials
-    authorizationUrl: "/auth/realms/simple/protocol/openid-connect/auth"
-    tokenUrl: "/auth/realms/simple/protocol/openid-connect/token"
-    refreshUrl: "/auth/realms/simple/protocol/openid-connect/token"
+    tokenUrl: "/auth/realms/alice/protocol/openid-connect/token"
+    refreshUrl: "/auth/realms/alice/protocol/openid-connect/token"
     scopes: {}
