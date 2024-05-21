@@ -8,7 +8,6 @@ configMapGenerator:
   - name: keycloak-values
     files:
       - values.yaml=values.yaml
-      - configuration-alice.json=configuration-alice.yaml
 configurations:
   - kustomize-config.yaml
 generatorOptions:
