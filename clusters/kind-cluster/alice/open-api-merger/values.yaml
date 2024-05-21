@@ -5,7 +5,7 @@ paths:
 baseUrl:
   - http://localhost:3080/alice/
 apiPublicUrlPrefix: /alice
-oauthClientId: "alice-swagger"
+oauthClientId: "sequence"
 oauthAppName: "Alice Swagger"
 oauthUsePkce: true
 ingress:

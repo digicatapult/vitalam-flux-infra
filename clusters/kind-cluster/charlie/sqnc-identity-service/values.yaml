@@ -19,6 +19,8 @@ ingress:
 node:
   enabled: false
 postgresql:
+  auth:
+    password: postgres
   metrics:
     enabled: true
     serviceMonitor:

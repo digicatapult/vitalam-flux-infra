@@ -5,7 +5,7 @@ paths:
 baseUrl:
   - http://localhost:3080/charlie/
 apiPublicUrlPrefix: /charlie
-oauthClientId: "charlie-swagger"
+oauthClientId: "sequence"
 oauthAppName: "Charlie Swagger"
 oauthUsePkce: true
 ingress:
