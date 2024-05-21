@@ -2,25 +2,17 @@
 
 Authentication in SQNC is managed using [`Keycloak`](https://www.keycloak.org/)
 
-## Admin
+## Kind Cluster
+
+### Admin
 
 After following instructions in [getting-started](./getting-started.md) to start a flux cluster, the admin console for Keycloak is available at http://localhost:3080/auth/.
 
 Default user is `user`
 Password is retrieved with `kubectl -n keycloak get secret keycloak -o jsonpath='{.data.admin-password}' | base64 -d && echo`
 
-The Keycloak instance comes with a realm named `simple`, set up to use Keycloak's built-in simple user login/registration. The default client for logging in is http://localhost:3080/auth/realms/simple/account/.
+The Keycloak instance comes with a realm per persona named `alice`, `bob` and `charlie`, set up to use Keycloak's built-in simple user login/registration. The default client for logging in is for example for `alice` http://localhost:3080/auth/realms/alice/account/.
 
-## Verifying against Keycloak's test app
+### Authenticating swagger
 
-Keycloak provide a web app https://www.keycloak.org/app/ to test authorisation flow is working.
-
-Enter the following details:
-
-```
-Keycloak URL: http://localhost:3080/auth/
-Realm: simple
-Client: account-console
-```
-
-Clicking `Save` then `Sign in` should redirect to the `simple` realm sign in/register page. `Register` a new user using any details. After registering, the client should be logged into that user and display `Hello {First name} {Last name}`.
+A client exists in each realm called `sequence` which supports the clientCredentials flow. When visiting any of the swagger interfaces, for example `http://localhost:3080/alice/swagger`, you will need to authenticate by clicking `Authorize`. The "secret" for all three realms is configured to be the value `secret`. Once authenticated you will then be able to make calls through the swagger interface.
