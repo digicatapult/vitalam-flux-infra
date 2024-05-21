@@ -5,7 +5,7 @@ paths:
 baseUrl:
   - http://localhost:3080/bob/
 apiPublicUrlPrefix: /bob
-oauthClientId: "bob-swagger"
+oauthClientId: "sequence"
 oauthAppName: "Bob Swagger"
 oauthUsePkce: true
 ingress:
@@ -23,9 +23,7 @@ securitySchema:
   enabled: true
   oauth2:
     flows:
-      - authorizationCode
       - clientCredentials
-    authorizationUrl: "/auth/realms/simple/protocol/openid-connect/auth"
-    tokenUrl: "/auth/realms/simple/protocol/openid-connect/token"
-    refreshUrl: "/auth/realms/simple/protocol/openid-connect/token"
+    tokenUrl: "/auth/realms/bob/protocol/openid-connect/token"
+    refreshUrl: "/auth/realms/bob/protocol/openid-connect/token"
     scopes: {}
