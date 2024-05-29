@@ -5,7 +5,7 @@ ingressClassResource:
   name: nginx-optimiser
   default: false
 service:
-  type: LoadBalancer
+  type: ClusterIp
   annotations: 
     service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
     external-dns.alpha.kubernetes.io/hostname: optimiser.dsch-l3.com
