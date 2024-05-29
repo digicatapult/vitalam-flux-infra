@@ -12,7 +12,7 @@ externalSqncIdentity:
 auth:
   clientId: 'l3'
   publicUrlPrefix: "https://auth.dsch-l3.com/realms/capacity/protocol/openid-connect"
-  internalUrlPrefix: "http://keycloak.keycloak.svc.cluster.local/realms/alice/protocol/openid-connect"
+  internalUrlPrefix: "http://keycloak.keycloak.svc.cluster.local/realms/capacity/protocol/openid-connect"
 ingress:
   enabled: true
   ingressClassName: nginx-capacity
