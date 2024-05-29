@@ -61,3 +61,17 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: keycloak-sync
+  namespace: keycloak
+spec:
+  interval: 1m
+  path: ./clusters/l3-sqnc/keycloak 
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
