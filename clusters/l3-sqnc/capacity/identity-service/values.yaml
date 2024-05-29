@@ -8,7 +8,7 @@ auth:
   publicUrlPrefix: "https://auth.dsch-l3.com/realms/capacity/protocol/openid-connect"
   internalUrlPrefix: "http://keycloak.keycloak.svc.cluster.local/realms/alice/protocol/openid-connect"
 ingress:
-  enabled: false
+  enabled: true
   ingressClassName: nginx-capacity
   hostname: capacity.dsch-l3.com
 node:
