@@ -16,7 +16,7 @@ securitySchema:
     scopes: {}
 ingress:
   ingressClassName: nginx-capacity
-  enabled: false
+  enabled: true
   hostname: capacity.dsch-l3.com
   paths:
     - path: /(api-docs(/.*)?)
