@@ -3,10 +3,12 @@ selfAddress: 5Df4d56pDyPz3RM3RBLYC7nyhhL9mGXchrV1dkyYPt5u8H88
 externalSqncNode:
   host: blue-node-sqnc-node-0
   port: 9944
-authType: EXTERNAL
-externalOrigin: "https://order.dsch-l3.com"
+auth:
+  clientId: 'l3'
+  publicUrlPrefix: "https://auth.dsch-l3.com/realms/order/protocol/openid-connect"
+  internalUrlPrefix: "http://keycloak.keycloak.svc.cluster.local/realms/order/protocol/openid-connect"
 ingress:
-  enabled: false
+  enabled: true
   ingressClassName: nginx-order
   hostname: order.dsch-l3.com
 node:

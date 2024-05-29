@@ -4,9 +4,19 @@ paths:
   - http://optimiser-matchmaker-api-sqnc-matchmaker-api:3000/api-docs
 baseUrl:
   - https://optimiser.dsch-l3.com
+securitySchema:
+  name: "oauth2"
+  type: "oauth2"
+  enabled: true
+  oauth2:
+    flows:
+      - clientCredentials
+    tokenUrl: "https://auth.dsch-l3.com/realms/optimiser/protocol/openid-connect/token"
+    refreshUrl: "https://auth.dsch-l3.com/realms/optimiser/protocol/openid-connect/token"
+    scopes: {}
 ingress:
   ingressClassName: nginx-optimiser
-  enabled: false
+  enabled: true
   hostname: optimiser.dsch-l3.com
   paths:
     - path: /(api-docs(/.*)?)

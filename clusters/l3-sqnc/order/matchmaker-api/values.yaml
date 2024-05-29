@@ -9,9 +9,12 @@ externalSqncIpfs:
 externalSqncIdentity:
   host: order-identity-service-sqnc-identity-service
   port: 3000
-authType: EXTERNAL
+auth:
+  clientId: 'l3'
+  publicUrlPrefix: "https://auth.dsch-l3.com/realms/order/protocol/openid-connect"
+  internalUrlPrefix: "http://keycloak.keycloak.svc.cluster.local/realms/order/protocol/openid-connect"
 ingress:
-  enabled: false
+  enabled: true
   ingressClassName: nginx-order
   hostname: order.dsch-l3.com
 node:
