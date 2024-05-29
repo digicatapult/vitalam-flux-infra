@@ -9,7 +9,10 @@ externalSqncIpfs:
 externalSqncIdentity:
   host: capacity-identity-service-sqnc-identity-service
   port: 3000
-authType: EXTERNAL
+auth:
+  clientId: 'l3'
+  publicUrlPrefix: "https://auth.dsch-l3.com/realms/capacity/protocol/openid-connect"
+  internalUrlPrefix: "http://keycloak.keycloak.svc.cluster.local/realms/alice/protocol/openid-connect"
 ingress:
   enabled: false
   ingressClassName: nginx-capacity

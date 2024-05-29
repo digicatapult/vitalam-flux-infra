@@ -3,8 +3,10 @@ selfAddress: 5Gh5cFC3sPS7pK8SN41Ytp6VFsMyPpvKxtrrcLpkf19u9W83
 externalSqncNode:
   host: magenta-sqnc-node-0
   port: 9944
-authType: EXTERNAL
-externalOrigin: "https://capacity.dsch-l3.com"
+auth:
+  clientId: 'l3'
+  publicUrlPrefix: "https://auth.dsch-l3.com/realms/capacity/protocol/openid-connect"
+  internalUrlPrefix: "http://keycloak.keycloak.svc.cluster.local/realms/alice/protocol/openid-connect"
 ingress:
   enabled: false
   ingressClassName: nginx-capacity
