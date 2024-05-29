@@ -21,4 +21,4 @@ spec:
   valuesFrom:
     - kind: ConfigMap
       name: keycloak-values
-      valuesKey: values-nginx.yaml
+      valuesKey: nginx-values.yaml
