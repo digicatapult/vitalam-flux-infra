@@ -17,3 +17,8 @@ extraEnvVars:
     value: "https://auth.dsch-l3.com/"
   - name: KC_HOSTNAME_DEBUG
     value: "true"
+postgresql:
+  primary:
+    persistence:
+      storageClass: managed-csi-premium
+      size: 5Gi
