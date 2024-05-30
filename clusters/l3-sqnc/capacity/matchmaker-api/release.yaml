@@ -11,9 +11,9 @@ spec:
   dependsOn:
     - name: ipfs-capacity
     - name: capacity-identity-service
-  version: 2.0.1
   chart:
     spec:
+      version: 2.0.1
       chart: sqnc-matchmaker-api
       sourceRef:
         kind: HelmRepository

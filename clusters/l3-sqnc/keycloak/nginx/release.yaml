@@ -9,9 +9,9 @@ spec:
     remediation:
       retries: -1
   releaseName: nginx-ingress-controller
-  version: 11.3.0
   chart:
     spec:
+      version: 11.3.0
       chart: nginx-ingress-controller
       sourceRef:
         kind: HelmRepository

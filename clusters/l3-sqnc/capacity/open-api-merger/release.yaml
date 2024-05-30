@@ -11,9 +11,9 @@ spec:
   dependsOn:
     - name: capacity-identity-service
     - name: capacity-matchmaker-api
-  version: 2.1.2
   chart:
     spec:
+      version: 2.1.2
       chart: openapi-merger
       sourceRef:
         kind: HelmRepository
