@@ -7,7 +7,7 @@ metadata:
 spec:
   interval: 1m0s
   ref:
-    branch: feature/l3-auth-prod
+    branch: main
   url: https://github.com/digicatapult/sqnc-flux-infra.git
 
 ---
