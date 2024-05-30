@@ -10,9 +10,9 @@ spec:
       retries: -1
   dependsOn:
     - name: blue-node
-  version: 4.0.1
   chart:
     spec:
+      version: 4.0.1
       chart: sqnc-identity-service
       sourceRef:
         kind: HelmRepository

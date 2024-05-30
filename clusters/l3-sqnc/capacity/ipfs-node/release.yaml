@@ -10,9 +10,9 @@ spec:
       retries: -1
   dependsOn:
     - name: magenta
-  version: 4.0.1
   chart:
     spec:
+      version: 4.0.1
       chart: sqnc-ipfs
       sourceRef:
         kind: HelmRepository
