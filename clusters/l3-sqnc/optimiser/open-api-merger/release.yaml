@@ -11,6 +11,7 @@ spec:
   dependsOn:
     - name: optimiser-identity-service
     - name: optimiser-matchmaker-api
+  version: 2.1.2
   chart:
     spec:
       chart: openapi-merger

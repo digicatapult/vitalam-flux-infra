@@ -8,6 +8,7 @@ spec:
     remediation:
       retries: -1
   releaseName: keycloak
+  version: 21.3.1
   chart:
     spec:
       chart: keycloak

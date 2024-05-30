@@ -9,6 +9,7 @@ spec:
     remediation:
       retries: -1
   releaseName: nginx-ingress-controller
+  version: 11.3.0
   chart:
     spec:
       chart: nginx-ingress-controller
