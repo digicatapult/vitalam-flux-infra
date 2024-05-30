@@ -10,6 +10,7 @@ spec:
       retries: -1
   dependsOn:
     - name: yellow-node
+  version: 4.0.1
   chart:
     spec:
       chart: sqnc-identity-service

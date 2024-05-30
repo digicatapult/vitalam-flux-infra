@@ -1,0 +1,24 @@
+production: true
+proxy: edge
+ingress:
+  enabled: true
+  ingressClassName: nginx-keycloak
+  hostname: auth.dsch-l3.com
+adminIngress:
+  enabled: true
+  ingressClassName: nginx-keycloak
+  hostname: auth.dsch-l3.com
+auth:
+  adminUser: "admin"
+extraEnvVars:
+  - name: KC_HOSTNAME_ADMIN_URL
+    value: "https://auth.dsch-l3.com/"
+  - name: KC_HOSTNAME_URL
+    value: "https://auth.dsch-l3.com/"
+  - name: KC_HOSTNAME_DEBUG
+    value: "true"
+postgresql:
+  primary:
+    persistence:
+      storageClass: managed-csi-premium
+      size: 5Gi

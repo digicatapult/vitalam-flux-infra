@@ -9,6 +9,7 @@ spec:
     remediation:
       retries: -1
   releaseName: cert-manager
+  version: 1.3.0
   chart:
     spec:
       chart: cert-manager  

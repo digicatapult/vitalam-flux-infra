@@ -11,6 +11,7 @@ spec:
   dependsOn:
     - name: capacity-identity-service
     - name: capacity-matchmaker-api
+  version: 2.1.2
   chart:
     spec:
       chart: openapi-merger
