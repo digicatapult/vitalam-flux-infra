@@ -2,17 +2,13 @@ watchIngressWithoutClass: true
 scope:
   enabled: true
 ingressClassResource:
-  name: nginx-optimiser
-  default: false
+  name: nginx
+  default: true
 service:
   type: LoadBalancer
   annotations: 
     service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
-    external-dns.alpha.kubernetes.io/hostname: optimiser.dsch-l3.com
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    cert-manager.io/common-name: optimiser.dsch-l3.com
-extraArgs:
-  default-ssl-certificate: "optimiser/optimiser-dsch-l3-com-prod-tls"
+    external-dns.alpha.kubernetes.io/hostname: sqnc.dsch-l3.com
 nodeSelector:
   kubernetes.io/os: linux
 tolerations:
@@ -29,4 +25,4 @@ metrics:
   enabled: true
   serviceMonitor:
     enabled: true
-    namespace: optimiser
+    namespace: monitoring

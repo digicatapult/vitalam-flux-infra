@@ -1,0 +1,109 @@
+alertmanager:
+  enabled: true
+  serviceMonitor:
+    selfMonitor: true
+    namespace: monitoring
+  config:
+    receivers:
+      - name: "null"
+      # - 
+      # - name: slack
+      #   webhook_configs:
+      #     - send_resolved: true
+      #       url: <secret>
+  alertmanagerSpec:
+    replicas: 2
+    podAntiAffinity: soft
+prometheus:
+  serviceMonitor:
+    selfMonitor: true
+    namespace: monitoring
+  service:
+    sessionAffinity: ClientIP # Ensures grafana always pulls from the same replica
+  prometheusSpec:
+    replicas: 2
+    podAntiAffinity: soft
+    retention: 12h
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: managed-csi-premium
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 50Gi
+    resources:
+      requests:
+        cpu: 200m
+        memory: 200Mi
+      limits:
+        cpu: 2000m
+        memory: 2Gi
+    serviceMonitorSelectorNilUsesHelmValues: false
+    serviceMonitorNamespaceSelector: { }
+    podMonitorSelectorNilUsesHelmValues: false
+    podMonitorNamespaceSelector: { }
+    podMonitorSelector:
+      matchLabels:
+        app.kubernetes.io/component: monitoring
+grafana:
+  defaultDashboardsEnabled: false
+  serviceMonitor:
+    enabled: true
+    namespace: monitoring
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hosts:
+      - grafana.dsch-l3.com
+  persistence:
+    enabled: true
+    type: pvc
+    storageClassName: managed-csi-premium
+    accessModes:
+      - ReadWriteOnce
+    size: 10Gi
+    finalizers:
+      - kubernetes.io/pvc-protection
+  plugins:
+    - camptocamp-prometheus-alertmanager-datasource
+  additionalDataSources:
+    - name: "Prometheus AlertManager"
+      type: camptocamp-prometheus-alertmanager-datasource
+      uid: prometheus-alertmanager
+      url: http://{{ template "kube-prometheus-stack.fullname" . }}-alertmanager.{{ template "kube-prometheus-stack.namespace" . }}:{{ .Values.alertmanager.service.port }}/{{ trimPrefix "/" .Values.alertmanager.alertmanagerSpec.routePrefix }}
+  dashboardProviders:
+    dashboardproviders.yaml:
+      apiVersion: 1
+      providers:
+      - name: 'default'
+        orgId: 1
+        folder: ''
+        type: file
+        disableDeletion: false
+        editable: true
+        options:
+          path: /var/lib/grafana/dashboards
+  dashboards:
+    default:
+      postgresql:
+        gnetId: 9628
+        revision: 7
+        datasource: Prometheus
+      nginx:
+        gnetId: 9614
+        revision: 1
+        datasource: Prometheus
+      flux2:
+        gnetId: 16714
+        revision: 1
+        datasource: Prometheus
+      alertmanager:
+        gnetId: 9578
+        revision: 4
+        datasource: Prometheus
+      polkadot:
+        gnetId: 13840
+        revision: 4
+        datasource: Prometheus
