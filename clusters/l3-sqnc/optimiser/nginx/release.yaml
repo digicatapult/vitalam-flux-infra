@@ -11,6 +11,7 @@ spec:
   releaseName: nginx-ingress-controller
   chart:
     spec:
+      version: 11.3.0
       chart: nginx-ingress-controller
       sourceRef:
         kind: HelmRepository

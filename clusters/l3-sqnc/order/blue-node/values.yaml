@@ -2,7 +2,6 @@ node:
   chain: l3-sqnc
   role: validator
   dataVolumeSize: 100Gi
-  customNodeKey: "0000000000000000000000000000000000000000000000000000000000000003"
   perNodeServices:
     setPublicAddressToExternal:
       enabled: false

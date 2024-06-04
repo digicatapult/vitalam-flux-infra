@@ -9,6 +9,10 @@ externalSqncIpfs:
 externalSqncIdentity:
   host: alice-identity-service-sqnc-identity-service
   port: 3000
+auth:
+  clientId: 'sequence'
+  publicUrlPrefix: "http://localhost:3080/auth/realms/alice/protocol/openid-connect"
+  internalUrlPrefix: "http://keycloak.keycloak.svc.cluster.local/auth/realms/alice/protocol/openid-connect"
 ingress:
   hostname: localhost
   paths:
@@ -27,6 +31,8 @@ ingress:
 node:
   enabled: false
 postgresql:
+  auth:
+    password: postgres
   metrics:
     enabled: true
     serviceMonitor:

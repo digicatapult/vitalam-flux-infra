@@ -1,0 +1,16 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: issuer-sync
+  namespace: cert-manager
+spec:
+  interval: 1m
+  path: ./clusters/l3-sqnc/cert-manager/issuer/
+  prune: true
+  dependsOn:
+    - name: cert-manager-sync
+      namespace: cert-manager
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system

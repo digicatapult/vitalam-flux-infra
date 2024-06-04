@@ -12,6 +12,7 @@ spec:
     - name: yellow-node
   chart:
     spec:
+      version: 4.0.1
       chart: sqnc-identity-service
       sourceRef:
         kind: HelmRepository

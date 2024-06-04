@@ -1,11 +1,12 @@
 logLevel: info
-selfAddress: 12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp
+selfAddress: 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY
 externalSqncNode:
   host: alice-node-sqnc-node-0
   port: 9944
-externalOrigin: "http://localhost:3080"
-externalPathPrefix: "alice/sqnc-identity-service"
-authType: NONE
+auth:
+  clientId: 'sequence'
+  publicUrlPrefix: "http://localhost:3080/auth/realms/alice/protocol/openid-connect"
+  internalUrlPrefix: "http://keycloak.keycloak.svc.cluster.local/auth/realms/alice/protocol/openid-connect"
 ingress:
   hostname: localhost
   paths:
@@ -18,6 +19,8 @@ ingress:
 node:
   enabled: false
 postgresql:
+  auth:
+    password: postgres
   metrics:
     enabled: true
     serviceMonitor:

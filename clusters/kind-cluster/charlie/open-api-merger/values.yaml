@@ -5,6 +5,9 @@ paths:
 baseUrl:
   - http://localhost:3080/charlie/
 apiPublicUrlPrefix: /charlie
+oauthClientId: "sequence"
+oauthAppName: "Charlie Swagger"
+oauthUsePkce: true
 ingress:
   hostname: localhost
   paths:
@@ -14,3 +17,13 @@ ingress:
       pathType: Prefix
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
+securitySchema:
+  name: "oauth2"
+  type: "oauth2"
+  enabled: true
+  oauth2:
+    flows:
+      - clientCredentials
+    tokenUrl: "/auth/realms/charlie/protocol/openid-connect/token"
+    refreshUrl: "/auth/realms/charlie/protocol/openid-connect/token"
+    scopes: {}

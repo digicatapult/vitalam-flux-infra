@@ -3,10 +3,12 @@ selfAddress: 5HdXyANz5ySq8FPBxhdbm2d8FjPRKZHEAnNtypaAWix8BDRJ
 externalSqncNode:
   host: yellow-node-sqnc-node-0
   port: 9944
-authType: EXTERNAL
-externalOrigin: "https://optimiser.dsch-l3.com"
+auth:
+  clientId: 'l3'
+  publicUrlPrefix: "https://auth.dsch-l3.com/realms/optimiser/protocol/openid-connect"
+  internalUrlPrefix: "http://keycloak.keycloak.svc.cluster.local/realms/optimiser/protocol/openid-connect"
 ingress:
-  enabled: false
+  enabled: true
   ingressClassName: nginx-optimiser
   hostname: optimiser.dsch-l3.com
 node:
