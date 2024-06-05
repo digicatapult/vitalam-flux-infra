@@ -3,12 +3,14 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - source.yaml
-  - release.yaml
   - monitoring-podmonitor-sync.yaml
+  - kube-prometheus-stack
+  - nginx
 configMapGenerator:
   - name: monitoring-values
     files:
-      - values.yaml
+      - values-nginx.yaml=nginx/values.yaml
+      - values-monitoring.yaml=kube-prometheus-stack/values.yaml
   - name: flux-kube-state-metrics-config
     files:
       - kube-state-metrics-config.yaml

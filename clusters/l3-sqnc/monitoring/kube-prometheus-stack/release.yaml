@@ -34,3 +34,4 @@ spec:
     name: monitoring-secrets
     valuesKey: grafana_password
     targetPath: grafana.adminPassword
+
