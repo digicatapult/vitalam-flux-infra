@@ -1,0 +1,26 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: monitoring-dsch-l3-com
+  namespace: monitoring
+spec:
+  # Secret names are always required.
+  secretName: monitoring-dsch-l3-com-prod-tls
+  duration: 2160h # 90d
+  renewBefore: 360h # 15d
+  subject:
+    organizations:
+     - Digital Catapult
+  isCA: false
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 4096
+  usages:
+    - server auth
+    - client auth
+  dnsNames:
+    - monitoring.dsch-l3.com
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
