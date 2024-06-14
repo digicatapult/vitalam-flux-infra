@@ -53,8 +53,8 @@ grafana:
     enabled: true
     namespace: monitoring
   ingress:
-    enabled: true
-    ingressClassName: nginx
+    enabled: false
+    ingressClassName: nginx-monitoring
     hosts:
       - grafana.dsch-l3.com
   persistence:
