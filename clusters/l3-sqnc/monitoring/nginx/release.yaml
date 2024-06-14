@@ -22,4 +22,4 @@ spec:
   valuesFrom:
     - kind: ConfigMap
       name: monitoring-values
-      valuesKey: nginx-values.yaml
+      valuesKey: values-nginx.yaml
