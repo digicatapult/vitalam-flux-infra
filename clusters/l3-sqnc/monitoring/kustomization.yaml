@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - source.yaml
-  - monitoring-podmonitor-sync.yaml
+  - monitoring-pod-monitor-sync.yaml
   - kube-prometheus-stack
   - nginx
 configMapGenerator:
