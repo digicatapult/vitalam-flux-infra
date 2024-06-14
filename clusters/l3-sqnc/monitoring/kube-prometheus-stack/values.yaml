@@ -23,7 +23,7 @@ prometheus:
   prometheusSpec:
     replicas: 2
     podAntiAffinity: soft
-    retention: 12h
+    retention: 30d
     storageSpec:
       volumeClaimTemplate:
         spec:
