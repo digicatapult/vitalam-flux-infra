@@ -29,9 +29,8 @@ spec:
     valuesKey: kube-state-metrics-config.yaml
   - kind: ConfigMap
     name: monitoring-values
-    valuesKey: values.yaml
+    valuesKey: values-monitoring.yaml
   - kind: Secret
     name: monitoring-secrets
     valuesKey: grafana_password
     targetPath: grafana.adminPassword
-
