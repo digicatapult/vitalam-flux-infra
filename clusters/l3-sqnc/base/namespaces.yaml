@@ -13,14 +13,6 @@ metadata:
   labels:
     app.kubernetes.io/instance: sqnc
     app.kubernetes.io/version: latest
-  name: infra
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  labels:
-    app.kubernetes.io/instance: sqnc
-    app.kubernetes.io/version: latest
   name: capacity
 ---
 apiVersion: v1
