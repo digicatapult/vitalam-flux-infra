@@ -17,8 +17,26 @@ extraEnvVars:
     value: "https://auth.dsch-l3.com/"
   - name: KC_HOSTNAME_DEBUG
     value: "true"
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    namespace: keycloak
+    relabelings:
+      - action: replace
+        sourceLabels: [namespace]
+        targetLabel: kubernetes_namespace
 postgresql:
   primary:
     persistence:
       storageClass: managed-csi-premium
       size: 5Gi
+  metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    namespace: keycloak
+    relabelings:
+      - action: replace
+        sourceLabels: [namespace]
+        targetLabel: kubernetes_namespace

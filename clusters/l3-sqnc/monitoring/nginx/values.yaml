@@ -25,9 +25,12 @@ tolerations:
 containerPorts:
   http: 80
   https: 443
-# Temporarily disabled until the CRDs are installed.
-# metrics:
-#   enabled: true
-#   serviceMonitor:
-#     enabled: true
-#     namespace: monitoring
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    namespace: monitoring
+    relabelings:
+      - action: replace
+        sourceLabels: [namespace]
+        targetLabel: kubernetes_namespace
