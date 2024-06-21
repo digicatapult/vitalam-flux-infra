@@ -85,7 +85,40 @@ grafana:
         editable: true
         options:
           path: /var/lib/grafana/dashboards
+      - name: 'grafana-dashboards-kubernetes'
+        orgId: 2
+        folder: 'kubernetes'
+        type: file
+        disableDeletion: true
+        editable: true
+        options:
+          path: /var/lib/grafana/dashboards/kubernetes
   dashboards:
+    grafana-dashboards-kubernetes:
+      k8s-system-api-server:
+        url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-system-api-server.json
+        token: ''
+        datasource: Prometheus
+      k8s-system-coredns:
+        url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-system-coredns.json
+        token: ''
+        datasource: Prometheus
+      k8s-views-global:
+        url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-global.json
+        token: ''
+        datasource: Prometheus
+      k8s-views-namespaces:
+        url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-namespaces.json
+        token: ''
+        datasource: Prometheus
+      k8s-views-nodes:
+        url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-nodes.json
+        token: ''
+        datasource: Prometheus
+      k8s-views-pods:
+        url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-pods.json
+        token: ''
+        datasource: Prometheus
     default:
       postgresql:
         gnetId: 9628
@@ -107,3 +140,22 @@ grafana:
         gnetId: 13840
         revision: 4
         datasource: Prometheus
+      velero:
+        gnetId: 16829
+        revision: 5
+        datasource: Prometheus
+      keycloak:
+        gnetId: 19659
+        revision: 1
+        datasource: Prometheus
+      node-exporter-full:
+        gnetId: 1860
+        revision: 37
+        datasource: Prometheus
+prometheus-node-exporter:
+  prometheus:
+    monitor:
+      relabelings:
+      - action: replace
+        sourceLabels: [__meta_kubernetes_pod_node_name]
+        targetLabel: nodename
