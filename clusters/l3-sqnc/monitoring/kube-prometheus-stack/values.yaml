@@ -86,7 +86,7 @@ grafana:
         options:
           path: /var/lib/grafana/dashboards
       - name: 'grafana-dashboards-kubernetes'
-        orgId: 2
+        orgId: 1
         folder: 'kubernetes'
         type: file
         disableDeletion: true
