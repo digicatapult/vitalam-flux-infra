@@ -53,10 +53,21 @@ grafana:
     enabled: true
     namespace: monitoring
   ingress:
-    enabled: false
+    enabled: true
     ingressClassName: nginx-monitoring
     hosts:
       - grafana.dsch-l3.com
+  grafana.ini:
+    auth.generic_oauth:
+      enabled: true
+      name: Keycloak
+      allow_sign_up: true
+      scopes: profile,email,groups
+      auth_url: https://auth.dsch-l3.com/realms/monitoring/protocol/openid-connect/auth
+      token_url: https://auth.dsch-l3.com/realms/monitoring/protocol/openid-connect/token
+      api_url: https://auth.dsch-l3.com/realms/monitoring/protocol/openid-connect/userinfo
+      client_id: grafana
+      role_attribute_path: contains(groups[*], 'grafana_admins') && 'Admin' || contains(groups[*], 'grafana_users') && 'Viewer'
   persistence:
     enabled: true
     type: pvc
