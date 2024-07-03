@@ -64,7 +64,7 @@ grafana:
       enabled: true
       name: Keycloak
       allow_sign_up: true
-      scopes: profile,email,groups
+      scopes: openid,email,profile,offline_access,roles
       auth_url: https://auth.dsch-l3.com/realms/monitoring/protocol/openid-connect/auth
       token_url: https://auth.dsch-l3.com/realms/monitoring/protocol/openid-connect/token
       api_url: https://auth.dsch-l3.com/realms/monitoring/protocol/openid-connect/userinfo
