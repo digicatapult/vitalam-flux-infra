@@ -56,7 +56,7 @@ grafana:
     enabled: true
     ingressClassName: nginx-monitoring
     hosts:
-      - grafana.dsch-l3.com
+      - monitoring.dsch-l3.com
   grafana.ini:
     auth.generic_oauth:
       enabled: true
