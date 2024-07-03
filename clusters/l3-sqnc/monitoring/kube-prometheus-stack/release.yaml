@@ -37,4 +37,4 @@ spec:
   - kind: Secret
     name: grafana-client-secret
     valuesKey: grafana-client-secret
-    targetPath: grafana.grafana.ini.auth.generic_oauth.client_secret
+    targetPath: grafana.grafana\.ini.auth\.generic_oauth.client_secret
