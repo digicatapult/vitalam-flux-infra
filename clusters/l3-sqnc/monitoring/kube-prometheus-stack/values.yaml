@@ -64,14 +64,13 @@ grafana:
       enabled: true
       name: Keycloak
       allow_sign_up: true
-      scopes: profile,email,groups
+      scopes: openid,email,profile,offline_access,roles
       auth_url: https://auth.dsch-l3.com/realms/monitoring/protocol/openid-connect/auth
       token_url: https://auth.dsch-l3.com/realms/monitoring/protocol/openid-connect/token
       api_url: https://auth.dsch-l3.com/realms/monitoring/protocol/openid-connect/userinfo
       client_id: grafana
       client_secret: "${KEYCLOAK_CLIENT_SECRET}"
       role_attribute_path: contains(groups[*], 'grafana_admins') && 'Admin' || contains(groups[*], 'grafana_users') && 'Viewer'
-      scope: openid email profile roles
   envValueFrom:
     KEYCLOAK_CLIENT_SECRET:
       secretKeyRef:
