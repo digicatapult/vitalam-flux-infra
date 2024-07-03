@@ -67,7 +67,13 @@ grafana:
       token_url: https://auth.dsch-l3.com/realms/monitoring/protocol/openid-connect/token
       api_url: https://auth.dsch-l3.com/realms/monitoring/protocol/openid-connect/userinfo
       client_id: grafana
+      client_secret: "${KEYCLOAK_CLIENT_SECRET}"
       role_attribute_path: contains(groups[*], 'grafana_admins') && 'Admin' || contains(groups[*], 'grafana_users') && 'Viewer'
+  envValueFrom:
+    KEYCLOAK_CLIENT_SECRET:
+      secretKeyRef:
+        name: grafana-client-secret
+        key: grafana-client-secret
   persistence:
     enabled: true
     type: pvc
