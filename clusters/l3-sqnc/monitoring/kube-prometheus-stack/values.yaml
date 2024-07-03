@@ -58,6 +58,8 @@ grafana:
     hosts:
       - monitoring.dsch-l3.com
   grafana.ini:
+    server:
+      root_url: https://monitoring.dsch-l3.com
     auth.generic_oauth:
       enabled: true
       name: Keycloak
