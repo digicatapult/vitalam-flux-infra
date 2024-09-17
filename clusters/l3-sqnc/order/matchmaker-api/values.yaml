@@ -33,3 +33,5 @@ postgresql:
         - action: replace
           sourceLabels: [namespace]
           targetLabel: kubernetes_namespace
+image:
+  tag: "v3.0.80"
