@@ -1,4 +1,4 @@
-logLevel: debug
+logLevel: trace
 userUri: 5Df4d56pDyPz3RM3RBLYC7nyhhL9mGXchrV1dkyYPt5u8H88
 externalSqncNode:
   host: blue-node-sqnc-node-0
@@ -34,4 +34,4 @@ postgresql:
           sourceLabels: [namespace]
           targetLabel: kubernetes_namespace
 image:
-  tag: "v3.0.80"
+  tag: "v3.0.81"
