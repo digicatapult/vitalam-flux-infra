@@ -1,5 +1,4 @@
 logLevel: debug
-userUri: 5HdXyANz5ySq8FPBxhdbm2d8FjPRKZHEAnNtypaAWix8BDRJ
 externalSqncNode:
   host: yellow-node-sqnc-node-0
   port: 9944
