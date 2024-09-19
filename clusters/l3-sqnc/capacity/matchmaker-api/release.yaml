@@ -26,4 +26,8 @@ spec:
       name: capacity-matchmaker-postgres-creds
       valuesKey: password
       targetPath: postgresql.auth.password
+    - kind: Secret
+      name: capacity-keys
+      valuesKey: account_seed
+      targetPath: userUri
   interval: 10m0s
