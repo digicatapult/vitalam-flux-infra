@@ -8,7 +8,7 @@ spec:
   url: https://charts.bitnami.com/bitnami
 ---
 apiVersion: source.toolkit.fluxcd.io/v1
-kind: helmRepository
+kind: HelmRepository
 metadata:
   name: bitnami-broadcom
   namespace: keycloak
