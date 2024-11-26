@@ -12,8 +12,8 @@ spec:
     spec:
       chart: keycloak
       sourceRef:
-        kind: HelmRepository
-        name: bitnami
+        kind: OCIRepository
+        name: bitnami-broadcom
   interval: 10m0s
   # Default values
   # https://github.com/bitnami/charts/blob/master/bitnami/keycloak/values.yaml

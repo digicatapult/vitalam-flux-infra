@@ -6,3 +6,12 @@ metadata:
 spec:
   interval: 10m
   url: https://charts.bitnami.com/bitnami
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
+metadata:
+  name: bitnami-broadcom
+  namespace: keycloak
+spec:
+  interval: 1m
+  url: oci://registry-1.docker.io/bitnamicharts
