@@ -5,7 +5,7 @@ metadata:
 spec:
   chart:
     spec:
-      version: "57.x"
+      version: "66.x"
       chart: kube-prometheus-stack
       sourceRef:
         kind: HelmRepository
@@ -15,17 +15,17 @@ spec:
     crds: Create
   upgrade:
     crds: CreateReplace
-  driftDetection:
-    mode: enabled
-    ignore:
-      # Ignore "validated" annotation which is not inserted during install
-      - paths: [ "/metadata/annotations/prometheus-operator-validated" ]
-        target:
-          kind: PrometheusRule
+  # driftDetection:
+  #   mode: enabled
+  #   ignore:
+  #     # Ignore "validated" annotation which is not inserted during install
+  #     - paths: [ "/metadata/annotations/prometheus-operator-validated" ]
+  #       target:
+  #         kind: PrometheusRule
   valuesFrom:
-  - kind: ConfigMap
-    name: flux-kube-state-metrics-config
-    valuesKey: kube-state-metrics-config.yaml
+  # - kind: ConfigMap
+  #   name: flux-kube-state-metrics-config
+  #   valuesKey: kube-state-metrics-config.yaml
   - kind: ConfigMap
     name: monitoring-values
     valuesKey: values.yaml

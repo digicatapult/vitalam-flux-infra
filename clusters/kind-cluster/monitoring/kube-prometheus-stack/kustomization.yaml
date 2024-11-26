@@ -4,18 +4,18 @@ namespace: monitoring
 resources:
   - source.yaml
   - release.yaml
-  - monitoring-podmonitor-sync.yaml
+  # - monitoring-podmonitor-sync.yaml
 configMapGenerator:
   - name: monitoring-values
     files:
       - values.yaml
-  - name: flux-kube-state-metrics-config
-    files:
-      - kube-state-metrics-config.yaml
-    options:
-      labels:
-        app.kubernetes.io/part-of: flux
-        app.kubernetes.io/component: monitoring
+  # - name: flux-kube-state-metrics-config
+  #   files:
+  #     - kube-state-metrics-config.yaml
+  #   options:
+  #     labels:
+  #       app.kubernetes.io/part-of: flux
+  #       app.kubernetes.io/component: monitoring
 configurations:
   - kustomize-config.yaml
 generatorOptions:
