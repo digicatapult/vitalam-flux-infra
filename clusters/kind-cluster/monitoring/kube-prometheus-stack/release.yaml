@@ -23,9 +23,9 @@ spec:
   #       target:
   #         kind: PrometheusRule
   valuesFrom:
-  # - kind: ConfigMap
-  #   name: flux-kube-state-metrics-config
-  #   valuesKey: kube-state-metrics-config.yaml
+  - kind: ConfigMap
+    name: flux-kube-state-metrics-config
+    valuesKey: kube-state-metrics-config.yaml
   - kind: ConfigMap
     name: monitoring-values
     valuesKey: values.yaml
