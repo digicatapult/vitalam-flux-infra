@@ -1,23 +1,23 @@
-# apiVersion: helm.toolkit.fluxcd.io/v2
-# kind: HelmRelease
-# metadata:
-#   name: keycloak
-#   namespace: keycloak
-# spec:
-#   install:
-#     remediation:
-#       retries: -1
-#   releaseName: keycloak
-#   chart:
-#     spec:
-#       chart: keycloak
-#       sourceRef:
-#         kind: OCIRepository
-#         name: bitnami-broadcom
-#   interval: 10m0s
-#   # Default values
-#   # https://github.com/bitnami/charts/blob/master/bitnami/keycloak/values.yaml
-#   valuesFrom:
-#     - kind: ConfigMap
-#       name: keycloak-values
-#       valuesKey: values.yaml
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: keycloak
+  namespace: keycloak
+spec:
+  install:
+    remediation:
+      retries: -1
+  releaseName: keycloak
+  chart:
+    spec:
+      chartRef:
+        name: keycloak
+        version: 24.2.2
+        repository: bitnami-broadcom
+  interval: 10m0s
+  # Default values
+  # https://github.com/bitnami/charts/blob/master/bitnami/keycloak/values.yaml
+  valuesFrom:
+    - kind: ConfigMap
+      name: keycloak-values
+      valuesKey: values.yaml
