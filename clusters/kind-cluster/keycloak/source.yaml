@@ -15,4 +15,4 @@ metadata:
 spec:
   type: "oci"
   interval: 1m
-  url: oci://registry-1.docker.io/bitnamicharts
+  url: oci://registry-1.docker.io/bitnamicharts/charts-index
