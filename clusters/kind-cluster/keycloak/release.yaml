@@ -10,7 +10,6 @@ spec:
   releaseName: keycloak
   chart:
     spec:
-      version: "18.x"
       chart: keycloak
       sourceRef:
         kind: HelmRepository

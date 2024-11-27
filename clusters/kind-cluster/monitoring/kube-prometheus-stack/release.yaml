@@ -15,13 +15,13 @@ spec:
     crds: Create
   upgrade:
     crds: CreateReplace
-  # driftDetection:
-  #   mode: enabled
-  #   ignore:
-  #     # Ignore "validated" annotation which is not inserted during install
-  #     - paths: [ "/metadata/annotations/prometheus-operator-validated" ]
-  #       target:
-  #         kind: PrometheusRule
+  driftDetection:
+    mode: enabled
+    ignore:
+      # Ignore "validated" annotation which is not inserted during install
+      - paths: [ "/metadata/annotations/prometheus-operator-validated" ]
+        target:
+          kind: PrometheusRule
   valuesFrom:
   - kind: ConfigMap
     name: flux-kube-state-metrics-config
