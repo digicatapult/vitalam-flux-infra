@@ -1,8 +1,10 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+---
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: bitnami
+  name: bitnami-broadcom
   namespace: keycloak
 spec:
-  interval: 10m
-  url: https://charts.bitnami.com/bitnami
+  type: "oci"
+  interval: 1m
+  url: oci://registry-1.docker.io/bitnamicharts

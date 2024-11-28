@@ -22,7 +22,7 @@ prometheus:
       matchLabels:
         app.kubernetes.io/component: monitoring
 grafana:
-  defaultDashboardsEnabled: false
+  defaultDashboardsEnabled: true
   serviceMonitor:
     enabled: true
     namespace: monitoring
