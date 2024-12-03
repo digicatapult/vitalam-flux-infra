@@ -13,7 +13,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: grafana
-        namespace: flux-system
+        namespace: loki
   valuesFrom:
     - kind: ConfigMap
       name: loki-values
