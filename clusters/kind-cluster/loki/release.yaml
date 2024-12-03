@@ -8,7 +8,7 @@ spec:
   interval: 1m
   chart:
     spec:
-      chart: loki-stack
+      chart: loki
       version: "6.22.0"
       sourceRef:
         kind: HelmRepository
