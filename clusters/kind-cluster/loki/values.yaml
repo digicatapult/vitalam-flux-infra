@@ -6,6 +6,8 @@ loki:
     storageClassName: default
   ingress:
     enabled: false
+  podSecurityPolicy:
+    enabled: false
 
 promtail:
   enabled: true
