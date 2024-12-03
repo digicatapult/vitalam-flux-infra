@@ -24,6 +24,8 @@ loki:
 
 minio:
   enabled: true
+  accessKey: "your-access-key"
+  secretKey: "your-secret-key"
 gateway:
   enabled: false
 grafanaAgentOperator:
@@ -38,16 +40,16 @@ singleBinary:
 backend:
   replicas: 0
 read:
-  replicas: 0
+  replicas: 1
 write:
   replicas: 0
 
 ingester:
   replicas: 0
 querier:
-  replicas: 0
+  replicas: 1
 queryFrontend:
-  replicas: 0
+  replicas: 1
 queryScheduler:
   replicas: 0
 distributor:
