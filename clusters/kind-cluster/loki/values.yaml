@@ -24,6 +24,10 @@ loki:
 
 minio:
   enabled: true
+gateway:
+  enabled: false
+grafanaAgentOperator:
+  enabled: false
 
 deploymentMode: SingleBinary
 
