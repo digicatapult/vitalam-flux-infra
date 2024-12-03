@@ -44,4 +44,4 @@ metadata:
   name: loki
   labels:
     app.kubernetes.io/component: loki
-    pod-security.kubernetes.io/enforce: latest
+    pod-security.kubernetes.io/enforce: privileged
