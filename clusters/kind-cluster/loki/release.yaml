@@ -14,7 +14,7 @@ spec:
         kind: HelmRepository
         name: grafana
         namespace: loki
-    valuesFrom:
-      - kind: ConfigMap
-        name: loki-values
-        valuesKey: values.yaml
+  valuesFrom:
+    - kind: ConfigMap
+      name: loki-values
+      valuesKey: values.yaml
