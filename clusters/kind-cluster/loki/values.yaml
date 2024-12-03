@@ -1,29 +1,13 @@
-loki:
-  enabled: true
-  persistence:
-    enabled: true
-    size: 10Gi
-    storageClassName: default
-  ingress:
-    enabled: false
-  podSecurityPolicy:
-    enabled: false
-
-promtail:
-  enabled: true
-  config:
-    client:
-      url: http://loki:3100/api/prom/push
-    scrape_configs:
-      - job_name: kubernetes
-        kubernetes_sd_configs:
-          - role: pod
-        relabel_configs:
-          - source_labels: [__meta_kubernetes_pod_name]
-            target_label: pod_name
-
+test_pod:
+  enabled: false
 grafana:
-  enabled: true
-  adminPassword: admin # You can customize the password here
-  ingress:
-    enabled: false
+  enabled: true # Enable Grafana for visualization
+  adminPassword: admin # Customize the admin password if needed
+  sidecar:
+    datasources:
+      label: ""
+      labelValue: ""
+      enabled: true
+      maxLines: 1000
+  image:
+    tag: 10.3.3 # Grafana image version (optional, can leave as default)
