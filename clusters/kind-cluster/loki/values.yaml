@@ -21,16 +21,18 @@ loki:
     delete_request_store: s3
   ruler:
     enable_api: true
-  chunk_cache:
-    memcached:
-      resources:
-        requests:
-          memory: 512Mi
-        limits:
-          memory: 512Mi
 
 minio:
   enabled: true # Enable MinIO for object storage if required
+
+chunk_cache:
+  enabled: false
+
+gateway:
+  enabled: false
+
+results_cache:
+  enabled: false
 
 deploymentMode: SingleBinary
 
