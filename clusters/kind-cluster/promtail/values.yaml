@@ -14,6 +14,16 @@ promtail:
               - localhost
             labels:
               __path__: /var/log/*log
+    snippets:
+      extraScrapeConfigs: |
+        # Add an additional scrape config for syslog
+        - job_name: node-syslog
+          static_configs:
+            - targets:
+                - localhost
+              labels:
+                job: node/syslog
+                __path__: /var/log/host/syslog
 extraVolumes:
   - name: node-logs
     hostPath:
