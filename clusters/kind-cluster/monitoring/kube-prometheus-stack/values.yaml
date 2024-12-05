@@ -22,15 +22,8 @@ prometheus:
       matchLabels:
         app.kubernetes.io/component: monitoring
 grafana:
-  datasources:
-    loki:
-      name: Loki
-      type: loki
-      url: http://loki-gateway.loki.svc.cluster.local:80
-      access: proxy
-      isDefault: true
-      jsonData:
-        maxLines: 1000
+  # datasources:
+
   defaultDashboardsEnabled: true
   serviceMonitor:
     enabled: true
@@ -45,6 +38,13 @@ grafana:
       type: camptocamp-prometheus-alertmanager-datasource
       uid: prometheus-alertmanager
       url: http://{{ template "kube-prometheus-stack.fullname" . }}-alertmanager.{{ template "kube-prometheus-stack.namespace" . }}:{{ .Values.alertmanager.service.port }}/{{ trimPrefix "/" .Values.alertmanager.alertmanagerSpec.routePrefix }}
+    - name: Loki
+      type: loki
+      url: http://loki-gateway.loki.svc.cluster.local:80
+      access: proxy
+      isDefault: true
+      jsonData:
+        maxLines: 1000
   dashboardProviders:
     dashboardproviders.yaml:
       apiVersion: 1
