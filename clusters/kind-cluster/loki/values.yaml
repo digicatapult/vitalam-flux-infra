@@ -13,6 +13,7 @@ loki:
         index:
           prefix: index_
           period: 24h
+  auth_enabled: false
 chunksCache:
   allocatedMemory: 2048
 write:
