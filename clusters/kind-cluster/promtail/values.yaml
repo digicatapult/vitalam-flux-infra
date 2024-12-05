@@ -14,3 +14,12 @@ promtail:
               - localhost
             labels:
               __path__: /var/log/*log
+extraVolumes:
+  - name: node-logs
+    hostPath:
+      path: /var/log
+
+extraVolumeMounts:
+  - name: node-logs
+    mountPath: /var/log/host
+    readOnly: true
