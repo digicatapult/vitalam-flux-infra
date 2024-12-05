@@ -13,8 +13,8 @@ loki:
         index:
           prefix: index_
           period: 24h
-  chunksCache:
-    allocatedMemory: 2048
+chunksCache:
+  allocatedMemory: 2048
 write:
   replicas: 0
 read:
