@@ -4,7 +4,7 @@ promtail:
       http_listen_port: 3101
       grpc_listen_port: 9095
     clients:
-      - url: "http://loki:3100/loki/api/v1/push" # This needs to point to Loki service
+      - url: "http://loki:3100/loki/api/v1/push" # forwarding to Loki
     positions:
       filename: /tmp/positions.yaml
     scrape_configs:
@@ -14,22 +14,3 @@ promtail:
               - localhost
             labels:
               __path__: /var/log/*log
-    snippets:
-      extraScrapeConfigs: |
-        # Add an additional scrape config for syslog
-        - job_name: node-syslog
-          static_configs:
-            - targets:
-                - localhost
-              labels:
-                job: node/syslog
-                __path__: /var/log/host/syslog
-extraVolumes:
-  - name: node-logs
-    hostPath:
-      path: /var/log
-
-extraVolumeMounts:
-  - name: node-logs
-    mountPath: /var/log/host
-    readOnly: true

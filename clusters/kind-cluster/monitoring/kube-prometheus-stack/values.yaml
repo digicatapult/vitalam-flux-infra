@@ -15,13 +15,22 @@ prometheus:
         cpu: 200m
         memory: 200Mi
     serviceMonitorSelectorNilUsesHelmValues: false
-    serviceMonitorNamespaceSelector: { }
+    serviceMonitorNamespaceSelector: {}
     podMonitorSelectorNilUsesHelmValues: false
-    podMonitorNamespaceSelector: { }
+    podMonitorNamespaceSelector: {}
     podMonitorSelector:
       matchLabels:
         app.kubernetes.io/component: monitoring
 grafana:
+  datasources:
+    loki:
+      name: Loki
+      type: loki
+      url: http://loki-gateway.loki.svc.cluster.local:80
+      access: proxy
+      isDefault: true
+      jsonData:
+        maxLines: 1000
   defaultDashboardsEnabled: true
   serviceMonitor:
     enabled: true
@@ -40,14 +49,14 @@ grafana:
     dashboardproviders.yaml:
       apiVersion: 1
       providers:
-      - name: 'default'
-        orgId: 1
-        folder: ''
-        type: file
-        disableDeletion: false
-        editable: true
-        options:
-          path: /var/lib/grafana/dashboards
+        - name: "default"
+          orgId: 1
+          folder: ""
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards
   dashboards:
     default:
       postgresql:
