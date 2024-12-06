@@ -34,7 +34,7 @@ grafana:
   additionalDataSources:
     - name: Loki
       type: loki
-      url: http://loki-gateway.loki.svc.cluster.local:80
+      url: http://loki-gateway.loki
       access: proxy
       isDefault: false
       jsonData:
