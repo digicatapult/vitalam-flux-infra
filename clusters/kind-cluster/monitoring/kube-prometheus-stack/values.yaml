@@ -15,9 +15,9 @@ prometheus:
         cpu: 200m
         memory: 200Mi
     serviceMonitorSelectorNilUsesHelmValues: false
-    serviceMonitorNamespaceSelector: { }
+    serviceMonitorNamespaceSelector: {}
     podMonitorSelectorNilUsesHelmValues: false
-    podMonitorNamespaceSelector: { }
+    podMonitorNamespaceSelector: {}
     podMonitorSelector:
       matchLabels:
         app.kubernetes.io/component: monitoring
@@ -32,6 +32,13 @@ grafana:
   plugins:
     - camptocamp-prometheus-alertmanager-datasource
   additionalDataSources:
+    - name: Loki
+      type: loki
+      url: http://loki-gateway.loki
+      access: proxy
+      isDefault: false
+      jsonData:
+        maxLines: 1000
     - name: "Prometheus AlertManager"
       type: camptocamp-prometheus-alertmanager-datasource
       uid: prometheus-alertmanager
@@ -40,9 +47,9 @@ grafana:
     dashboardproviders.yaml:
       apiVersion: 1
       providers:
-      - name: 'default'
+      - name: "default"
         orgId: 1
-        folder: ''
+        folder: ""
         type: file
         disableDeletion: false
         editable: true

@@ -37,3 +37,11 @@ metadata:
   labels:
     app.kubernetes.io/component: monitoring
     pod-security.kubernetes.io/enforce: privileged
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: loki
+  labels:
+    app.kubernetes.io/component: loki
+    pod-security.kubernetes.io/enforce: privileged
