@@ -177,20 +177,20 @@ The described script allows for generating a new cluster with any number of desi
 
 ```
 ./scripts/make-new-cluster-genesis.sh \
-    -o alice:ns1
-    -o bob:ns2
-    -o charlie:ns3
-    -v red:ns1:alice \
-    -v green:ns2:bob \
-    -v blue:ns3:charlie \
-    -a bootnode:ns1:alice \
-    -a api-light:ns1:alice \
-    -a api-light:ns2:bob \
-    -a api-light:ns3:charlie \
+    -o alice:ns1 \
+    -o bob:ns2 \
+    -o charlie:ns3 \
+    -v red:ns1 \
+    -v green:ns2 \
+    -v blue:ns3 \
+    -a bootnode:ns1 \
+    -a api-light:ns1 \
+    -a api-light:ns2 \
+    -a api-light:ns3 \
     new-cluster > new-cluster.json
 ```
 
-would create a genesis for a new cluster called `new-cluster`. Three accounts `alice`, `bob` and `charlie` would be created in the namespaces `ns1`, `ns2` and `ns3` respectively. Three validator nodes called `red`, `green` and `blue` would be created in namespaces `ns1`, `ns2` and `ns3` and with owners `alice`, `bob` and `charlie` respectively. Two additional nodes (`bootnode` and `api-light`) would be created in `ns1` and owned by `alice`. Finally namespaces `ns2` and `ns3` would both contain an additional node called `api-light` owned by `bob` and `charlie` respectively.
+would create a genesis for a new cluster called `new-cluster`. Three accounts `alice`, `bob` and `charlie` would be created in the namespaces `ns1`, `ns2` and `ns3` respectively. Three validator nodes called `red`, `green` and `blue` would be created in namespaces `ns1`, `ns2` and `ns3` respectively along with matching owner accounts. Two additional nodes (`bootnode` and `api-light`) would be created in `ns1` along with owner accounts. Finally namespaces `ns2` and `ns3` would both contain an additional node called `api-light` with a corresponding owner account.
 
 Additional options may be specified to configure the docker image used to generate the genesis (defaults to `digicatapult/sqnc-node:latest`) and the kubernetes namespace secrets should be created in (defaults to `sqnc`). The script writes the final raw genesis file to stdout so can be safely redirected. This should then either be hosted publicly or built into the node to be deployed so that the chain can be referenced.
 

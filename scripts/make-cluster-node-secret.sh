@@ -158,14 +158,16 @@ create_k8s_secret() {
   local namespace=$2
   local node_name=$3
   local node_key=$4
-  local babe_seed=$5
-  local grandpa_seed=$6
+  local owner_seed=$5
+  local babe_seed=$6
+  local grandpa_seed=$7
 
   printf "Generating k8s secret for $node_name..." >&2
   kubectl create secret generic ${node_name}-keys \
     --type=Opaque \
     --namespace=$namespace \
     --from-literal=node_id=$node_key \
+    --from-literal=owner_seed="$owner_seed" \
     --from-literal=babe_seed="$babe_seed" \
     --from-literal=grandpa_seed="$grandpa_seed" \
     --dry-run=client \
@@ -191,6 +193,9 @@ pull_container $CONTAINER
 # Generate keys
 generate_node_key $CONTAINER
 generate_authority_key $CONTAINER Sr25519
+OWNER_ADDR=$AUTH_ADDR
+OWNER_SEED=$AUTH_KEY
+generate_authority_key $CONTAINER Sr25519
 BABE_ADDR=$AUTH_ADDR
 BABE_SEED=$AUTH_KEY
 generate_authority_key $CONTAINER Ed25519
@@ -198,11 +203,12 @@ GRANDPA_ADDR=$AUTH_ADDR
 GRANDPA_SEED=$AUTH_KEY
 
 # generate kubernetes secret
-create_k8s_secret "$CLUSTER" "$NAMESPACE" "$NODE_NAME" "$NODE_KEY" "$BABE_SEED" "$GRANDPA_SEED"
+create_k8s_secret "$CLUSTER" "$NAMESPACE" "$NODE_NAME" "$NODE_KEY" "$OWNER_SEED" "$BABE_SEED" "$GRANDPA_SEED"
 
 # Generate output as JSON
 echo $(jq --null-input \
   --arg node_id $NODE_ID \
+  --arg owner_id $OWNER_ADDR \
   --arg babe_id $BABE_ADDR \
   --arg grandpa_id $GRANDPA_ADDR \
-  '{ "nodeId": $node_id, "babeId": $babe_id, "grandpaId": $grandpa_id }')
+  '{ "nodeId": $node_id, "ownerId": $owner_id, "babeId": $babe_id, "grandpaId": $grandpa_id }')
