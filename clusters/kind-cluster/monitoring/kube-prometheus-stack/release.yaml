@@ -12,7 +12,7 @@ spec:
         name: prometheus-community
   interval: 10m
   install:
-    crds: CreateReplace
+    crds: Create
   upgrade:
     crds: CreateReplace
   driftDetection:
