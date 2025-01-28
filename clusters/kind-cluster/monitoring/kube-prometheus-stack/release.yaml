@@ -5,14 +5,14 @@ metadata:
 spec:
   chart:
     spec:
-      version: "66.x"
+      version: "67.x"
       chart: kube-prometheus-stack
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
   interval: 10m
   install:
-    crds: Create
+    crds: CreateReplace
   upgrade:
     crds: CreateReplace
   driftDetection:
