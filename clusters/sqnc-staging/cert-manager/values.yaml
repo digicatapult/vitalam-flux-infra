@@ -1,0 +1,10 @@
+installCRDs: true
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    namespace: cert-manager
+    relabelings:
+      - action: replace
+        sourceLabels: [namespace]
+        targetLabel: kubernetes_namespace

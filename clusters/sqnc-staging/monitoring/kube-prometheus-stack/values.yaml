@@ -1,0 +1,147 @@
+alertmanager:
+  enabled: true
+  serviceMonitor:
+    selfMonitor: true
+    namespace: monitoring
+  config:
+    receivers:
+      - name: "null"
+      # - 
+      # - name: slack
+      #   webhook_configs:
+      #     - send_resolved: true
+      #       url: <secret>
+  alertmanagerSpec:
+    replicas: 2
+    podAntiAffinity: soft
+prometheus:
+  serviceMonitor:
+    selfMonitor: true
+    namespace: monitoring
+  service:
+    sessionAffinity: ClientIP # Ensures grafana always pulls from the same replica
+  prometheusSpec:
+    replicas: 2
+    podAntiAffinity: soft
+    retention: 30d
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: managed-csi-premium
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 50Gi
+    resources:
+      requests:
+        cpu: 200m
+        memory: 200Mi
+      limits:
+        cpu: 2000m
+        memory: 2Gi
+    serviceMonitorSelectorNilUsesHelmValues: false
+    serviceMonitorNamespaceSelector: { }
+    podMonitorSelectorNilUsesHelmValues: false
+    podMonitorNamespaceSelector: { }
+    podMonitorSelector:
+      matchLabels:
+        app.kubernetes.io/component: monitoring
+grafana:
+  defaultDashboardsEnabled: true
+  serviceMonitor:
+    enabled: true
+    namespace: monitoring
+  ingress:
+    enabled: true
+    ingressClassName: nginx-monitoring
+    hosts:
+      - monitoring.sqnc-staging.com
+  grafana.ini:
+    server:
+      root_url: https://monitoring.sqnc-staging.com
+    auth.generic_oauth:
+      enabled: true
+      name: Keycloak
+      allow_sign_up: true
+      scopes: openid,email,profile,offline_access,roles
+      auth_url: https://auth.sqnc-staging.com/realms/monitoring/protocol/openid-connect/auth
+      token_url: https://auth.sqnc-staging.com/realms/monitoring/protocol/openid-connect/token
+      api_url: https://auth.sqnc-staging.com/realms/monitoring/protocol/openid-connect/userinfo
+      client_id: grafana
+      client_secret: "${KEYCLOAK_CLIENT_SECRET}"
+      role_attribute_path: contains(groups[*], 'grafana_admins') && 'Admin' || contains(groups[*], 'grafana_users') && 'Viewer'
+  envValueFrom:
+    KEYCLOAK_CLIENT_SECRET:
+      secretKeyRef:
+        name: grafana-client-secret
+        key: grafana-client-secret
+  persistence:
+    enabled: true
+    type: pvc
+    storageClassName: managed-csi-premium
+    accessModes:
+      - ReadWriteOnce
+    size: 10Gi
+    finalizers:
+      - kubernetes.io/pvc-protection
+  plugins:
+    - camptocamp-prometheus-alertmanager-datasource
+  additionalDataSources:
+    - name: "Prometheus AlertManager"
+      type: camptocamp-prometheus-alertmanager-datasource
+      uid: prometheus-alertmanager
+      url: http://{{ template "kube-prometheus-stack.fullname" . }}-alertmanager.{{ template "kube-prometheus-stack.namespace" . }}:{{ .Values.alertmanager.service.port }}/{{ trimPrefix "/" .Values.alertmanager.alertmanagerSpec.routePrefix }}
+  dashboardProviders:
+    dashboardproviders.yaml:
+      apiVersion: 1
+      providers:
+      - name: 'default'
+        orgId: 1
+        folder: ''
+        type: file
+        disableDeletion: false
+        editable: true
+        options:
+          path: /var/lib/grafana/dashboards
+  dashboards:
+    default:
+      postgresql:
+        gnetId: 9628
+        revision: 7
+        datasource: Prometheus
+      nginx:
+        gnetId: 9614
+        revision: 1
+        datasource: Prometheus
+      flux2:
+        gnetId: 16714
+        revision: 1
+        datasource: Prometheus
+      alertmanager:
+        gnetId: 9578
+        revision: 4
+        datasource: Prometheus
+      polkadot:
+        gnetId: 13840
+        revision: 4
+        datasource: Prometheus
+      velero:
+        gnetId: 16829
+        revision: 5
+        datasource: Prometheus
+      keycloak:
+        gnetId: 19659
+        revision: 1
+        datasource: Prometheus
+      node-exporter-full:
+        gnetId: 1860
+        revision: 37
+        datasource: Prometheus
+prometheus-node-exporter:
+  prometheus:
+    monitor:
+      relabelings:
+      - action: replace
+        sourceLabels: [__meta_kubernetes_pod_node_name]
+        targetLabel: nodename

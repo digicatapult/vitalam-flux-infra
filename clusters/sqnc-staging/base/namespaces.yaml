@@ -1,0 +1,48 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.kubernetes.io/instance: sqnc
+    app.kubernetes.io/version: latest
+  name: monitoring
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.kubernetes.io/instance: sqnc
+    app.kubernetes.io/version: latest
+  name: capacity
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.kubernetes.io/instance: sqnc
+    app.kubernetes.io/version: latest
+  name: optimiser
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.kubernetes.io/instance: sqnc
+    app.kubernetes.io/version: latest
+  name: order
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.kubernetes.io/instance: sqnc
+    app.kubernetes.io/version: latest
+  name: cert-manager
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.kubernetes.io/instance: sqnc
+    app.kubernetes.io/version: latest
+  name: keycloak

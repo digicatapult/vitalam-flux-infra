@@ -1,0 +1,36 @@
+watchIngressWithoutClass: true
+scope:
+  enabled: true
+ingressClassResource:
+  name: nginx-keycloak
+  default: false
+service:
+  type: LoadBalancer
+  annotations: 
+    service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
+    external-dns.alpha.kubernetes.io/hostname: auth.sqnc-staging.com
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/common-name: auth.sqnc-staging.com
+extraArgs:
+  default-ssl-certificate: "keycloak/auth-sqnc-staging-com-prod-tls"
+nodeSelector:
+  kubernetes.io/os: linux
+tolerations:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/master
+    operator: Equal
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/control-plane
+    operator: Equal
+containerPorts:
+  http: 80
+  https: 443
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    namespace: keycloak
+    relabelings:
+      - action: replace
+        sourceLabels: [namespace]
+        targetLabel: kubernetes_namespace

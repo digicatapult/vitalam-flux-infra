@@ -1,0 +1,42 @@
+production: true
+proxy: edge
+ingress:
+  enabled: true
+  ingressClassName: nginx-keycloak
+  hostname: auth.sqnc-staging.com
+adminIngress:
+  enabled: true
+  ingressClassName: nginx-keycloak
+  hostname: auth.sqnc-staging.com
+auth:
+  adminUser: "admin"
+extraEnvVars:
+  - name: KC_HOSTNAME_ADMIN_URL
+    value: "https://auth.sqnc-staging.com/"
+  - name: KC_HOSTNAME_URL
+    value: "https://auth.sqnc-staging.com/"
+  - name: KC_HOSTNAME_DEBUG
+    value: "true"
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    namespace: keycloak
+    relabelings:
+      - action: replace
+        sourceLabels: [namespace]
+        targetLabel: kubernetes_namespace
+postgresql:
+  primary:
+    persistence:
+      storageClass: managed-csi-premium
+      size: 5Gi
+  metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    namespace: keycloak
+    relabelings:
+      - action: replace
+        sourceLabels: [namespace]
+        targetLabel: kubernetes_namespace
