@@ -8,11 +8,11 @@ service:
   type: LoadBalancer
   annotations: 
     service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
-    external-dns.alpha.kubernetes.io/hostname: auth.sqnc-staging.com
+    external-dns.alpha.kubernetes.io/hostname: auth.sqnc-stage.com
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    cert-manager.io/common-name: auth.sqnc-staging.com
+    cert-manager.io/common-name: auth.sqnc-stage.com
 extraArgs:
-  default-ssl-certificate: "keycloak/auth-sqnc-staging-com-prod-tls"
+  default-ssl-certificate: "keycloak/auth-sqnc-stage-com-prod-tls"
 nodeSelector:
   kubernetes.io/os: linux
 tolerations:

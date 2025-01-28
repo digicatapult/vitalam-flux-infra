@@ -56,18 +56,18 @@ grafana:
     enabled: true
     ingressClassName: nginx-monitoring
     hosts:
-      - monitoring.sqnc-staging.com
+      - monitoring.sqnc-stage.com
   grafana.ini:
     server:
-      root_url: https://monitoring.sqnc-staging.com
+      root_url: https://monitoring.sqnc-stage.com
     auth.generic_oauth:
       enabled: true
       name: Keycloak
       allow_sign_up: true
       scopes: openid,email,profile,offline_access,roles
-      auth_url: https://auth.sqnc-staging.com/realms/monitoring/protocol/openid-connect/auth
-      token_url: https://auth.sqnc-staging.com/realms/monitoring/protocol/openid-connect/token
-      api_url: https://auth.sqnc-staging.com/realms/monitoring/protocol/openid-connect/userinfo
+      auth_url: https://auth.sqnc-stage.com/realms/monitoring/protocol/openid-connect/auth
+      token_url: https://auth.sqnc-stage.com/realms/monitoring/protocol/openid-connect/token
+      api_url: https://auth.sqnc-stage.com/realms/monitoring/protocol/openid-connect/userinfo
       client_id: grafana
       client_secret: "${KEYCLOAK_CLIENT_SECRET}"
       role_attribute_path: contains(groups[*], 'grafana_admins') && 'Admin' || contains(groups[*], 'grafana_users') && 'Viewer'

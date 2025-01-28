@@ -1,11 +1,11 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: monitoring-sqnc-staging-com
+  name: monitoring-sqnc-stage-com
   namespace: monitoring
 spec:
   # Secret names are always required.
-  secretName: monitoring-sqnc-staging-com-prod-tls
+  secretName: monitoring-sqnc-stage-com-prod-tls
   duration: 2160h # 90d
   renewBefore: 360h # 15d
   subject:
@@ -20,7 +20,7 @@ spec:
     - server auth
     - client auth
   dnsNames:
-    - monitoring.sqnc-staging.com
+    - monitoring.sqnc-stage.com
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
