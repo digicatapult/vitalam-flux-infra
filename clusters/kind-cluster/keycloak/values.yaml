@@ -21,7 +21,7 @@ postgresql:
   auth:
     password: postgres
 keycloakConfigCli:
-  enabled: true
+  enabled: false
   configuration:
     alice.json: |
       {
