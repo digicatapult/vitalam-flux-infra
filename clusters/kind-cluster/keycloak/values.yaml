@@ -1,6 +1,3 @@
-logging:
-  output: default
-  level: DEBUG
 httpRelativePath: /auth/
 proxy: edge
 ingress:
