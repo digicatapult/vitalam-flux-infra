@@ -19,6 +19,7 @@ postgresql:
     password: postgres
 keycloakConfigCli:
   enabled: true
+  backoffLimit: 5
   configuration:
     alice.json: |
       {
