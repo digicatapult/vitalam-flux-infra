@@ -20,5 +20,5 @@ postgresql:
   auth:
     password: postgres
 keycloakConfigCli:
-  enabled: true
+  enabled: false
   backoffLimit: 5
