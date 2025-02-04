@@ -14,8 +14,6 @@ extraEnvVars:
     value: "http://localhost:3080/auth/"
   - name: KC_HOSTNAME_DEBUG
     value: "true"
-logging:
-  level: DEBUG
 postgresql:
   auth:
     password: postgres
