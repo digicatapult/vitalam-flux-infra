@@ -1,0 +1,22 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    email: opensource@digicatapult.org.uk
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    solvers:
+    - dns01:
+        azureDNS:
+          subscriptionID: b79077c8-1069-441b-9ebe-bbc60c013e41
+          resourceGroupName: l3-sqnc-infra
+          hostedZoneName: sqnc-stage.com
+          # Azure Cloud Environment, default to AzurePublicCloud
+          environment: AzurePublicCloud
+          # optional, only required if node pools have more than 1 managed identity assigned
+          managedIdentity:
+            # client id of the node pool managed identity (can not be set at the same time as resourceID)
+            clientID: dda214ba-c69c-40b9-9f30-2a640f97e363

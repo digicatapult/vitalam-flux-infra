@@ -1,0 +1,16 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: monitoring-podmonitoring-sync
+  namespace: monitoring
+spec:
+  interval: 1m
+  path: ./clusters/sqnc-staging/podmonitors
+  prune: true
+  dependsOn:
+    - name: monitoring-sync
+      namespace: monitoring
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system

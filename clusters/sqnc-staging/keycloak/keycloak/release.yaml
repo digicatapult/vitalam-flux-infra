@@ -1,0 +1,34 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: keycloak
+  namespace: keycloak
+spec:
+  install:
+    remediation:
+      retries: -1
+  releaseName: keycloak
+  chart:
+    spec:
+      version: 21.3.1
+      chart: keycloak
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+  interval: 10m0s
+  # Default values
+  # https://github.com/bitnami/charts/blob/master/bitnami/keycloak/values.yaml
+  valuesFrom:
+    - kind: ConfigMap
+      name: keycloak-values
+      valuesKey: keycloak-values.yaml
+    - kind: Secret
+      name: keycloak-postgres-password
+      valuesKey: password
+      targetPath: postgresql.auth.password
+    - kind: Secret
+      name: keycloak-admin-creds
+      valuesKey: password
+      targetPath: auth.adminPassword
+
+
