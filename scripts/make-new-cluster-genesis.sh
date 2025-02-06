@@ -12,17 +12,15 @@ print_usage() {
   echo ""
   echo "Flags: "
   echo "  -h                                            Print this message"
-  echo "  -n <namespace>                                Namespace in which to create the secret. Defaults to sqnc"
   echo "  -b <base_chain>                               Base chain-spec to generate spec from. Defaults to local"
   echo "  -c <container>                                Container image to use for key generation."
   echo "                                                Defaults to digicatapult/sqnc-node:latest"
-  echo "  -o <owner>:<namespace>:<balance>              Adds a node owner account giving the specified balance."
-  echo "                                                The secret for the owner will be placed in the Kubernetes <namespace>"
-  echo "  -v <validator_node_name>:<namespace>:<owner>  Adds a validator node with name <validator_node_name> which will be owned by <owner>."
+  echo "  -o <owner_name>:<namespace>                   Adds a transacting account. The secret for the owner will be placed in the Kubernetes <namespace>"
+  echo "  -v <validator_node_name>:<namespace>          Adds a validator node with name <validator_node_name> which will be owned by <owner>."
   echo "                                                The secrets will be added to the specified Kubernetes <namespace>."
   echo "                                                The <owner> must be in the same namesapce as the node."
   echo "                                                To add multiple validators add multiple -v flags"
-  echo "  -a <additional_node_name:<namespace>:<owner>  Adds an additional (non-validator) node with name <additional_node_name>"
+  echo "  -a <additional_node_name:<namespace>          Adds an additional (non-validator) node with name <additional_node_name>"
   echo "                                                which will be owned by <owner>. The secrets will be added to the specified"
   echo "                                                Kubernetes <namespace>. The <owner> must be in the same namesapce as the node."
   echo "                                                To add multiple additional nodes add multiple -a flags"
@@ -92,7 +90,7 @@ assert_not_node() {
   else
     if [ -f "./clusters/$cluster/secrets/${node_name}_${namespace}_node-keys.yaml" ] ||
        [ -f "./clusters/$cluster/secrets/${node_name}_${namespace}_node-keys.unc.yaml" ]; then
-      echo -e "Node $node_name already exists in cluster $cluster" >&2
+      echo -e "Node $node_name already exists in cluster $cluster. Nodes and accounts cannot share names" >&2
       exit 1
     fi
     printf "OK\n" >&2
@@ -110,7 +108,7 @@ assert_not_account() {
   else
     if [ -f "./clusters/$cluster/secrets/${account_name}_${namespace}_account-keys.yaml" ] ||
        [ -f "./clusters/$cluster/secrets/${account_name}_${namespace}_account-keys.unc.yaml" ]; then
-      echo -e "Account $account_name:$namespace already exists in cluster $cluster" >&2
+      echo -e "Account $account_name:$namespace already exists in cluster $cluster. Nodes and accounts cannot share names" >&2
       exit 1
     fi
     printf "OK\n" >&2
@@ -129,54 +127,16 @@ assert_label() {
   printf "OK\n" >&2
 }
 
-assert_balance() {
-  local balance=$1
-  printf "Checking that balance $balance is valid..." >&2
-  if [[ ! $balance =~ ^[1-9][0-9]*$ ]]; then
-    echo -e "$balance is not a valid integer" >&2
-    exit 1
-  fi
-  printf "OK\n" >&2
-}
+assert_account_valid() {
+  local name_namespace_input=$1
 
-assert_node_valid() {
-  local node_input=$1
-  local node=$(echo $node_input | cut -f1 -d:)
-  local namespace=$(echo $node_input | cut -f2 -d:)
-  local node_owner=$(echo $node_input | cut -f3 -d:)
-  local owner_name=
-  local owner_namespace=
+  local name=$(echo $name_namespace_input | cut -f1 -d:)
+  local namespace=$(echo $name_namespace_input | cut -f2 -d:)
 
   assert_label "namespace" $namespace
-  assert_label "name" $node
-  assert_not_node "$CLUSTER" "$namespace" "$node"
-
-  assert_label "owner" $node_owner
-  printf "Checking that owner for node $node:$namespace is valid..." >&2
-  for owner in "${OWNER_NAMES[@]}"
-  do
-    owner_name=$(echo $owner | cut -f1 -d:)
-    owner_namespace=$(echo $owner | cut -f2 -d:)
-    if [[ "$namespace" == "$owner_namespace" ]] && [[ "$node_owner" == "$owner_name" ]]; then
-      printf "OK\n" >&2
-      return 0
-    fi
-  done
-
-  printf "Owner is not present in account list\n" >&2
-  exit 1
-}
-
-assert_owner_valid() {
-  local owner_input=$1
-  local owner=$(echo $owner_input | cut -f1 -d:)
-  local namespace=$(echo $owner_input | cut -f2 -d:)
-  local balance=$(echo $owner_input | cut -f3 -d:)
-
-  assert_label "namespace" $namespace
-  assert_label "owner" $owner
-  assert_balance $balance
-  assert_not_account "$CLUSTER" "$namespace" "$owner"
+  assert_label "name" $name
+  assert_not_node "$CLUSTER" "$namespace" "$name"
+  assert_not_account "$CLUSTER" "$namespace" "$name"
 }
 
 assert_command() {
@@ -205,22 +165,6 @@ pull_container() {
   fi
 }
 
-create_node_identity() {
-  local node_type=$1
-  local cluster=$2
-  local namespace=$3
-  local container=$4
-  local node_name=$5
-
-  local output=
-
-  output=$(./scripts/make-cluster-node-secret \
-    -n "$namespace" \
-    -c "$container" \
-    "$cluster" "$node_name" | \
-    tail -n 1)
-}
-
 SUDO_SEED=
 SUDO_ADDR=
 generate_sudo() {
@@ -245,18 +189,17 @@ OWNER_ACCOUNTS=()
 generate_owner() {
   local cluster=$1
   local container=$2
-  local owner_name_namespace_balance=$3
+  local owner_name_namespace=$3
 
-  local owner_name=$(echo "$owner_name_namespace_balance" | cut -f1 -d:)
-  local owner_namespace=$(echo "$owner_name_namespace_balance" | cut -f2 -d:)
-  local owner_balance=$(echo "$owner_name_namespace_balance" | cut -f3 -d:)
+  local owner_name=$(echo "$owner_name_namespace" | cut -f1 -d:)
+  local owner_namespace=$(echo "$owner_name_namespace" | cut -f2 -d:)
 
   printf "Generating owner account ${owner_name}:${owner_namespace}..." >&2
   if output=$(./scripts/make-cluster-account-secret.sh -n $owner_namespace -c $container $cluster $owner_name 2>/dev/null); then
     printf "OK\n" >&2
     account_id=$(echo $output | jq -r '.accountId')
     OWNER_ACCOUNTS+=("${owner_name}:${owner_namespace}:${account_id}")
-    GENESIS=$(echo $GENESIS | jq --arg account_id $account_id --arg balance $owner_balance '.genesis.runtimeGenesis.patch.balances.balances += [[$account_id, ($balance | tonumber)]]')
+    GENESIS=$(echo $GENESIS | jq --arg account_id $account_id --arg balance 1000000000000 '.genesis.runtimeGenesis.patch.balances.balances += [[$account_id, ($balance | tonumber)]]')
     GENESIS=$(echo $GENESIS | jq --arg account_id $account_id '.genesis.runtimeGenesis.patch.membership.members += [$account_id]')
   else
     printf "FAIL\n" >&2
@@ -273,46 +216,38 @@ generate_node() {
 
   local node_name=$(echo "$node_name_namespace_owner" | cut -f1 -d:)
   local namespace=$(echo "$node_name_namespace_owner" | cut -f2 -d:)
-  local node_owner=$(echo "$node_name_namespace_owner" | cut -f3 -d:)
-  local node_owner_account=
-
+  
   local output=
   local node_id=
+  local owner_id=
   local babe_id=
   local grandpa_id=
-  local owner_name=
-  local owner_namespace=
-  local owner_account=
-
-  for owner in "${OWNER_ACCOUNTS[@]}"
-  do
-    owner_name=$(echo $owner | cut -f1 -d:)
-    owner_namespace=$(echo $owner | cut -f2 -d:)
-    owner_account=$(echo $owner | cut -f3 -d:)
-    if [[ "$namespace" == "$owner_namespace" ]] && [[ "$node_owner" == "$owner_name" ]]; then
-      node_owner_account=$owner_account
-    fi
-  done
 
   printf "Generating keys for $type node $node_name:$namespace..." >&2
   if output=$(./scripts/make-cluster-node-secret.sh -n $namespace -c $container $cluster $node_name 2>/dev/null); then
     printf "OK\n" >&2
     # extract ids
     node_id=$(echo $output | jq -r '.nodeId')
+    owner_id=$(echo $output | jq -r '.ownerId')
     babe_id=$(echo $output | jq -r '.babeId')
     grandpa_id=$(echo $output | jq -r '.grandpaId')
+
+    # set balance for node owner 
+    GENESIS=$(echo $GENESIS | jq --arg account_id $owner_id --arg balance 1000000000000 '.genesis.runtimeGenesis.patch.balances.balances += [[$account_id, ($balance | tonumber)]]')
+
     # update genesis
     if [ "$type" == "validator" ]; then
-      GENESIS=$(echo $GENESIS | jq --arg babe_id $babe_id '.genesis.runtimeGenesis.patch.babe.authorities += [[$babe_id, 1]]')
-      GENESIS=$(echo $GENESIS | jq --arg grandpa_id $grandpa_id '.genesis.runtimeGenesis.patch.grandpa.authorities += [[$grandpa_id, 1]]')
+      GENESIS=$(echo $GENESIS | jq --arg owner_id $owner_id '.genesis.runtimeGenesis.patch.validatorSet.initialValidators += [$owner_id]')
+      GENESIS=$(echo $GENESIS | jq --arg owner_id $owner_id --arg babe_id $babe_id --arg grandpa_id $grandpa_id '.genesis.runtimeGenesis.patch.session.keys += [[$owner_id, $owner_id, { "babe": $babe_id, "grandpa": $grandpa_id }]]')
     fi
+
     # convert node_id to hex
     node_id=$(docker run --rm -a stdout python:alpine /bin/sh -c "\
       pip install base58 1>/dev/null; \
       printf \"$node_id\" | base58 -d | xxd -p | tr -d '[:space:]' | tr '[:lower:]' '[:upper:]'" 2>/dev/null)
     node_id=($(echo $node_id | fold -w2))
 
-    GENESIS=$(echo $GENESIS | jq --arg owner $node_owner_account '.genesis.runtimeGenesis.patch.nodeAuthorization.nodes += [[[], $owner]]')
+    GENESIS=$(echo $GENESIS | jq --arg owner $owner_id '.genesis.runtimeGenesis.patch.nodeAuthorization.nodes += [[[], $owner]]')
     for byte in "${node_id[@]}"
     do
       GENESIS=$(echo $GENESIS | jq --arg byte $(echo "obase=10; ibase=16; $byte" | bc) '.genesis.runtimeGenesis.patch.nodeAuthorization.nodes[-1][0] += [($byte | tonumber)]')
@@ -331,17 +266,17 @@ assert_cluster $CLUSTER
 
 for owner in "${OWNER_NAMES[@]}"
 do
-  assert_owner_valid $owner
+  assert_account_valid $owner
 done
 
 for validator_name in "${VALIDATOR_NAMES[@]}"
 do
-  assert_node_valid $validator_name
+  assert_account_valid $validator_name
 done
 
 for additional_name in "${ADDITIONAL_NAMES[@]}"
 do
-  assert_node_valid $additional_name
+  assert_account_valid $additional_name
 done
 
 # make sure we can pull the container
@@ -359,6 +294,10 @@ GENESIS=$(echo $GENESIS | jq '.genesis.runtimeGenesis.patch.grandpa.authorities 
 GENESIS=$(echo $GENESIS | jq '.genesis.runtimeGenesis.patch.balances.balances |= []')
 GENESIS=$(echo $GENESIS | jq '.genesis.runtimeGenesis.patch.nodeAuthorization.nodes |= []')
 GENESIS=$(echo $GENESIS | jq '.genesis.runtimeGenesis.patch.membership.members |= []')
+GENESIS=$(echo $GENESIS | jq '.genesis.runtimeGenesis.patch.session.keys |= []')
+GENESIS=$(echo $GENESIS | jq '.genesis.runtimeGenesis.patch.session.nonAuthorityKeys |= []')
+GENESIS=$(echo $GENESIS | jq '.genesis.runtimeGenesis.patch.validatorSet.initialValidators |= []')
+
 
 # Generate sudo
 generate_sudo $CONTAINER
