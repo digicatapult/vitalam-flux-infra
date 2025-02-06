@@ -1,5 +1,6 @@
 node:
   chainSpecConfigMap: chainspec
+  chain: ""
   role: validator
   dataVolumeSize: 100Gi
   perNodeServices:
