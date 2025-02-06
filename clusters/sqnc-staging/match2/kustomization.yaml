@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: match2
+resources:
+  - yellow-node
+  - green-node
+  - chainspec-configmap.yaml
+  - source.yaml
+configMapGenerator:
+  - name: match2-values
+    files:
+      - values-yellow.yaml=yellow-node/values.yaml
+      - values-green.yaml=green-node/values.yaml
+configurations:
+  - kustomize-config.yaml
+generatorOptions:
+  disableNameSuffixHash: true
