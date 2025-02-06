@@ -1,0 +1,23 @@
+node:
+  chainSpecConfigMap: chainspec
+  role: validator
+  dataVolumeSize: 100Gi
+  perNodeServices:
+    setPublicAddressToExternal:
+      enabled: false
+  keys:
+    - type: "babe"
+      scheme: "sr25519"
+    - type: "gran"
+      scheme: "ed25519"
+  flags:
+    - "--rpc-external"
+    - "--rpc-methods=Unsafe"
+    - "--rpc-cors=all"
+    - "--unsafe-rpc-external"
+    - "--prometheus-external"
+    - "--bootnodes '/dns4/magenta-sqnc-node-0-rc-p2p.demanda.svc.cluster.local/tcp/30333/p2p/12D3KooWLaNsqN16oAJyeTyaWPUpAZxJTqyngfg7dMwukcHZeqxy'"
+  serviceMonitor:
+    enabled: true
+    namespace: match2
+storageClass: managed-csi-premium

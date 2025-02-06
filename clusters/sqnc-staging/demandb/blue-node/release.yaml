@@ -1,0 +1,34 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: blue-node
+  namespace: demandb
+spec:
+  install:
+    remediation:
+      retries: -1
+  chart:
+    spec:
+      version: 7.1.0
+      chart: sqnc-node
+      sourceRef:
+        kind: HelmRepository
+        name: digicatapult
+  valuesFrom:
+    - kind: ConfigMap
+      name: demandb-values
+      valuesKey: values-blue.yaml
+    - kind: Secret
+      name: blue-keys
+      valuesKey: babe_seed
+      targetPath: node.keys[0].seed
+    - kind: Secret
+      name: blue-keys
+      valuesKey: grandpa_seed
+      targetPath: node.keys[1].seed
+    - kind: Secret
+      name: blue-keys
+      valuesKey: node_id
+      targetPath: node.customNodeKey
+  interval: 10m
