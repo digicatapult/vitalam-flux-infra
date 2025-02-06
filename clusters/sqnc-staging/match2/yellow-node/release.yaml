@@ -10,7 +10,7 @@ spec:
       retries: -1
   chart:
     spec:
-      version: 7.1.0
+      version: 7.1.1
       chart: sqnc-node
       sourceRef:
         kind: HelmRepository
