@@ -4,7 +4,7 @@ externalSqncNode:
   host: blue-node-sqnc-node-0
   port: 9944
 auth:
-  clientId: 'l3'
+  clientId: 'sqnc'
   publicUrlPrefix: "https://auth.sqnc-stage.com/realms/demandb/protocol/openid-connect"
   internalUrlPrefix: "http://keycloak.keycloak.svc.cluster.local/realms/demandb/protocol/openid-connect"
 ingress:
