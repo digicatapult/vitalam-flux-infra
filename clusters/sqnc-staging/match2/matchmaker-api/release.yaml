@@ -9,7 +9,7 @@ spec:
     remediation:
       retries: -1
   dependsOn:
-    - name: ipfs-match2
+    - name: ipfs
     - name: match2-identity-service
   chart:
     spec:

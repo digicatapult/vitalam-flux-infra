@@ -9,7 +9,7 @@ spec:
     remediation:
       retries: -1
   dependsOn:
-    - name: ipfs-demanda
+    - name: ipfs
     - name: demanda-identity-service
   chart:
     spec:
