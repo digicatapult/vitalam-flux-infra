@@ -17,7 +17,8 @@ node:
     - "--rpc-cors=all"
     - "--unsafe-rpc-external"
     - "--prometheus-external"
-    - "--state-pruning=100000"
+    - "--state-pruning=2500000"
+    - "--database=paritydb"
   serviceMonitor:
     enabled: true
     namespace: demanda
