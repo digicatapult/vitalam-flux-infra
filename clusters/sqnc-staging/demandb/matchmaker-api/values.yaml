@@ -3,7 +3,7 @@ externalSqncNode:
   host: blue-node-sqnc-node-0
   port: 9944
 externalSqncIpfs:
-  host: ipfs-demandb-sqnc-ipfs-api
+  host: ipfs-sqnc-ipfs-api
   port: 5001
 externalSqncIdentity:
   host: demandb-identity-service-sqnc-identity-service

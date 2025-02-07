@@ -3,7 +3,7 @@ externalSqncNode:
   host: magenta-sqnc-node-0
   port: 9944
 externalSqncIpfs:
-  host: ipfs-demanda-sqnc-ipfs-api
+  host: ipfs-sqnc-ipfs-api
   port: 5001
 externalSqncIdentity:
   host: demanda-identity-service-sqnc-identity-service

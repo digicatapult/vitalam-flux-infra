@@ -3,7 +3,7 @@ externalSqncNode:
   host: green-node-sqnc-node-0
   port: 9944
 externalSqncIpfs:
-  host: ipfs-match2-sqnc-ipfs-api
+  host: ipfs-sqnc-ipfs-api
   port: 5001
 externalSqncIdentity:
   host: match2-identity-service-sqnc-identity-service
