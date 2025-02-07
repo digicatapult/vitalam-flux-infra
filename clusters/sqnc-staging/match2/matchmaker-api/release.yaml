@@ -1,0 +1,33 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: match2-matchmaker-api
+  namespace: match2
+spec:
+  install:
+    remediation:
+      retries: -1
+  dependsOn:
+    - name: ipfs
+    - name: match2-identity-service
+  chart:
+    spec:
+      version: 2.0.1
+      chart: sqnc-matchmaker-api
+      sourceRef:
+        kind: HelmRepository
+        name: digicatapult
+  valuesFrom:
+    - kind: ConfigMap
+      name: match2-values
+      valuesKey: values-matchmaker-api.yaml
+    - kind: Secret
+      name: match2-matchmaker-postgres-creds
+      valuesKey: password
+      targetPath: postgresql.auth.password
+    - kind: Secret
+      name: match2-keys
+      valuesKey: account_seed
+      targetPath: userUri
+  interval: 10m0s

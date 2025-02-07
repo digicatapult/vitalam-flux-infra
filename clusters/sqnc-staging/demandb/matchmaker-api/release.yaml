@@ -1,0 +1,33 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: demandb-matchmaker-api
+  namespace: demandb
+spec:
+  install:
+    remediation:
+      retries: -1
+  dependsOn:
+    - name: ipfs
+    - name: demandb-identity-service
+  chart:
+    spec:
+      version: 2.0.1
+      chart: sqnc-matchmaker-api
+      sourceRef:
+        kind: HelmRepository
+        name: digicatapult
+  valuesFrom:
+    - kind: ConfigMap
+      name: demandb-values
+      valuesKey: values-matchmaker-api.yaml
+    - kind: Secret
+      name: demandb-matchmaker-postgres-creds
+      valuesKey: password
+      targetPath: postgresql.auth.password
+    - kind: Secret
+      name: demandb-keys
+      valuesKey: account_seed
+      targetPath: userUri
+  interval: 10m0s

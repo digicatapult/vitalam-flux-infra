@@ -1,0 +1,28 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: match2-identity-service
+  namespace: match2
+spec:
+  install:
+    remediation:
+      retries: -1
+  dependsOn:
+    - name: green-node
+  chart:
+    spec:
+      version: 4.0.1
+      chart: sqnc-identity-service
+      sourceRef:
+        kind: HelmRepository
+        name: digicatapult
+  valuesFrom:
+    - kind: ConfigMap
+      name: match2-values
+      valuesKey: values-identity-service.yaml
+    - kind: Secret
+      name: match2-identity-postgres-creds
+      valuesKey: password
+      targetPath: postgresql.auth.password
+  interval: 10m0s

@@ -1,0 +1,25 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: match2-open-api
+  namespace: match2
+spec:
+  install:
+    remediation:
+      retries: -1
+  dependsOn:
+    - name: match2-identity-service
+    - name: match2-matchmaker-api
+  chart:
+    spec:
+      version: 2.1.2
+      chart: openapi-merger
+      sourceRef:
+        kind: HelmRepository
+        name: digicatapult
+  valuesFrom:
+    - kind: ConfigMap
+      name: match2-values
+      valuesKey: values-open-api-merger.yaml
+  interval: 10m0s
