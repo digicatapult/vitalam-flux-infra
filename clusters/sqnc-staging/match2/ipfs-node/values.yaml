@@ -1,0 +1,10 @@
+externalSqncNode:
+  host: yellow-node-sqnc-node-0
+  port: 9944
+ipfs:
+  bootNodeAddress: /dns4/ipfs-sqnc-ipfs-0-swarm.demanda.svc.cluster.local/tcp/4001/p2p/12D3KooWFjV75AharhHUtuYQuUji7VjDUTi7beL5dR26ucszBTfb
+persistence:
+  storageClass: managed-csi-premium
+  size: 60Gi
+sqncNode:
+  enabled: false
