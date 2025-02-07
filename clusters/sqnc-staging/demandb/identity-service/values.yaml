@@ -1,0 +1,29 @@
+logLevel: info
+selfAddress: 5H3tzZQCat5H11t6kQMmuh24HMbzYAxKbsb4z7P6qHdjRgcc
+externalSqncNode:
+  host: blue-node-sqnc-node-0
+  port: 9944
+auth:
+  clientId: 'l3'
+  publicUrlPrefix: "https://auth.sqnc-stage.com/realms/demandb/protocol/openid-connect"
+  internalUrlPrefix: "http://keycloak.keycloak.svc.cluster.local/realms/demandb/protocol/openid-connect"
+ingress:
+  enabled: true
+  ingressClassName: nginx-demandb
+  hostname: demandb.sqnc-stage.com
+node:
+  enabled: false
+postgresql:
+  primary:
+    persistence:
+      storageClass: managed-csi-premium
+      size: 5Gi
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      namespace: demandb
+      relabelings:
+        - action: replace
+          sourceLabels: [namespace]
+          targetLabel: kubernetes_namespace

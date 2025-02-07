@@ -1,0 +1,27 @@
+logLevel: info
+paths:
+  - http://match2-identity-service-sqnc-identity-service:3000/api-docs
+  - http://match2-matchmaker-api-sqnc-matchmaker-api:3000/api-docs
+baseUrl:
+  - https://match2.sqnc-stage.com
+securitySchema:
+  name: "oauth2"
+  type: "oauth2"
+  enabled: true
+  oauth2:
+    flows:
+      - clientCredentials
+    tokenUrl: "https://auth.sqnc-stage.com/realms/match2/protocol/openid-connect/token"
+    refreshUrl: "https://auth.sqnc-stage.com/realms/match2/protocol/openid-connect/token"
+    scopes: {}
+ingress:
+  ingressClassName: nginx-match2
+  enabled: true
+  hostname: match2.sqnc-stage.com
+  paths:
+    - path: /(api-docs(/.*)?)
+      pathType: Prefix
+    - path: /(swagger(/.*)?)
+      pathType: Prefix
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1

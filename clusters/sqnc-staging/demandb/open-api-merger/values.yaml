@@ -1,0 +1,27 @@
+logLevel: info
+paths:
+  - http://demandb-identity-service-sqnc-identity-service:3000/api-docs
+  - http://demandb-matchmaker-api-sqnc-matchmaker-api:3000/api-docs
+baseUrl:
+  - https://demandb.sqnc-stage.com
+securitySchema:
+  name: "oauth2"
+  type: "oauth2"
+  enabled: true
+  oauth2:
+    flows:
+      - clientCredentials
+    tokenUrl: "https://auth.sqnc-stage.com/realms/demandb/protocol/openid-connect/token"
+    refreshUrl: "https://auth.sqnc-stage.com/realms/demandb/protocol/openid-connect/token"
+    scopes: {}
+ingress:
+  ingressClassName: nginx-demandb
+  enabled: true
+  hostname: demandb.sqnc-stage.com
+  paths:
+    - path: /(api-docs(/.*)?)
+      pathType: Prefix
+    - path: /(swagger(/.*)?)
+      pathType: Prefix
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1

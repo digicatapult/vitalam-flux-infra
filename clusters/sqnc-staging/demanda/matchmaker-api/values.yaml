@@ -1,0 +1,34 @@
+logLevel: debug
+externalSqncNode:
+  host: magenta-sqnc-node-0
+  port: 9944
+externalSqncIpfs:
+  host: ipfs-demanda-sqnc-ipfs-api
+  port: 5001
+externalSqncIdentity:
+  host: demanda-identity-service-sqnc-identity-service
+  port: 3000
+auth:
+  clientId: 'l3'
+  publicUrlPrefix: "https://auth.sqnc-stage.com/realms/demanda/protocol/openid-connect"
+  internalUrlPrefix: "http://keycloak.keycloak.svc.cluster.local/realms/demanda/protocol/openid-connect"
+ingress:
+  enabled: true
+  ingressClassName: nginx-demanda
+  hostname: demanda.sqnc-stage.com
+node:
+  enabled: false
+postgresql:
+  primary:
+    persistence:
+      storageClass: managed-csi-premium
+      size: 15Gi
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      namespace: demanda
+      relabelings:
+        - action: replace
+          sourceLabels: [namespace]
+          targetLabel: kubernetes_namespace

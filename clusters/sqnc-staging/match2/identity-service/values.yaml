@@ -1,0 +1,29 @@
+logLevel: info
+selfAddress: 5EeyFp4w4v6Leeeu7rbvE5Ni5ZYTdkQNCEgxXntFCAMeBTRG
+externalSqncNode:
+  host: green-node-sqnc-node-0
+  port: 9944
+auth:
+  clientId: 'l3'
+  publicUrlPrefix: "https://auth.sqnc-stage.com/realms/match2/protocol/openid-connect"
+  internalUrlPrefix: "http://keycloak.keycloak.svc.cluster.local/realms/match2/protocol/openid-connect"
+ingress:
+  enabled: true
+  ingressClassName: nginx-match2
+  hostname: match2.sqnc-stage.com
+node:
+  enabled: false
+postgresql:
+  primary:
+    persistence:
+      storageClass: managed-csi-premium
+      size: 5Gi
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      namespace: match2
+      relabelings:
+        - action: replace
+          sourceLabels: [namespace]
+          targetLabel: kubernetes_namespace

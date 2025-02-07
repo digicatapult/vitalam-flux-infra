@@ -1,0 +1,25 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: demanda-open-api
+  namespace: demanda
+spec:
+  install:
+    remediation:
+      retries: -1
+  dependsOn:
+    - name: demanda-identity-service
+    - name: demanda-matchmaker-api
+  chart:
+    spec:
+      version: 2.1.2
+      chart: openapi-merger
+      sourceRef:
+        kind: HelmRepository
+        name: digicatapult
+  valuesFrom:
+    - kind: ConfigMap
+      name: demanda-values
+      valuesKey: values-open-api-merger.yaml
+  interval: 10m0s

@@ -1,0 +1,36 @@
+watchIngressWithoutClass: true
+scope:
+  enabled: true
+ingressClassResource:
+  name: nginx-demandb
+  default: false
+service:
+  type: LoadBalancer
+  annotations: 
+    service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
+    external-dns.alpha.kubernetes.io/hostname: demandb.sqnc-stage.com
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/common-name: demandb.sqnc-stage.com
+extraArgs:
+  default-ssl-certificate: "demandb/demandb-sqnc-stage-com-prod-tls"
+nodeSelector:
+  kubernetes.io/os: linux
+tolerations:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/master
+    operator: Equal
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/control-plane
+    operator: Equal
+containerPorts:
+  http: 80
+  https: 443
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    namespace: demandb
+    relabelings:
+      - action: replace
+        sourceLabels: [namespace]
+        targetLabel: kubernetes_namespace
