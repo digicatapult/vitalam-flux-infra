@@ -4,6 +4,7 @@ namespace: demandb
 resources:
   - blue-node
   - cyan-node
+  - ipfs-node
   - chainspec-configmap.yaml
   - source.yaml
 configMapGenerator:
@@ -11,6 +12,7 @@ configMapGenerator:
     files:
       - values-blue.yaml=blue-node/values.yaml
       - values-cyan.yaml=cyan-node/values.yaml
+      - values-ipfs.yaml=ipfs-node/values.yaml
 configurations:
   - kustomize-config.yaml
 generatorOptions:

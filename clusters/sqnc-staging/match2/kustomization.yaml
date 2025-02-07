@@ -4,6 +4,7 @@ namespace: match2
 resources:
   - yellow-node
   - green-node
+  - ipfs-node
   - chainspec-configmap.yaml
   - source.yaml
 configMapGenerator:
@@ -11,6 +12,7 @@ configMapGenerator:
     files:
       - values-yellow.yaml=yellow-node/values.yaml
       - values-green.yaml=green-node/values.yaml
+      - values-ipfs.yaml=ipfs-node/values.yaml
 configurations:
   - kustomize-config.yaml
 generatorOptions:

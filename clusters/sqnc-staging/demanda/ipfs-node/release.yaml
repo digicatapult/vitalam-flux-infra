@@ -1,0 +1,32 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: ipfs
+  namespace: demanda
+spec:
+  install:
+    remediation:
+      retries: -1
+  dependsOn:
+    - name: magenta
+  chart:
+    spec:
+      version: 4.0.1
+      chart: sqnc-ipfs
+      sourceRef:
+        kind: HelmRepository
+        name: digicatapult
+  valuesFrom:
+    - kind: ConfigMap
+      name: demanda-values
+      valuesKey: values-ipfs.yaml
+    - kind: Secret
+      name: demanda-ipfs-keys
+      valuesKey: publicKey
+      targetPath: ipfs.publicKey
+    - kind: Secret
+      name: demanda-ipfs-keys
+      valuesKey: privateKey
+      targetPath: ipfs.privateKey
+  interval: 10m
